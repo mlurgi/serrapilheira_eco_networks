@@ -1,0 +1,51 @@
+---
+title: "Introduction"
+output:
+  html_document:
+    toc_float: false
+    includes:
+      before_body: [include_header.html, include_lessons_nav.html]
+      after_body: [include_lessons_nav_end.html, include_footer.html]
+---
+
+Welcome to the Ecological Networks component of the Community Ecology and Biodiversity module of the Training Program in Quantitative Biology and Ecology
+
+### Overview
+
+During this topic we will learn how to think about species in communities made of many species and their interactions. 
+
+This tutorial is intended for students interested in learning how to analyse ecological networks using R. As such, the main learning outcomes of this course are:
+
+* to get familiar with basic concepts of networks in general and ecological networks in particular
+* create computer code in R to represent and analyse networks in computer processable formats
+
+Concepts presented during the course will often be followed by corresponding coding examples, however, the main aim of the tutorial is to understand and assimilate network thinking to help thinking about ecosystems and communities in terms of species and their interactions. This 6-minute video provides a quick introduction of what will be covered in the course:
+
+<iframe src="https://player.vimeo.com/video/153476481" width="700" height="394" frameborder="0" style="margin-bottom: 2em;" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+### Housekeeping
+
+Like the rest of R, the packages that will be using during this tutorial are free and open source. You can install the required packages from CRAN with, for example:
+
+```r
+install.packages("igraph")
+```
+
+The instruction above installs the [igraph package for network analysis](https://igraph.org/). We will be using that package a lot! So, feel free to play around with it in between sections.
+
+### Get Started
+
+The links to the left provide quick access to each of the topics we will be discussing during the tutorial. Feel free to access each of them independently, or just following the 'Continue' links at the bottom of each page.
+
+
+### Disclaimer
+
+I hope you enjoy this tutorial. If you have any questions, comments, suggestions, or simply would like to discuss any of the topics presented here, I would be happy to talk to you. Just email me at: (miguel.lurgi@swansea.ac.uk)
+
+
+### Collaborators
+
+This project wouldn't have been possible without the help and inspiration of Sebastian Block. [Sebastian](https://blockecology.github.io/) is currently finishing his PhD in Princeton with Jonathan Levine.
+
+***
+## [Continue to Network Structural Properties](lesson-2.html){.continue-link}

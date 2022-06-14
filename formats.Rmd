@@ -1,0 +1,231 @@
+---
+title: "Formats"
+output:
+  html_document:
+    toc_float: false
+    includes:
+      before_body: [include_header.html, include_header_navpage.html]
+---
+
+<!--html_preserve-->
+
+<div class="band full">
+  <div class="bandContent pageTitle">RStudio Formats</div>
+  <div class="bandContent pageIntro">R Markdown formats from RStudio (see below for additional formats created by the R community)</div>
+  <div class="bandContent">
+
+  <div class="columns">
+    <div class="column2">
+
+    <div class="formatSection">
+      <div class="formatSectionTitle">Documents</div>
+      <div class="formatTable">
+        <a href="https://bookdown.org/yihui/rmarkdown/notebook.html" class="formatTableRow">
+          <div class="formatName">Notebook</div>
+          <div class="formatDescription">Interactive R Notebooks</div>
+        </a>
+        <a href="https://bookdown.org/yihui/rmarkdown/html-document.html" class="formatTableRow">
+          <div class="formatName">HTML</div>
+          <div class="formatDescription">HTML document w/ Bootstrap CSS</div>
+        </a>
+        <a href="https://bookdown.org/yihui/rmarkdown/pdf-document.html" class="formatTableRow">
+          <div class="formatName">PDF</div>
+          <div class="formatDescription">PDF document (via LaTeX template)</div>
+        </a>
+        <a href="https://bookdown.org/yihui/rmarkdown/word-document.html" class="formatTableRow">
+          <div class="formatName">Word</div>
+          <div class="formatDescription">Microsoft Word document (docx)</div>
+        </a>
+        <a href="https://bookdown.org/yihui/rmarkdown/opendocument-text-document.html" class="formatTableRow">
+          <div class="formatName">ODT</div>
+          <div class="formatDescription">OpenDocument Text document</div>
+        </a>
+        <a href="https://bookdown.org/yihui/rmarkdown/rich-text-format-document.html" class="formatTableRow">
+          <div class="formatName">RTF</div>
+          <div class="formatDescription">Rich Text Format document</div>
+        </a>
+        <a href="https://bookdown.org/yihui/rmarkdown/markdown-document.html" class="formatTableRow">
+          <div class="formatName">Markdown</div>
+          <div class="formatDescription">Markdown document (various flavors)</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="formatSection">
+      <div class="formatSectionTitle">Presentations</div>
+      <div class="formatTable">
+        <a href="https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html" class="formatTableRow">
+          <div class="formatName">ioslides</div>
+          <div class="formatDescription">HTML presentation with ioslides</div>
+        </a>
+        <a href="https://bookdown.org/yihui/rmarkdown/revealjs.html" class="formatTableRow">
+          <div class="formatName">reveal.js</div>
+          <div class="formatDescription">HTML presentation with reveal.js</div>
+        </a>
+        <a href="https://bookdown.org/yihui/rmarkdown/slidy-presentation.html" class="formatTableRow">
+          <div class="formatName">Slidy</div>
+          <div class="formatDescription">HTML presentation with W3C Slidy</div>
+        </a>
+        <a href="https://bookdown.org/yihui/rmarkdown/beamer-presentation.html" class="formatTableRow">
+          <div class="formatName">Beamer</div>
+          <div class="formatDescription">PDF presentation with LaTeX Beamer</div>
+        </a>
+        <a href="https://bookdown.org/yihui/rmarkdown/powerpoint-presentation.html" class="formatTableRow">
+          <div class="formatName">PowerPoint</div>
+          <div class="formatDescription">PowerPoint presentation</div>
+        </a>
+      </div>
+    </div>
+
+    </div>
+
+    <div class="column2">
+    
+    <div class="formatSection">
+      <div class="formatSectionTitle">Journals</div>
+      <div class="formatTable">
+         <a href="https://github.com/rstudio/rticles" class="formatTableRow">
+          <div class="formatName">jss_article</div>
+          <div class="formatDescription">Journal of Statistical Software (JSS)</div>
+        </a>
+        <a href="https://github.com/rstudio/rticles" class="formatTableRow">
+          <div class="formatName">acm_article</div>
+          <div class="formatDescription">Association for Computing Machinery (ACM)</div>
+        </a>
+        <a href="https://github.com/rstudio/rticles" class="formatTableRow">
+          <div class="formatName">acs_article</div>
+          <div class="formatDescription">American Chemical Society (ACS) Journal</div>
+        </a>
+        <a href="https://github.com/rstudio/rticles" class="formatTableRow">
+          <div class="formatName">ctex</div>
+          <div class="formatDescription">Documents based on the LaTeX package ctex</div>
+        </a>
+        <a href="https://github.com/rstudio/rticles" class="formatTableRow">
+          <div class="formatName">elsevier_article</div>
+          <div class="formatDescription">Submissions to Elsevier journals</div>
+        </a>
+      </div>
+    </div>
+    
+    <div class="formatSection">
+      <div class="formatSectionTitle">More</div>
+      <div class="formatTable">
+        <a href="flexdashboard/index.html" class="formatTableRow">
+          <div class="formatName">flexdashboard</div>
+          <div class="formatDescription">Interactive dashboards</div>
+        </a>
+        <a href="https://bookdown.org" class="formatTableRow">
+          <div class="formatName">bookdown</div>
+          <div class="formatDescription">HTML, PDF, ePub, and Kindle books</div>
+        </a>
+        <a href="https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html" class="formatTableRow">
+          <div class="formatName">Websites</div>
+          <div class="formatDescription">Multi-page websites</div>
+        </a>
+        <a href="https://bookdown.org/yihui/blogdown/" class="formatTableRow">
+          <div class="formatName">blogdown</div>
+          <div class="formatDescription">Customizable websites and blogs</div>
+        </a>
+        <a href="https://pkgdown.r-lib.org/" class="formatTableRow">
+          <div class="formatName">pkgdown</div>
+          <div class="formatDescription">Package documentation websites</div>
+        </a>
+        <a href="https://bookdown.org/yihui/rmarkdown/tufte-handouts.html" class="formatTableRow">
+          <div class="formatName">Tufte Handout</div>
+          <div class="formatDescription">Handouts in the style of Edward Tufte</div>
+        </a>
+        <a href="https://bookdown.org/yihui/rmarkdown/r-package-vignette.html" class="formatTableRow">
+          <div class="formatName">Package Vignette</div>
+          <div class="formatDescription">R package vignette (HTML)</div>
+        </a>
+        <a href="github_document_format.html" class="formatTableRow">
+          <div class="formatName">Github Document</div>
+          <div class="formatDescription">GitHub Flavored Markdown document.</div>
+        </a>
+      </div>
+    </div>
+    
+    </div>
+    
+    
+  </div>
+  </div>
+</div>
+
+
+<div class="band full">
+  <div class="bandContent pageTitle">Community Formats</div>
+  <div class="bandContent pageIntro">R Markdown formats created by the R community</div>
+  <div class="bandContent">
+
+  <div class="columns">
+    <div class="column2">
+
+    <div class="formatSection">
+      <div class="formatSectionTitle">HTML</div>
+      <div class="formatTable">
+        <a href="http://statr.me/2016/08/creating-pretty-documents-with-the-prettydoc-package/" class="formatTableRow">
+          <div class="formatName">html_pretty</div>
+          <div class="formatDescription">Small yet pretty HTML pages</div>
+        </a>
+        <a href="https://github.com/juba/rmdformats" class="formatTableRow">
+          <div class="formatName">readthedown</div>
+          <div class="formatDescription">Format adapted from the Read the docs Sphinx theme</div>
+        </a>
+        <a href="https://github.com/juba/rmdformats" class="formatTableRow">
+          <div class="formatName">html_docco</div>
+          <div class="formatDescription">Format adapted from the docco documentation generator</div>
+        </a>
+        <a href="https://github.com/juba/rmdformats" class="formatTableRow">
+          <div class="formatName">html_clean</div>
+          <div class="formatDescription">Clean and simple HTML format</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="formatSection">
+      <div class="formatSectionTitle">Documents</div>
+      <div class="formatTable">
+        <a href="https://github.com/bblodfon/rtemps" class="formatTableRow">
+          <div class="formatName">rtemps</div>
+          <div class="formatDescription">Reproducible data analysis templates</div>
+        </a>
+        <a href="https://github.com/ropenscilabs/vitae" class="formatTableRow">
+          <div class="formatName">vitae</div>
+          <div class="formatDescription">Résumé and CV templates</div>
+        </a>
+      </div>
+    </div>
+    
+    <div class="formatSection">
+      <div class="formatSectionTitle">Presentations</div>
+      <div class="formatTable">
+        <a href="https://github.com/mangothecat/rmdshower" class="formatTableRow">
+          <div class="formatName">shower_presentation</div>
+          <div class="formatDescription">Themeable presentations using the Shower framework</div>
+        </a>
+      </div>
+    </div>
+
+    </div>
+
+    <div class="column2">
+    
+    <!-- More formats can go here -->
+    
+    </div>
+    
+    
+  </div>
+  
+    <br/>
+    
+    Please send email to <a href="mailto:garrett@rstudio.com">garrett@rstudio.com</a> if you would like to add an R Markdown template you've developed to this listing.
+
+  
+  </div>
+
+</div>
+
+
+<!--/html_preserve-->
