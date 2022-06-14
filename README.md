@@ -1,4 +1,5 @@
-# serrapilheira training program in quantitative biology and ecology
+# Ecological Networks at the Serrapilheira Training Program in Quantitative Biology and Ecology
+
 This website was created to deliver the ecological networks component of the "Community Ecology and Biodiversity" module of the 2022 edition of the Serrapilheira Training Program in Quantitative Biology and Ecology
 
 https://www.ictp-saifr.org/qbioprogram/
