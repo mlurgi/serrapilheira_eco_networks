@@ -697,7 +697,7 @@ table.table td a:only-child:active {
 @media screen and (max-width: 1200px){
 
   .band .imageOne {
-    width: 490px;
+    width: 550px;
     bottom: -50px;
     left: -25px;
   }

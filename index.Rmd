@@ -22,15 +22,16 @@ $("#pageContent").removeClass("standardPadding");
       <div class="blurb">
         <div class="tagline">Ecological Networks</div>
         <div>What is an ecological community? What are ecological networks? How can they be analysed and modelled?</div>
+          <img class="imageOne" src="images/virus-virus-network-no-bg.png"/>
       </div>
     </div>
-    <img class="imageOne" src="images/food-web.png"/>
+    
   </div>
 
   <div class="band full gray1 second leftText">
     <div class="bandContent vCenter">
       <div class="blurb">
-        <div>In this series of lectures of the Training Program in Quantitative Biology and Ecology, we will ask ecologically meaningful questions and answer them using complex networks tools. We will get familiar with network modelling techniques and use them to answer questions related to biodiversity and community ecology.
+        <div>In this series of lectures of the Training Program in Quantitative Biology and Ecology, we will ask ecologically meaningful questions and answer them using complex networks tools.
           <br> 
           <br>
           <a href="lesson-1.html"><button class="bigButton getStarted">Get Started</button></a>
@@ -38,7 +39,7 @@ $("#pageContent").removeClass("standardPadding");
         </div>
       </div>
     </div>
-    <img class="imageTwo" src="images/net-example.png"/>
+    <img class="imageTwo" src="images/food-web.png"/>
   </div>
 
 
