@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Network Structure: Construction and Metrics</title>
+
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<meta name="description" content="Turn your analyses into high quality documents, reports, presentations and dashboards with R Markdown. Use a productive notebook interface to weave together narrative text and code to produce elegantly formatted output. Use multiple languages including R, Python, and SQL. R Markdown supports a reproducible workflow for dozens of static and dynamic output formats including HTML, PDF, MS Word, Beamer, HTML5 slides, Tufte-style handouts, books, dashboards, shiny applications, scientific articles, websites, and more." />
+
+<link rel="icon" type="image/png" href="images/favicon.png" />
+
+<script type="text/javascript" src="js/redirect.js"></script>
+<script type="text/javascript" src="js/rmarkdown.js"></script>
+<script type="text/javascript" src="js/ga.js"></script>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="css/rmarkdown.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div id="rStudioHeader" class="alwaysShrunk">
+  <div class="innards bandContent">
+    <div>
+      <a class="productName" href="index.html">Ecological Networks</a>
+      <div class="Networks">    </div>
+    </div>
+
+    <div id="menu">
+      <div id="menuToggler"></div>
+      <div id="menuItems">
+        <a class="menuItem" href="lesson-1.html">Get Started</a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<style type="text/css">
+#TOC {
+  margin-left: 35px;
+  margin-top: 90px;
+}
+</style>
+
+<script type="text/javascript">
+$(".main-container").removeClass("main-container").removeClass("container-fluid").addClass("footerPushDown");
+</script>
+
+
+<div id="pageContent" class="standardPadding">
+  <div class="articleBandContent">
+<div class="lessonPage">
+  <div class="lessonsNav">
+    <a id="nav-lesson-1" href="lesson-1.html">Introduction</a>
+    <a id="nav-lesson-2" href="lesson-2.html">Representing Networks</a>
+    <a id="nav-lesson-3" href="lesson-3.html">Ecological Networks: Species and Interactions</a>
+    <a id="nav-lesson-4" href="lesson-4.html">Networks as Graphs</a>
+    <a id="nav-lesson-5" href="lesson-5.html">Food Web Properties</a>
+   
+  </div>
+  <div class="lessonContent">
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Network Structure: Construction and Metrics</h1>
+
+</div>
+
+
+<div id="what-is-a-network" class="section level2">
+<h2>What is a network?</h2>
+<p>A network (or graph in mathematics) is a set of elements with specific characteristic relationships between them. We call the elements vertices (or nodes) and the relations between them edges (or links). In the picture below we can see a network composed of 8 nodes and 10 links between them.</p>
+<center>
+<img src="lesson-images/small-network.png" style="width:50.0%" />
+</center>
+<p>There are a couple of things to be noted about this network, which we will revisit later on. The links between the nodes do not have an apparent directionality, making this an <strong>undirected graph</strong>. On the other hand, when the direction between link is relevant, such as for example in a predator-prey interaction, where it is convenient to represent the fact that the flow of biomass runs from prey to predator, the links might be represented as arrows. Networks represented in this way are called <strong>directed graphs</strong>.</p>
+<p>Secondly, one of the nodes is <em>isolated</em>. Can you guess which one it is?</p>
+<p>Many systems both natural and man-made, can be thought of as networks. From the network of airports around to world and the air routes connecting them, to the World Wide Web and the links between web pages, or social networks of friendships (both real and digital), all the way down to microscopic entities such as gene and metabolic networks, these systems can be represented and, perhaps more importantly, analysed as networks.</p>
+<p><img src="lesson-images/Leonhard_Euler.jpeg" style="float:left; padding-right:10px" width="280" /></p>
+<p>The mathematical study of graphs (or networks) arguably started in 1735 when the celebrated mathematician <a href="https://en.wikipedia.org/wiki/Leonhard_Euler">Leonhard Euler</a>, yes!, the same one who introduced the <em>e</em> as the base of the natural logarithm, developed what is considered the first theorem of graph theory to solve the problem known as the <a href="https://en.wikipedia.org/wiki/Seven_Bridges_of_K%C3%B6nigsberg">Seven bridges of Königsberg</a>.</p>
+<p><img src="lesson-images/konigsberg_bridges.png" style="padding-left:100px" width="380" /> Ever since then, the application of graph theory has percolated the sciences. It started back in the 1930s when tools for the analysis of networks were applied to the social sciences to develop a better understanding of social relationships among humans.</p>
+<p>In ecology, even though network representations of natural communities can be traced back to the 1880’s in the work by Lorenzo Camerano, the quantitative analysis of networks and their properties, as well as their mathematical modelling, started much more recently, around the 1960’s - 70’s.</p>
+<center>
+<img src="lesson-images/camerano.png" width="380" />
+</center>
+<p>In the following sections we will learn how to analyse networks. Our focus will be networks of ecological interactions between species sharing the same ecological community. In very diverse systems these can be up to 1,000’s of species. As such, many of the quantities we will be learning about are mostly relevant to quantify <strong>biodiversity</strong> and can be seen as a natural extension to the classical analysis performed in <strong>community ecology</strong>. Nonetheless, the underlying principles of network construction and analysis can be applied to any networked system, including those mentioned above.</p>
+</div>
+<div id="network-formats-edgelists-and-adjacency-matrices" class="section level2">
+<h2>Network formats: edgelists and adjacency matrices</h2>
+<p>To be able to manipulate and analyse networks in an automated way, we need to represent them in a way that is understandable by a computer.</p>
+<p>Several computer readable formats exist to store the description and information contained in a network. The most commonly used in ecology (and other disciplines) are: (i) adjacency matrices, and (ii) edgelists.</p>
+<p>Adjancecy matrices are matrices in which columns and rows represent the nodes (species) in the network, and a link (interaction) between them is repsented as a 1, while the absence of a link is represented as a 0.</p>
+<p>In a foodweb, for example, as we saw previously, links are directed from prey to predator. In the adjacency matrix, the rows represent prey species and the columns represent predators. Thus, an interaction a<sub>ij</sub> runs from prey i to predator j.</p>
+<p>In the case of a mutualistic (i.e. bipartite) network, species are not all represented in each dimension of the matrix (rows and columns). Instead hosts are usually shown in rows and their mutualistic partners are shown in columns. This makes these matrices non-square.</p>
+<p>Edge lists, on the other hand, are lists of pairs of identifiers (usually integers) that denote links (or ecological interactions) from the first item in pair to the second. For example, a network specified by the following edgelist:</p>
+<p>1 2 <br> 2 3 <br> 1 3 <br></p>
+<p>is one with three nodes: V = {1,2,3}, and three links: one from basal prey 1 to primary consumer 2, another one from prey (primary consumer) 2 to top predator 3, and finally, an interaction between the basal resource and the top predator (E = {(1,2), (2,3), (1,3)}). This makes the top predator an omnivorous species. A representation of this network is shown below:</p>
+<p><img src="lesson-images/net1.png" /></p>
+<p>This network can be represented as an adjacency matrix thus:</p>
+<p><img src="lesson-images/matrix.png" /></p>
+<p>More sophisticated ways of representing and storing networks exist, such as for example the <a href="http://graphml.graphdrawing.org">GraphML</a> format, in which additional information about the network, the nodes, and the links can be included in the description.</p>
+<p>In this course, we will use edge lists as a starting format and then convert that representation into an adjacency matrix.</p>
+<p>Throughout the course we will use a few examples of real ecological networks taken publicly available databases such as the well-known food web from the Benguela upwelling marine system off the Western coast of Africa:</p>
+<p><img src="lesson-images/benguela.png" height="500" /></p>
+<p>Image taken from Yodzis, P (1998) <em>Local trophodynamics and the interaction of marine mammals and fisheries in the Benguela ecosystem</em>. <strong>Journal of Animal Ecology</strong>. 67, 635-658.</p>
+<p>This, and other ecological networks datasets are available from the <a href="https://www.globalwebdb.com/">Global Food Web Database</a>.</p>
+<p>The code below will enable you to download the edgelist file and use it to create an adjacency matrix representation of the network. Two representations of the network then remain available: the Edgelist representation (<code>benguela.EL</code>) and the Adjacency Matrix representation (<code>benguela.AM</code>).</p>
+<pre class="r"><code>library(RCurl)
+x &lt;- getURL(&quot;https://raw.githubusercontent.com/mlurgi/networks_for_r/master/datasets/benguela.edgelist&quot;)
+benguela.EL &lt;- read.table(text = x) 
+benguela.EL &lt;- as.matrix(benguela.EL)</code></pre>
+<pre class="r"><code># Create an adjacency matrix called benguela.AM, containing only zeros
+benguela.AM &lt;- matrix(0, max(benguela.EL), max(benguela.EL))
+
+# Introduce ones to the matrix to represent interactions between species
+benguela.AM[benguela.EL] &lt;- 1</code></pre>
+<hr />
+</div>
+<div id="continue-to-ecological-networks-species-and-interactions" class="section level2">
+<h2><a href="lesson-3.html" class="continue-link">Continue to Ecological networks: Species and interactions</a></h2>
+</div>
+
+  </div> <!-- lessonContent -->
+</div> <!-- lessonPage -->
+
+
+<script type="text/javascript">
+  var lesson = window.location.href.match(/lesson-[0-9]+/g);
+  if (lesson !== null) {
+    lesson = 'nav-' + lesson[0];
+    $('#'+lesson).addClass('current');
+  }
+
+  $('#show-answer').on("click", function() {
+    $('#show-answer').addClass('showing');
+    $('#model-answer').addClass('showing');
+  })
+</script>
+  </div> <!-- articleBandContent -->
+</div> <!-- pageContent -->
+
+<div id="rStudioFooter" class="band full">
+<div class="bandContent">
+  <div id="copyright">© Copyright 2016 - 2020 RStudio, PBC</div>
+  <div id="logos">
+    <a href="https://twitter.com/rstudio" class="footerLogo twitter"></a>
+    <a href="https://github.com/rstudio" class="footerLogo gitHub"></a>
+    <a href="https://www.linkedin.com/company/rstudio-pbc" class="footerLogo linkedIn"></a>
+    <a href="https://www.facebook.com/rstudioinc/" class="footerLogo facebook"></a>
+  </div>
+</div>
+</div>
+
+<!-- bizible -->
+<script type="text/javascript" src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
+
+<!-- disqus -->
+<div id="disqus_thread" class="standardPadding"></div>
+<script type="text/javascript" src="js/disqus.js"></script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<script type="text/javascript" src="js/external-links.js"></script>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+</body>
+</html>

@@ -8,24 +8,31 @@ output:
       after_body: [include_lessons_nav_end.html, include_footer.html]
 ---
 
-Welcome to the Ecological Networks component of the Community Ecology and Biodiversity module of the Training Program in Quantitative Biology and Ecology
+Welcome to the Ecological Networks component of the Community Ecology and Biodiversity module of the [Training Program in Quantitative Biology and Ecology](https://www.ictp-saifr.org/qbioprogram/). I have developed this material to guide the lectures that we will in person. 
 
-### Overview
+## Overview
 
-During this topic we will learn how to think about species in communities made of many species and their interactions. 
+During this series of lectures we will learn how to think about species in communities made of many species and their interactions. We will probe their organisational patterns and look at tools that will allow us to better understand the mechanisms behind their assembly and their responses to perturbations.
 
-This tutorial is intended for students interested in learning how to analyse ecological networks using R. As such, the main learning outcomes of this course are:
+We will do this focusing on very well known mathematical objects called networks (or graphs). The advantage of doing this is that we have a large body of theory and analytical tools at our disposal to develop a good understanding of the structure of these objects. As we will see during the course of the lectures, there is also a large set of modelling tools available that allow us to predict the behaviour of networked systems (such as food webs) based on their network structure and the rules governing the nodes' behaviour. This is sometimes referred to as **network dynamics**.
 
-* to get familiar with basic concepts of networks in general and ecological networks in particular
-* create computer code in R to represent and analyse networks in computer processable formats
+To illustrate some of the concepts that we will touch upon, I will rely on computer code developed in the R programming language. Code snippets will thus be embedded throughout the course that can be run on any platform with an installation of R.
 
-Concepts presented during the course will often be followed by corresponding coding examples, however, the main aim of the tutorial is to understand and assimilate network thinking to help thinking about ecosystems and communities in terms of species and their interactions. This 6-minute video provides a quick introduction of what will be covered in the course:
+### Syllabus
 
-<iframe src="https://player.vimeo.com/video/153476481" width="700" height="394" frameborder="0" style="margin-bottom: 2em;" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+The content will be delivered in 5 sessions comprising 1.5 hours of lecture. We will cover the following topics:
 
-### Housekeeping
+1.- Network Structure: Construction and Metrics \
+2.- The Assembly of Ecological Networks Across Spatial Scales \
+3.- Effects of Global Change on Complex Communities \
+4.- Ecological Applications: Invasive Species Management \
+5.- The Complex Microbiome \
 
-Like the rest of R, the packages that will be using during this tutorial are free and open source. You can install the required packages from CRAN with, for example:
+## Housekeeping
+
+As mentioned in the overview, we will be using R to illustrate some concepts and have some fun running code and producing nice pictures. For that, please install [R](https://www.r-project.org/) on your computer, as well as any editor of your choice to write scripts of computer code. A convenient way of writing and running R code is to use an integrated development environment (IDE) specifically designed for R: [RStudio](https://www.rstudio.com/)
+
+We will be using a series of third party libraries developed on R to perform different operations and manipulations on data, perform simulations, and carry on different kind of analyses. Like R itself, the packages that will be using during this tutorial are free and open source. You can install required R packages from the CRAN repository using the function `install.packages`. For example:
 
 ```r
 install.packages("igraph")
@@ -33,19 +40,20 @@ install.packages("igraph")
 
 The instruction above installs the [igraph package for network analysis](https://igraph.org/). We will be using that package a lot! So, feel free to play around with it in between sections.
 
-### Get Started
+### Navigation
 
-The links to the left provide quick access to each of the topics we will be discussing during the tutorial. Feel free to access each of them independently, or just following the 'Continue' links at the bottom of each page.
+The links to the left provide quick access to each of the topics we will be discussing during the topic. Feel free to access each of them independently, or just following the 'Continue' links at the bottom of each page.
 
+### Acknowledgements
+
+I would like to thank the **International Centre for Theoretical Physics** of the **South American Institute for Fundamental Research** and the **Serrapilheira** program for the opportunity to participate in the Training Program in Quantitative Biology and Ecology and to provide the funding to travel to Brazil.
+
+Special thanks go to Dr Ricardo Martínez-García for this great opportunity.
 
 ### Disclaimer
 
-I hope you enjoy this tutorial. If you have any questions, comments, suggestions, or simply would like to discuss any of the topics presented here, I would be happy to talk to you. Just email me at: (miguel.lurgi@swansea.ac.uk)
+I hope you enjoy this material. If you have any questions, comments, suggestions, or simply would like to discuss any of the topics presented here, I would be happy to talk to you. Just email me at: (miguel.lurgi@swansea.ac.uk)
 
-
-### Collaborators
-
-This project wouldn't have been possible without the help and inspiration of Sebastian Block. [Sebastian](https://blockecology.github.io/) is currently finishing his PhD in Princeton with Jonathan Levine.
 
 ***
-## [Continue to Network Structural Properties](lesson-2.html){.continue-link}
+## [Continue to Network Structure: Construction and Metrics](lesson-2.html){.continue-link}
