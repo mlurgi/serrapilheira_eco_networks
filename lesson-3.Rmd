@@ -212,9 +212,9 @@ timesteps <- 100
 output <- NULL
 for(e in extinction){
   for(j in 1:replicates){
+    file_name <- paste0("https://raw.githubusercontent.com/mlurgi/serrapilheira_eco_networks/master/datasets/networks/network-",j,".rda")
     
-    y <- getURL(paste0("https://github.com/mlurgi/network-area/tree/master/networks/network-",j,'?raw=true'))
-    load(url(paste0("https://github.com/mlurgi/network-area/tree/master/networks/network-",j)))
+    load(url(file_name))
     S <- food_web$S
     presences <- array(0, S)
     
