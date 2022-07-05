@@ -13,7 +13,7 @@
 
 <title>2.- The Assembly of Ecological Networks Across Spatial Scales</title>
 
-<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -360,10 +360,384 @@ fields::image.plot(x = colonisations,
 <div id="network-area-relationships" class="section level2">
 <h2>2.6- Network-Area Relationships</h2>
 <p>This way of thinking has <a href="https://www.nature.com/articles/s41559-018-0517-3">recently allowed us to extend the ideas of SARs into multispecies communities</a>. In particular, to the way that properties related to the networks of species interactions that characterise natural communities changes across spatial scales.</p>
+<p>Using an extension of the Theory of Island Biogeography, and a meta-community model inspired on the metacommunty paradigms introduced above, we developed a theoretical framework to understand the influence of dispersal, colonisation and extinction on the scaling of biodiversity. The full model can be found <a href="https://github.com/mlurgi/network-area">here</a>.</p>
+<p><strong><em>An Island Biogeography model for food webs:</em></strong> In this model, species occupancy depends not only on colonisation and extinction rates, but also on trophic constraints enforced in which a species can only be present in the community if at least one of its prey (as defined by the food web structure) is also present. Except for basal species which can be first colonisers.</p>
+<pre class="r"><code>source(&#39;funcs.r&#39;)
+# we explore the model using a colonisation rate and several values of extinction rates
+# the ratio between these values determines the equilibrium number of species
+c &lt;- 0.3
+extinction &lt;- c(.1, .12, .15, .2, .3, .4, .5, .6, .7, .8, .95)
+
+# since this is an stochastic model we perform several replicated simulations and analyse the average trend
+replicates &lt;- 5
+
+# number of timesteps per replicate
+timesteps &lt;- 100
+
+# in this data structure we store the output of our simulations
+output &lt;- NULL
+for(e in extinction){
+  for(j in 1:replicates){
+    file_name &lt;- paste0(&quot;https://raw.githubusercontent.com/mlurgi/serrapilheira_eco_networks/master/datasets/networks/network-&quot;,j,&quot;.rda&quot;)
+    con &lt;- url(file_name) 
+    load(con)
+    close(con)
+    S &lt;- food_web$S
+    presences &lt;- array(0, S)
+    for(i in 1:timesteps){
+      #basal species
+      basal_sps &lt;- which(colSums(food_web$M) == 0)
+      cur_com &lt;- presences
+      
+      #this is what species are present
+      present &lt;- which(cur_com != 0)
+      
+      if(sum(cur_com) != 0){
+        
+        #this is the set of species in the network that have prey in the current community
+        with_prey &lt;- which(colSums(as.matrix(food_web$M[present, ])) &gt; 0)
+        #this are the potential colonisers
+        potential &lt;- append(basal_sps , with_prey)
+        #to which we remove the ones that are already present
+        potential &lt;- setdiff(potential, present)
+        
+      }else{
+        potential &lt;- basal_sps
+      }
+      
+      if(length(potential) != 0){
+        colonisers &lt;- potential[which(runif(length(potential), 0, 1) &lt; c)]
+        presences[colonisers] &lt;- 1
+      }
+      
+      extinctions &lt;- FALSE
+      if(length(present) != 0){
+        extinct &lt;- present[which(runif(length(present), 0, 1) &lt; e)]
+        if(length(extinct) != 0){
+          presences[extinct] &lt;- 0
+          extinctions &lt;- TRUE
+        }
+      }
+      
+      if(extinctions){
+        cur_com &lt;- presences
+        #this is what species are present
+        present &lt;- which(cur_com != 0)
+        #this is the set of species in the network that have prey in the current community
+        with_prey &lt;- which(colSums(as.matrix(food_web$M[present, ])) &gt; 0)
+        legal &lt;- union(with_prey, basal_sps)
+        illegal &lt;- present[!(present %in% legal)]
+        presences[illegal] &lt;- 0  
+      }
+      
+    }
+    
+    results &lt;- presences
+    net &lt;- food_web
+    
+    current_species &lt;- which(results &gt; 0)
+    
+    if(length(current_species) &lt; 2){
+      next
+    }
+    
+    M &lt;- net$M[current_species, current_species]
+    C &lt;- sum(M)/((dim(M)[1])*(dim(M)[1]-1)) #Connectance if we prevent cannibalism
+    
+    mfcl &lt;- tryCatch({
+      MeanFoodChainLength(M)
+    }, warning = function(w) {
+      &#39;NA&#39;
+    }, error = function(e) {
+      &#39;NA&#39;
+    }, finally = {
+      
+    })
+    
+    mfcls &lt;- mfcl
+    links &lt;- sum(M)
+    indegree &lt;- Generality(M)
+    outdegree &lt;- Vulnerability(M)
+    basal &lt;- FractionOfBasal(M)
+    top &lt;- FractionOfTop(M)
+    intermediate &lt;- FractionOfIntermediate(M)
+    sd_gen &lt;- SDGenerality(M)
+    sd_vul &lt;- SDVulnerability(M)
+    ratio &lt;- c/e
+    colonization_rate &lt;- c
+    extinction_rate &lt;- e
+    
+    cur_out &lt;- data.frame(replicate=j, S=length(current_species), C, links,  mfcls, indegree, outdegree, basal, top, intermediate, sd_gen, sd_vul, ratio, colonization_rate, extinction_rate)
+    
+    if(is.null(output)){
+      output &lt;- cur_out
+    }else{
+      output &lt;- rbind(output, cur_out)
+    } 
+    
+  }
+}
+
+ggplot(output, aes(log10(ratio*100), log10(links))) + geom_point() + theme_bw() + xlab(&#39;log10(c-e ratio)&#39;) + ylab(&#39;log10(number of interactions)&#39;) + geom_smooth(method=&#39;lm&#39;, se=FALSE, colour=&#39;red&#39;)</code></pre>
+<p><img src="lesson-3_files/figure-html/unnamed-chunk-2-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<p>On the x-axis we plot the ratio between colonisation and extinction as a proxy for the area sampled. Islands with bigger areas have a higher colonisation relative to extinction rates and hence higher chances of harbouring more species.</p>
+<p>A meta-community model:</p>
+<!-- ```{r warning=FALSE, message=FALSE, out.width="60%", fig.align='center'} -->
+<!-- islands <- 75 -->
+<!-- landscape <- space(islands, 0.3)[[2]] -->
+<!-- landscape[landscape > 0] <- 1 -->
+<!-- XY <- space(islands, 0.3)[[1]] -->
+<!-- #parameters -->
+<!-- c <- 0.1    #colonisation rate -->
+<!-- e <- 0.4    #extinction rate -->
+<!-- #d <- 0.1    #dispersal rate -->
+<!-- # extinction_values <- c(.2, .3, .4, .5, .6, .7, .8) -->
+<!-- # colonisations <- c(.01, .05, .1, .15, .2, .25, .3, .35, .4) -->
+<!-- dispersals <- c(0,.01,.05,.1,.2,.3,.4,.5) -->
+<!-- timesteps <- 1000 -->
+<!-- replicates <- 5 -->
+<!-- max_attempts <- 100 -->
+<!-- output <- NULL -->
+<!-- output_occupancy <- NULL -->
+<!-- # for(c in colonisations){ -->
+<!-- #   print(c) -->
+<!-- #   for(e in extinction_values){ -->
+<!-- #     print(e) -->
+<!--     for(d in dispersals){ -->
+<!--       print(d) -->
+<!--       for(j in 1:replicates){ -->
+<!--         print(j) -->
+<!--         load(paste('../networks/network-',j,sep='')) -->
+<!--         S <- food_web$S -->
+<!--         presences <- array(0, c(islands,S)) -->
+<!--         for(i in 1:timesteps){ -->
+<!--           #basal species -->
+<!--           basal_sps <- which(colSums(food_web$M) == 0) -->
+<!--           for(isl in 1:islands){ -->
+<!--             #this is the current community -->
+<!--             cur_com <- presences[isl,] -->
+<!--             #this is what species are present -->
+<!--             present <- which(cur_com != 0) -->
+<!--             #this is the set of species in the network that have prey in the current community -->
+<!--             with_prey <- which(colSums(as.matrix(food_web$M[present, ])) > 0) -->
+<!--             #this are the potential colonisers -->
+<!--             potential <- append(basal_sps , with_prey) -->
+<!--             #to which we remove the ones that are already present -->
+<!--             potential <- setdiff(potential, present) -->
+<!--             if(length(potential) != 0){ -->
+<!--               colonisers <- potential[which(runif(length(potential), 0, 1) < c)] -->
+<!--               presences[isl, colonisers] <- 1 -->
+<!--             } -->
+<!--             extinctions <- FALSE -->
+<!--             if(length(present) != 0){ -->
+<!--               extinct <- present[which(runif(length(present), 0, 1) < e)] -->
+<!--               if(length(extinct) != 0){ -->
+<!--                 presences[isl, extinct] <- 0 -->
+<!--                 extinctions <- TRUE -->
+<!--               } -->
+<!--             } -->
+<!--             if(extinctions){ -->
+<!--               cur_com <- presences[isl,] -->
+<!--               #this is what species are present -->
+<!--               present <- which(cur_com != 0) -->
+<!--               #this is the set of species in the network that have prey in the current community -->
+<!--               with_prey <- which(colSums(as.matrix(food_web$M[present, ])) > 0) -->
+<!--               legal <- union(with_prey, basal_sps) -->
+<!--               illegal <- present[!(present %in% legal)] -->
+<!--               presences[isl, illegal] <- 0   -->
+<!--             } -->
+<!--           } -->
+<!--           ### dispersal after colonisation and extinction processes -->
+<!--           #### we took this code from the metacomm model. Check Nuria's notes to see what they do -->
+<!--           randCol = matrix(runif(islands*S,0,1),nr=islands,nc=S) -->
+<!--           ColMat = matrix(0,nr=islands,nc=S) -->
+<!--           ConPop = landscape%*%presences -->
+<!--           LocalCol = 1-(1-d)^ConPop -->
+<!--           LocalPrey = presences %*% food_web$M -->
+<!--           LocalPrey[LocalPrey>0] = 1 -->
+<!--           LocalPrey[,basal_sps] = 1 -->
+<!--           ColMat[presences == 0 & LocalPrey == 1 & randCol<LocalCol] = 1 -->
+<!--           presences = presences + ColMat -->
+<!--         } -->
+<!--         results <- presences # This is the community matrix presences -->
+<!--         net <- food_web -->
+<!--         occupancy <- c() -->
+<!--         dietbreath <- c() -->
+<!--         dispersal <- c() -->
+<!--         occupancy <- append(occupancy, colMeans(results)) -->
+<!--         dietbreath <- append(dietbreath, colSums(net$M)) -->
+<!--         dispersal <- append(dispersal, d) -->
+<!--         cur_out_occu <- data.frame(occupancy,dietbreath,rep(dispersal,length(occupancy))) -->
+<!--       if(is.null(output_occupancy)){ -->
+<!--         output_occupancy <- cur_out_occu -->
+<!--       }else{ -->
+<!--         output_occupancy <- rbind(output_occupancy, cur_out_occu) -->
+<!--       }  -->
+<!--         beta_total <- c() -->
+<!--         beta_turn <- c() -->
+<!--         beta_rich <- c() -->
+<!--         beta_total <- append(beta_total, as.numeric(beta.multi.carv(results)[3])) -->
+<!--         beta_turn <- append(beta_turn, as.numeric(beta.multi.carv(results)[1])) -->
+<!--         beta_rich <- append(beta_rich, as.numeric(beta.multi.carv(results)[2])) -->
+<!--         #### after obtaining the results we aggregate local communities and obtain network attributes  -->
+<!--         species <- c() -->
+<!--         area <-c() -->
+<!--         C <- c() -->
+<!--         links <- c() -->
+<!--         mfcls <- c() -->
+<!--         indegree <- c() -->
+<!--         normalised_indegree <- c() -->
+<!--         outdegree <- c() -->
+<!--         normalised_outdegree <- c() -->
+<!--         basal <- c() -->
+<!--         top <- c() -->
+<!--         intermediate <- c() -->
+<!--         overlap <- c() -->
+<!--         sd_gen <- c() -->
+<!--         sd_vul <- c() -->
+<!--         omnivory <- c() -->
+<!--         S_top <- c() -->
+<!--         S_intermediate <- c() -->
+<!--         S_basal <- c() -->
+<!--         SD_Gen <- c() -->
+<!--         SD_Vul <- c() -->
+<!--         ## Order patches across space -->
+<!--         euc.dist <- function(x1, x2) sqrt(sum((x1 - x2) ^ 2)) -->
+<!--         focal_coordinate <- c(0.5,0.5) -->
+<!--         distance_focal <- c() -->
+<!--         for (i in 1:islands){ -->
+<!--           distance_focal <- append(distance_focal, euc.dist(focal_coordinate,XY[i,])) -->
+<!--         } -->
+<!--         results_ordered <- results[order(distance_focal),] #this orders the metacommunity matrix in respect to the center of the lanscape (focal_coordinate) -->
+<!--         for(i in 1:islands){ -->
+<!--           areas <- i -->
+<!-- #           # aggregation random -->
+<!-- #           patches_selected <- as.matrix(results[sample(nrow(results), i),]) -->
+<!-- #            -->
+<!-- #           if(i > 1){ -->
+<!-- #             current_species_ran <- which(colSums(patches_selected[,]) > 0) -->
+<!-- #              -->
+<!-- #           }else{ -->
+<!-- #             current_species_ran <- which(patches_selected[,] > 0) -->
+<!-- #              -->
+<!-- #           } -->
+<!-- #           if(length(unique(current_species_ran)) <= 1){ -->
+<!-- #             next -->
+<!-- #           } -->
+<!-- #            -->
+<!-- #           M <- net$M[current_species_ran, current_species_ran] -->
+<!-- #            -->
+<!-- #           #we can check if the network is connected -->
+<!-- #           graf <- igraph::graph.adjacency(M); # Making sure the network is connected -->
+<!-- #           y <- igraph::no.clusters(graf, mode='weak'); -->
+<!-- #           attempts <- 0 -->
+<!-- #           while(y > 1 & attempts < max_attempts){ -->
+<!-- #             patches_selected <- as.matrix(results[sample(nrow(results), i),]) -->
+<!-- #              -->
+<!-- #             if(i > 1){ -->
+<!-- #               current_species_ran <- which(colSums(patches_selected[,]) > 0) -->
+<!-- #                -->
+<!-- #             }else{ -->
+<!-- #               current_species_ran <- which(patches_selected[,] > 0) -->
+<!-- #               print(i) -->
+<!-- #             }     -->
+<!-- #             M <- net$M[current_species_ran, current_species_ran] -->
+<!-- #             graf <- igraph::graph.adjacency(M); # Making sure the network is connected -->
+<!-- #             y <- igraph::no.clusters(graf, mode='weak'); -->
+<!-- #              -->
+<!-- #             attempts <- attempts + 1 -->
+<!-- #           } -->
+<!-- #            -->
+<!-- #           if(length(unique(current_species_ran)) < 2 | attempts >= max_attempts){ -->
+<!-- #             print('network not found') -->
+<!-- #             next -->
+<!-- #           } -->
+<!-- #            -->
+<!-- #               if(nrow(M) < 2){ -->
+<!-- #                 next -->
+<!-- #               } -->
+<!-- #          write.table(M, paste(i ,"localmetacom_ran", ".txt", sep = ""), row.names=FALSE, col.names=FALSE) #Saving the local network -->
+<!--           ## aggregation ordering them -->
+<!--           if(i > 1){ -->
+<!--             current_species_ran <-unique(which(colSums(results_ordered[1:i,]) > 0)) -->
+<!--           }else{ -->
+<!--             current_species_ran <- unique(which(results_ordered[1,] > 0)) -->
+<!--           } -->
+<!--           if(length(unique(current_species_ran)) <= 1){ -->
+<!--             next -->
+<!--           } -->
+<!--           M <- net$M[current_species_ran, current_species_ran] -->
+<!--           #we can check if the network is connected -->
+<!--           graf <- igraph::graph.adjacency(M); # Making sure the network is connected -->
+<!--           y <- igraph::no.clusters(graf, mode='weak'); -->
+<!--           attempts <- 0 -->
+<!--           while(y > 1 & attempts < max_attempts){ -->
+<!--           patches_selected <- as.matrix(results[sample(nrow(results), i),]) -->
+<!--           if(i > 1){ -->
+<!--           current_species_ran <- which(colSums(patches_selected[,]) > 0) -->
+<!--           }else{ -->
+<!--           current_species_ran <- which(patches_selected[,] > 0) -->
+<!--           print(i) -->
+<!--           }     -->
+<!--           M <- net$M[current_species_ran, current_species_ran] -->
+<!--          graf <- igraph::graph.adjacency(M); # Making sure the network is connected -->
+<!--          y <- igraph::no.clusters(graf, mode='weak'); -->
+<!--          attempts <- attempts + 1 -->
+<!--          } -->
+<!--          if(length(unique(current_species_ran)) < 2 | attempts >= max_attempts){ -->
+<!--           print('network not found') -->
+<!--           next -->
+<!--           } -->
+<!--           if(nrow(M)<2){ -->
+<!--             next -->
+<!--           } -->
+<!--           species <- append(species, length(current_species_ran)) -->
+<!--           C <- append(C, sum(M)/((dim(M)[1])*(dim(M)[1]-1))) #Connectance if we prevent cannibalism -->
+<!--           mfcl <- tryCatch({ -->
+<!--             MeanFoodChainLength(M) -->
+<!--           }, warning = function(w) { -->
+<!--             'NA' -->
+<!--           }, error = function(e) { -->
+<!--             'NA' -->
+<!--           }, finally = { -->
+<!--           }) -->
+<!--           mfcls <- append(mfcls, mfcl) -->
+<!--           area <- append(area, areas) -->
+<!--           links <- append(links, sum(M)) -->
+<!--           indegree <- append(indegree, Generality(M)) -->
+<!--           normalised_indegree <- append(normalised_indegree, NormalisedGenerality(M)) -->
+<!--           outdegree <- append(outdegree, Vulnerability(M)) -->
+<!--           normalised_outdegree <- append(normalised_outdegree, NormalisedVulnerability(M)) -->
+<!--           basal <- append(basal, FractionOfBasal(M)) -->
+<!--           top <- append(top, FractionOfTop(M)) -->
+<!--           intermediate <- append(intermediate, FractionOfIntermediate(M)) -->
+<!--           sd_gen <- append(sd_gen, SDGenerality(M)) -->
+<!--           sd_vul <- append(sd_vul, SDVulnerability(M)) -->
+<!--           overlap <- append(overlap, CalculatePredatorOverlap(M)) -->
+<!--           omnivory <- append(omnivory, Omnivory(M)) -->
+<!--           S_top <- append(S_top, NumberOfTop(M)) -->
+<!--           S_intermediate <- append(S_intermediate, NumberOfIntermediate(M)) -->
+<!--           S_basal <- append(S_basal, NumberOfBasal(M)) -->
+<!--           SD_Vul <- append(SD_Vul, SDVulnerability(M)) -->
+<!--           SD_Gen <- append(SD_Gen, SDGenerality(M)) -->
+<!--           cur_out <- data.frame(rep(c,length(species)), rep(e,length(species)), rep(d,length(species)), rep(j,length(species)), beta_total, beta_rich, beta_turn, species, C, links, area,  indegree, normalised_indegree, outdegree, mfcls, normalised_outdegree, basal, top, intermediate, overlap, sd_gen, sd_vul, omnivory, S_top, S_intermediate, S_basal, SD_Gen, SD_Vul) -->
+<!--         } -->
+<!--         if(is.null(output)){ -->
+<!--           output <- cur_out -->
+<!--         }else{ -->
+<!--           output <- rbind(output, cur_out) -->
+<!--         }  -->
+<!--       } -->
+<!--      } -->
+<!-- #   } -->
+<!-- # } -->
+<!-- #  -->
+<!-- ``` -->
 </div>
 <div id="references" class="section level2">
 <h2>References</h2>
 <p>Arrhenius, O (1921) Species and area. <strong><em>Journal of Ecology</em></strong>, 9:1, 95-99.</p>
+<p>Galiana, N, Lurgi, M, Claramunt-López, B. et al. (2018) The spatial scaling of species interaction networks. <strong><em>Nature Ecology &amp; Evolution</em></strong> 2, 782–790.</p>
 <p>Leibold, MA et al. (2004), The metacommunity concept: a framework for multi-scale community ecology. <strong><em>Ecology Letters</em></strong>, 7, 601-613.</p>
 <p>Levin, SA (1992), The problem of pattern and scale in ecology: The Robert H. MacArthur award lecture. <strong><em>Ecology</em></strong>, 73, 1943-1967.</p>
 <p>Levins, R (1969) Some demographic and genetic consequences of environmental heterogeneity for biological control. <strong><em>Bulletin of the Entomological Society of America</em></strong>, 15(3), 237–240.</p>
