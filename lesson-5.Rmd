@@ -168,7 +168,7 @@ MeanFoodChainLength <- function(M){
   
   pm <- matrix(M, ncol=dim(M)[2], dimnames=list(node, node), byrow=TRUE);
   
-  # We need to convert our adjacency matrix into a Chedday community object.
+  # We need to convert our adjacency matrix into a Cheddar community object.
   # For this, we yse PredationMatrixToLinks()
   community <- Community(nodes=data.frame(node=node), trophic.links=PredationMatrixToLinks(pm), properties=list(title='Community'));
   

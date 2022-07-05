@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>2.- The Assembly of Ecological Networks Across Spatial Scales</title>
+
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<meta name="description" content="Turn your analyses into high quality documents, reports, presentations and dashboards with R Markdown. Use a productive notebook interface to weave together narrative text and code to produce elegantly formatted output. Use multiple languages including R, Python, and SQL. R Markdown supports a reproducible workflow for dozens of static and dynamic output formats including HTML, PDF, MS Word, Beamer, HTML5 slides, Tufte-style handouts, books, dashboards, shiny applications, scientific articles, websites, and more." />
+
+<link rel="icon" type="image/png" href="images/favicon.png" />
+
+<script type="text/javascript" src="js/redirect.js"></script>
+<script type="text/javascript" src="js/rmarkdown.js"></script>
+<script type="text/javascript" src="js/ga.js"></script>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="css/rmarkdown.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div id="rStudioHeader" class="alwaysShrunk">
+  <div class="innards bandContent">
+    <div>
+      <a class="productName" href="index.html">Community Ecology and Biodiversity</a>
+      <div class="Networks">    </div>
+    </div>
+
+    <div id="menu">
+      <div id="menuToggler"></div>
+      <div id="menuItems">
+        <a class="menuItem" href="lesson-1.html">Get Started</a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<style type="text/css">
+#TOC {
+  margin-left: 35px;
+  margin-top: 90px;
+}
+</style>
+
+<script type="text/javascript">
+$(".main-container").removeClass("main-container").removeClass("container-fluid").addClass("footerPushDown");
+</script>
+
+
+<div id="pageContent" class="standardPadding">
+  <div class="articleBandContent">
+<div class="lessonPage">
+  <div class="lessonsNav">
+    <a id="nav-lesson-1" href="lesson-1.html">Introduction</a>
+    <a id="nav-lesson-2" href="lesson-2.html">1.- Network Structure: Construction and Metrics</a>
+    <a id="nav-lesson-3" href="lesson-3.html">2.- The Assembly of Ecological Networks Across Spatial Scales</a>
+    <a id="nav-lesson-4" href="lesson-4.html">Networks as Graphs</a>
+    <a id="nav-lesson-5" href="lesson-5.html">Food Web Properties</a>
+   
+  </div>
+  <div class="lessonContent">
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore"><strong>2.- The Assembly of Ecological Networks Across Spatial Scales</strong></h1>
+
+</div>
+
+
+<p><img src="lesson-images/wallace.png" style="float:right; padding-left:10px" width="200" /></p>
+<p>Ever since <a href="https://en.wikipedia.org/wiki/Alfred_Russel_Wallace">Alfred Russel Wallace</a>’s pioneering expeditions to the Malay Archipelago, during which he realised the fundamental differences between neighbouring faunas and their link to the independent evolutionary dynamics that ensue after geographical isolation, ecologists have tried to understand the underlying mechanisms behind the observed geographical distributions of animal and plant species.</p>
+<p>Wallace, now considered the father of biogeography, but also jointly with Darwin one of the original proponents of the theory of evolution by natural selection, proposed the separation between islands in the Indonesian Archipelago according to whether the animal species on those islands where from Asian or Australasian origins, in what is now known as Wallace’s line.</p>
+<p><img src="lesson-images/wallacea.png" style="float:left; padding-right:10px" width="380" /> The study of the spatial distribution of species has revealed recurrent patterns in the way biodiversity is organised and how it changes across spatial scales, as well as the implications of this organisation for community composition and structure. It has also prompted the development of ecological theory aimed at understanding the mechanisms behind these spatial patterns. Spatial processes thus have since then emerged as one of the fundamental drivers of biodiversity.</p>
+<p>One of the spatial patterns of biodiversity that has attracted most attention, not only for its simplicity, but also because of its universality, is the relationship between the size of the area sampled and the number of species found within.</p>
+<div id="species-area-relationships" class="section level2">
+<h2>2.1- Species-Area relationships</h2>
+<p>Arguably one of the only true laws in ecology is the species-area relationship. <strong>Species-Area Relationships (SARs)</strong> describe the relation between area sampled and the number of species present in that area. Species-area relationships were first described by Arrhenius in 1921, who observed similar scaling relationships across plant communities. Since then, many ecologists have collected similar data of species richness across different expanses of areas. Many empirical systems have thus been shown to follow general scaling patterns and this pattern can be described by a <strong>power law</strong>!</p>
+<center>
+<p><img src="lesson-images/sar-west-indies.png" width="500" /></p>
+</center>
+<p><strong>Species-area relationship of showing bird species richness as a function of island size in the West Indies.</strong> Image taken from Preston, FW (1962) <em>The canonical distribution of commonness and rarity: Part I</em>. <strong><em>Ecology</em></strong>. 43:2, 185-215.</p>
+<p>The seminal paper by <a href="https://www.jstor.org/stable/1931976">Preston in 1962</a> building upon Arrhenius work and presenting SARs like the one above for different faunas, presented canonical values for the parameters of the power law form of the SARs:</p>
+<p><span class="math display"><em>S</em> = <em>c</em><em>A</em><sup><em>z</em></sup></span></p>
+<p>where <em>S</em> is species richness, <em>c</em> is a proportionality constant, <em>A</em> is the area size, and <em>z</em> is the scaling exponent of the relationship. Applying the logarithm to both sides of the equation above, we can linearize and obtain the expression:</p>
+<p><span class="math display"><em>l</em><em>n</em>(<em>S</em>) = <em>l</em><em>n</em>(<em>c</em>) + <em>z</em> * <em>l</em><em>n</em>(<em>A</em>)</span></p>
+<p>Making easy to fit a straight line to the log-log relationship of species richness with area size, and the reason why most of the times we see that relationship represented as in the plot above.</p>
+<p>The value of <em>z</em> across systems was shown by Preston, and many others after him, to be in the range of 0.1 and 0.5 and usually around the value of 0.25. The existence of this canonical value suggests profound general principles of community richness, and makes it a powerful predictive tool that has been used ever since in biodiversity conservation and studies of extinction during biotic collapse. The value of <em>c</em> and its universality is more debated (see <a href="http://ecflora.cavehill.uwi.edu/bio_courses/ECOL2453/pdfs/species%20area%20relationship.pdf">Lomolino’s account</a> for a nice discussion of the topic).</p>
+</div>
+<div id="the-theory-of-island-biogeography" class="section level2">
+<h2>2.2- The Theory of Island Biogeography</h2>
+<p>The discovery of ‘true ecological laws’ such as SARs represented an important advance for the field and for our efforts to better understand biodiversity and its distribution. However, as Simon Levin (<a href="https://esajournals.onlinelibrary.wiley.com/doi/10.2307/1941447">1992</a>) elegantly puts it:</p>
+<p><strong><em>“Understanding patterns in terms of the processes that produce them is the essence of science, and is the key to the development of principles for management.”</em></strong></p>
+<p>In 1967, two of the most prominent ecologists, Edward O. Wilson and Robert MacArthur, attempted to provide a mechanistic explanation for the distributional patterns of species using a graphical and mathematical framework. This framework has become to be known as the Theory of Island Biogeography. Ever since their development, the Theory of Island Biogeography has formed the backbone of our thinking on species distributions and accummulation of species with area.</p>
+</div>
+<div id="extending-the-theory" class="section level2">
+<h2>2.3- Extending the Theory</h2>
+</div>
+<div id="network-area-relationships" class="section level2">
+<h2>2.4- Network-Area Relationships</h2>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+<p>Arrhenius, O (1921) Species and area. <strong><em>Journal of Ecology</em></strong>, 9:1, 95-99.</p>
+<p>Levin, SA (1992), The problem of pattern and scale in ecology: The Robert H. MacArthur award lecture. <strong><em>Ecology</em></strong>, 73, 1943-1967.</p>
+<p>Lomolino, MV (2000) Ecology’s most general, yet protean pattern: The species-area relationship. <strong><em>Journal of Biogeography</em></strong>, 27, 17-26.</p>
+<p>Preston, FW (1962) The canonical distribution of commonness and rarity: Part I. <strong><em>Ecology</em></strong>, 43:2, 185-215.</p>
+</div>
+<div id="continue-to-networks-as-graphs" class="section level2">
+<h2><a href="lesson-4.html" class="continue-link">Continue to Networks as Graphs</a></h2>
+</div>
+
+  </div> <!-- lessonContent -->
+</div> <!-- lessonPage -->
+
+
+<script type="text/javascript">
+  var lesson = window.location.href.match(/lesson-[0-9]+/g);
+  if (lesson !== null) {
+    lesson = 'nav-' + lesson[0];
+    $('#'+lesson).addClass('current');
+  }
+
+  $('#show-answer').on("click", function() {
+    $('#show-answer').addClass('showing');
+    $('#model-answer').addClass('showing');
+  })
+</script>
+  </div> <!-- articleBandContent -->
+</div> <!-- pageContent -->
+
+<div id="rStudioFooter" class="band full">
+<div class="bandContent">
+  <div id="copyright">© Copyright 2016 - 2020 RStudio, PBC</div>
+  <div id="logos">
+    <a href="https://twitter.com/rstudio" class="footerLogo twitter"></a>
+    <a href="https://github.com/rstudio" class="footerLogo gitHub"></a>
+    <a href="https://www.linkedin.com/company/rstudio-pbc" class="footerLogo linkedIn"></a>
+    <a href="https://www.facebook.com/rstudioinc/" class="footerLogo facebook"></a>
+  </div>
+</div>
+</div>
+
+<!-- bizible -->
+<script type="text/javascript" src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
+
+<!-- disqus -->
+<div id="disqus_thread" class="standardPadding"></div>
+<script type="text/javascript" src="js/disqus.js"></script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<script type="text/javascript" src="js/external-links.js"></script>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+</body>
+</html>

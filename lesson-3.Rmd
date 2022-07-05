@@ -1,5 +1,5 @@
 ---
-title: "Ecological networks: Species and interactions"
+title: "**2.- The Assembly of Ecological Networks Across Spatial Scales**"
 output:
   html_document:
     toc_float: false
@@ -8,65 +8,71 @@ output:
       after_body: [include_lessons_nav_end.html, include_footer.html]
 ---
 
-## Species and interactions as vertices and links
+![](lesson-images/wallace.png){width="200px" style="float:right; padding-left:10px"}
 
-In abstract representations of ecological communities as networks, nodes represent species and links amongst them denote ecological interactions happening between the represented species. 
 
-Adjacency matrices (as we saw in the previous section) are matrix representations of networks where elements of the matrix denote the presence of a link (i.e. interaction) between the species represented by the row and the species represented by the column. Thus, to represent a food web composed of S species as a matrix we need a SxS matrix in order to be able to represent all possible interaction between the S species. The number of species in the network can be calcuated thus as the number of rows or the number of columns.
+Ever since [Alfred Russel Wallace](https://en.wikipedia.org/wiki/Alfred_Russel_Wallace)'s pioneering expeditions to the Malay Archipelago, during which he realised the fundamental differences between neighbouring faunas and their link to the independent evolutionary dynamics that ensue after geographical isolation, ecologists have tried to understand the underlying mechanisms behind the observed geographical distributions of animal and plant species.
 
-Using the Benguela food web adjacency matrix `benguela.AM` that you created in the previous section, you can calculate the number of species.
+Wallace, now considered the father of biogeography, but also jointly with Darwin one of the original proponents of the theory of evolution by natural selection, proposed the separation between islands in the Indonesian Archipelago according to whether the animal species on those islands where from Asian or Australasian origins, in what is now known as Wallace's line.
 
-In an adjacency matrix, all species are represented by columns and rows. Counting the number of columns or rows in the adjacency matrix will let you obtain the number of species in the food web. In R, you can use the `dim` function to look at the matrix **dimensions**.
+![](lesson-images/wallacea.png){width="380px" style="float:left; padding-right:10px"}
+The study of the spatial distribution of species has revealed recurrent patterns in the way biodiversity is organised and how it changes across spatial scales, as well as the implications of this organisation for community composition and structure. It has also prompted the development of ecological theory aimed at understanding the mechanisms behind these spatial patterns. Spatial processes thus have since then emerged as one of the fundamental drivers of biodiversity.
 
-```{r, eval=FALSE}
-# species richness
-S <- dim(benguela.AM)[1]
-```
+One of the spatial patterns of biodiversity that has attracted most attention, not only for its simplicity, but also because of its universality, is the relationship between the size of the area sampled and the number of species found within.
 
-Similarly, since interactions are represented as ones in the matrix, if you `sum` all the values in the matrix, you will get the number of interactions.
+## 2.1- Species-Area relationships
 
-```{r, eval=FALSE}
-# number of links
-L <- sum(benguela.AM)
-```
+Arguably one of the only true laws in ecology is the species-area relationship. **Species-Area Relationships (SARs)** describe the relation between area sampled and the number of species present in that area. Species-area relationships were first described by Arrhenius in 1921, who observed similar scaling relationships across plant communities. Since then, many ecologists have collected similar data of species richness across different expanses of areas. Many empirical systems have thus been shown to follow general scaling patterns and this pattern can be described by a **power law**!
 
-## Interactions in bipartite networks
+<center>
+![](lesson-images/sar-west-indies.png){width="500px"}
 
-Food webs, like that for the Benguela ecosystem studied above, are network representation of who eats whom relationships in an ecological community. As such, there are no distinct subset of species among which interactions are not possible. This is why adjacency matrices for representing food webs contain the total number of species as rows and also as columns. In theory, any interaction is possible. 
+</center>
 
-Other types of ecological networks, however, like for example, plant-animal mutualistic networks (Figure 1) or host-parasite interaction networks, exhibit a bipartite structure. In this type of networks, species can be classified into two distinct groups where interactions do not occur (or are forbidden) among members of the same group. For example, in a plant-animal mutualistic network, plants do not interact with plants and animal mutualists do not interact among them. This feature allows for a more concise matrix representation of bipartite networks.
+**Species-area relationship of showing bird species richness as a function of island size in the West Indies.** Image taken from Preston, FW (1962) *The canonical distribution of commonness and rarity: Part I*. ***Ecology***. 43:2, 185-215. 
 
-![](lesson-images/plant-pollinator.png){}
+The seminal paper by [Preston in 1962](https://www.jstor.org/stable/1931976) building upon Arrhenius work and presenting SARs like the one above for different faunas, presented canonical values for the parameters of the power law form of the SARs:
 
-**Figure 1. Example of a plant-animal pollinator bipartite network.** Image taken from MacGregor, CJ et al. (2015) *Pollination by nocturnal Lepidoptera, and the effects of light pollution, a review*. **Ecological Entomology**. 40, 187-198. 
+$$
+S = c A^z     
+$$
 
-The equivalent of an adjacency matrix for a bipartite network is termed an incidence matrix. In incidence matrices one set of species are represented as rows (e.g. hosts/plants), and the other set of species as columns (e.g. visitors/mutualists). Thus, the way of counting species in an incidence matrix representing a mutualistic (bipartite) network is different from that used to count species in adjacency matrices representing food webs.
+where *S* is species richness, *c* is a proportionality constant, *A* is the area size, and *z* is the scaling exponent of the relationship. Applying the logarithm to both sides of the equation above, we can linearize and obtain the expression:
 
-For a bipartite ecological network represented by an incidence matrix with size HxV, where H is the number of hosts and V is the number of visitors, the number of species in the network is equal to H + V.
+$$
+ln(S) = ln(c) + z * ln(A)
+$$
 
-As an example, we load a matrix representing a bipartite network of interactions between anemones and several species of fish living within them in South-East Asia. This network was taken from Ollerton, J. et al. (2007) *Finding NEMO: nestedness engendered by mutualistic organization in anemonefish and their hosts*. **Proceedings of the Royal Society B**. 274, 591-598.  
+Making easy to fit a straight line to the log-log relationship of species richness with area size, and the reason why most of the times we see that relationship represented as in the plot above.
 
-Try and calculate the total number of anemone *and* fish species in the network. Remember that in a bipartite network, one set of species (in this case, anemones) are represented as columns, while the other set (in this case, fishes) are represented as rows.
+The value of *z* across systems was shown by Preston, and many others after him, to be in the range of 0.1 and 0.5 and usually around the value of 0.25. The existence of this canonical value suggests profound general principles of community richness, and makes it a powerful predictive tool that has been used ever since in biodiversity conservation and studies of extinction during biotic collapse. The value of *c* and its universality is more debated (see [Lomolino's account](http://ecflora.cavehill.uwi.edu/bio_courses/ECOL2453/pdfs/species%20area%20relationship.pdf) for a nice discussion of the topic).
 
-```{r}
-library(RCurl)
-y <- getURL("https://raw.githubusercontent.com/mlurgi/networks_for_r/master/datasets/anemonefish.txt")
-anemonef <- read.table(text = y)
-names(anemonef) <- paste("A", 1:10, sep = "")
-row.names(anemonef) <- paste("F", 1:26, sep = "")       
-anemonef <- as.matrix(anemonef)
 
-### The number of fish species in the network is the number of rows
-n_fish <- dim(anemonef)[1]
-### The number of anemone species is the number of columns
-n_anemone <- dim(anemonef)[2]
+## 2.2- The Theory of Island Biogeography
 
-### So, the total number of species is the sum of these two quantities
-S <- n_fish + n_anemone
+The discovery of 'true ecological laws' such as SARs represented an important advance for the field and for our efforts to better understand biodiversity and its distribution. However, as Simon Levin ([1992](https://esajournals.onlinelibrary.wiley.com/doi/10.2307/1941447)) elegantly puts it:
 
-### Whereas the total number of interactions is still the sum of the matrix
-L <- sum(anemonef)
+***"Understanding patterns in terms of the processes that produce them is the essence of science, and is the key to the development of principles for management."***
 
-```
+In 1967, two of the most prominent ecologists, Edward O. Wilson and Robert MacArthur, attempted to provide a mechanistic explanation for the distributional patterns of species using a graphical and mathematical framework. This framework has become to be known as the Theory of Island Biogeography. Ever since their development, the Theory of Island Biogeography has formed the backbone of our thinking on species distributions and accummulation of species with area.
+
+
+
+
+## 2.3- Extending the Theory
+
+## 2.4- Network-Area Relationships
+
+
+## References
+
+Arrhenius, O (1921) Species and area. ***Journal of Ecology***, 9:1, 95-99.
+
+Levin, SA (1992), The problem of pattern and scale in ecology: The Robert H. MacArthur award lecture. ***Ecology***, 73, 1943-1967.
+
+Lomolino, MV (2000) Ecology's most general, yet protean pattern: The species-area relationship. ***Journal of Biogeography***, 27, 17-26.
+
+Preston, FW (1962) The canonical distribution of commonness and rarity: Part I. ***Ecology***, 43:2, 185-215.
+
 
 ## [Continue to Networks as Graphs](lesson-4.html){.continue-link}

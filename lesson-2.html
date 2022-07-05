@@ -11,7 +11,7 @@
 
 
 
-<title>Network Structure: Construction and Metrics</title>
+<title>1.- Network Structure: Construction and Metrics</title>
 
 <script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -178,7 +178,7 @@ pre code {
 <div id="rStudioHeader" class="alwaysShrunk">
   <div class="innards bandContent">
     <div>
-      <a class="productName" href="index.html">Ecological Networks</a>
+      <a class="productName" href="index.html">Community Ecology and Biodiversity</a>
       <div class="Networks">    </div>
     </div>
 
@@ -209,8 +209,8 @@ $(".main-container").removeClass("main-container").removeClass("container-fluid"
 <div class="lessonPage">
   <div class="lessonsNav">
     <a id="nav-lesson-1" href="lesson-1.html">Introduction</a>
-    <a id="nav-lesson-2" href="lesson-2.html">Representing Networks</a>
-    <a id="nav-lesson-3" href="lesson-3.html">Ecological Networks: Species and Interactions</a>
+    <a id="nav-lesson-2" href="lesson-2.html">1.- Network Structure: Construction and Metrics</a>
+    <a id="nav-lesson-3" href="lesson-3.html">2.- The Assembly of Ecological Networks Across Spatial Scales</a>
     <a id="nav-lesson-4" href="lesson-4.html">Networks as Graphs</a>
     <a id="nav-lesson-5" href="lesson-5.html">Food Web Properties</a>
    
@@ -221,48 +221,64 @@ $(".main-container").removeClass("main-container").removeClass("container-fluid"
 
 
 
-<h1 class="title toc-ignore">Network Structure: Construction and Metrics</h1>
+<h1 class="title toc-ignore"><strong>1.- Network Structure: Construction and Metrics</strong></h1>
 
 </div>
 
 
 <div id="what-is-a-network" class="section level2">
-<h2>What is a network?</h2>
+<h2>1.1- What is a network?</h2>
 <p>A network (or graph in mathematics) is a set of elements with specific characteristic relationships between them. We call the elements vertices (or nodes) and the relations between them edges (or links). In the picture below we can see a network composed of 8 nodes and 10 links between them.</p>
 <center>
 <img src="lesson-images/small-network.png" style="width:50.0%" />
 </center>
 <p>There are a couple of things to be noted about this network, which we will revisit later on. The links between the nodes do not have an apparent directionality, making this an <strong>undirected graph</strong>. On the other hand, when the direction between link is relevant, such as for example in a predator-prey interaction, where it is convenient to represent the fact that the flow of biomass runs from prey to predator, the links might be represented as arrows. Networks represented in this way are called <strong>directed graphs</strong>.</p>
 <p>Secondly, one of the nodes is <em>isolated</em>. Can you guess which one it is?</p>
+<p>You might have started noticing that depending on the types of links, and their placement between nodes within the network, there are a few categories under which we can classify networks according to their features. Two categories are relevant for this course:</p>
+<p>1.- Networks can be either <strong>directed</strong> or <strong>undirected</strong> as we saw before.</p>
+<p>2.- Depending on the constraints of connectivity between groups of nodes, networks can be classified as either <strong>unipartite</strong> where all nodes could in principle be connected to any other node, or <strong>bipartite</strong>, where two different groups of nodes exist in which <em>links between nodes in different groups occur</em> but links between nodes <em>within the same group do not</em>.</p>
+<p>We will encounter both <strong>unipartite</strong> and <strong>bipartite</strong> networks along the way. Watch out!</p>
 <p>Many systems both natural and man-made, can be thought of as networks. From the network of airports around to world and the air routes connecting them, to the World Wide Web and the links between web pages, or social networks of friendships (both real and digital), all the way down to microscopic entities such as gene and metabolic networks, these systems can be represented and, perhaps more importantly, analysed as networks.</p>
 <p><img src="lesson-images/Leonhard_Euler.jpeg" style="float:left; padding-right:10px" width="280" /></p>
+<p>The field of mathematics has been studying networks for decades. The mathematics subfield of <a href="https://en.wikipedia.org/wiki/Graph_theory">Graph Theory</a> has developed extensive frameworks to analyse and manipulate mathematical objects known as <code>graphs</code>. Graphs, as networks, are simply collections of nodes and links between them. So, we can represent networks as graphs and take advantage of the mathematical framework of Graph Theory to study them.</p>
+<p><img src="lesson-images/konigsberg_bridges.png" style="padding-left:100px" width="380" /></p>
 <p>The mathematical study of graphs (or networks) arguably started in 1735 when the celebrated mathematician <a href="https://en.wikipedia.org/wiki/Leonhard_Euler">Leonhard Euler</a>, yes!, the same one who introduced the <em>e</em> as the base of the natural logarithm, developed what is considered the first theorem of graph theory to solve the problem known as the <a href="https://en.wikipedia.org/wiki/Seven_Bridges_of_K%C3%B6nigsberg">Seven bridges of Königsberg</a>.</p>
-<p><img src="lesson-images/konigsberg_bridges.png" style="padding-left:100px" width="380" /> Ever since then, the application of graph theory has percolated the sciences. It started back in the 1930s when tools for the analysis of networks were applied to the social sciences to develop a better understanding of social relationships among humans.</p>
-<p>In ecology, even though network representations of natural communities can be traced back to the 1880’s in the work by Lorenzo Camerano, the quantitative analysis of networks and their properties, as well as their mathematical modelling, started much more recently, around the 1960’s - 70’s.</p>
+<p>Ever since then, the application of graph theory has percolated the sciences. It started back in the 1930s when tools for the analysis of networks were applied to the social sciences to develop a better understanding of social relationships among humans.</p>
+<p>In ecology, even though network representations of natural communities can be traced back to the 1880’s in the work by <a href="https://en.wikipedia.org/wiki/Lorenzo_Camerano">Lorenzo Camerano</a>, the quantitative analysis of networks and their properties, as well as their mathematical modelling, started much more recently, around the 1960’s - 70’s.</p>
 <center>
 <img src="lesson-images/camerano.png" width="380" />
 </center>
-<p>In the following sections we will learn how to analyse networks. Our focus will be networks of ecological interactions between species sharing the same ecological community. In very diverse systems these can be up to 1,000’s of species. As such, many of the quantities we will be learning about are mostly relevant to quantify <strong>biodiversity</strong> and can be seen as a natural extension to the classical analysis performed in <strong>community ecology</strong>. Nonetheless, the underlying principles of network construction and analysis can be applied to any networked system, including those mentioned above.</p>
+<center>
+<strong>Lorenzo Camerano’s representation of a food web (1880)</strong>
+</center>
+<p><br> In the following sections we will learn how to analyse networks. Our focus will be networks of ecological interactions between species sharing the same ecological community. In very diverse systems these can be up to 1,000’s of species. As such, many of the quantities we will be learning about are mostly relevant to quantify <strong>biodiversity</strong> and can be seen as a natural extension to the classical analysis performed in <strong>community ecology</strong>. Nonetheless, the underlying principles of network construction and analysis can be applied to any networked system, including those mentioned above.</p>
 </div>
 <div id="network-formats-edgelists-and-adjacency-matrices" class="section level2">
-<h2>Network formats: edgelists and adjacency matrices</h2>
-<p>To be able to manipulate and analyse networks in an automated way, we need to represent them in a way that is understandable by a computer.</p>
-<p>Several computer readable formats exist to store the description and information contained in a network. The most commonly used in ecology (and other disciplines) are: (i) adjacency matrices, and (ii) edgelists.</p>
-<p>Adjancecy matrices are matrices in which columns and rows represent the nodes (species) in the network, and a link (interaction) between them is repsented as a 1, while the absence of a link is represented as a 0.</p>
+<h2>1.2- Network formats: edgelists and adjacency matrices</h2>
+<p>To be able to manipulate and analyse networks in an automated way, we need to represent them in a way that is understandable by a computer. Several computer readable formats exist to store the description and information contained in a network. The most commonly used in ecology (and other disciplines) are: (i) adjacency matrices, and (ii) edgelists.</p>
+<p><strong>Adjancecy matrices</strong>, one of the most common ways of representing networks in mathematics, are matrices in which columns and rows represent the nodes (species) in the network, and a link (interaction) between them is represented as a 1, while the absence of a link is represented as a 0.</p>
 <p>In a foodweb, for example, as we saw previously, links are directed from prey to predator. In the adjacency matrix, the rows represent prey species and the columns represent predators. Thus, an interaction a<sub>ij</sub> runs from prey i to predator j.</p>
-<p>In the case of a mutualistic (i.e. bipartite) network, species are not all represented in each dimension of the matrix (rows and columns). Instead hosts are usually shown in rows and their mutualistic partners are shown in columns. This makes these matrices non-square.</p>
-<p>Edge lists, on the other hand, are lists of pairs of identifiers (usually integers) that denote links (or ecological interactions) from the first item in pair to the second. For example, a network specified by the following edgelist:</p>
+<p><strong>Adjacency matrices</strong> are good for representing <strong>unipartite</strong> networks because in principle there could be a connection between any two nodes. In <strong>bipartite</strong> networks on the other hand, as we saw before, we know in advance that some links cannot occur (i.e. those between nodes within the same groups). As such all nodes do not have to be represented in each dimension of the matrix (rows and columns) but only in one of them. This gives rise to a slightly different format from an adjacency matrix, but where the meaning of the elements in the matrix is still the same. These are <strong>incidence matrices</strong>. In and <strong>incidence matrix</strong> one set of nodes is represented by the rows and the other one by the columns. Links thus connect nodes in the the rows with nodes in the columns. This makes these matrices non-square.</p>
+<p>An added virtue of the <strong>incidence matrix</strong> format is that it saves us a lot of space in the computer (and in our notebooks if we were using pen and paper!). Can you figure out why?</p>
+<p>Can you think of a few examples of ecological networks that can be represented as <strong>bipartite</strong> and thus as <strong>incidence matrices</strong>?</p>
+<p>That’s right! Mutualistic networks (e.g. plant-pollinator) are bipartite. As such, they can be represented as incidence matrices, where hosts are usually shown in rows and their mutualistic partners are shown in columns.</p>
+<p><strong>Edge lists</strong>, on the other hand, are lists of pairs of identifiers (usually integers) that denote links (or ecological interactions) from the first item in pair to the second. For example, a network specified by the following edge list:</p>
 <p>1 2 <br> 2 3 <br> 1 3 <br></p>
 <p>is one with three nodes: V = {1,2,3}, and three links: one from basal prey 1 to primary consumer 2, another one from prey (primary consumer) 2 to top predator 3, and finally, an interaction between the basal resource and the top predator (E = {(1,2), (2,3), (1,3)}). This makes the top predator an omnivorous species. A representation of this network is shown below:</p>
-<p><img src="lesson-images/net1.png" /></p>
+<center>
+<img src="lesson-images/net1.png" />
+</center>
 <p>This network can be represented as an adjacency matrix thus:</p>
-<p><img src="lesson-images/matrix.png" /></p>
-<p>More sophisticated ways of representing and storing networks exist, such as for example the <a href="http://graphml.graphdrawing.org">GraphML</a> format, in which additional information about the network, the nodes, and the links can be included in the description.</p>
-<p>In this course, we will use edge lists as a starting format and then convert that representation into an adjacency matrix.</p>
+<center>
+<img src="lesson-images/matrix.png" />
+</center>
+<p>More sophisticated ways of representing and storing networks exist, such as for example the <a href="http://graphml.graphdrawing.org">GraphML</a> format, in which additional information about the network, the nodes, and the links can be included in the description. During these lectures, we will use a mixture of different formats to represent networks in text files (e.g. edge lists, adjacency matrices, etc).</p>
 <p>Throughout the course we will use a few examples of real ecological networks taken publicly available databases such as the well-known food web from the Benguela upwelling marine system off the Western coast of Africa:</p>
-<p><img src="lesson-images/benguela.png" height="500" /></p>
+<center>
+<img src="lesson-images/benguela.png" height="500" />
+</center>
 <p>Image taken from Yodzis, P (1998) <em>Local trophodynamics and the interaction of marine mammals and fisheries in the Benguela ecosystem</em>. <strong>Journal of Animal Ecology</strong>. 67, 635-658.</p>
-<p>This, and other ecological networks datasets are available from the <a href="https://www.globalwebdb.com/">Global Food Web Database</a>.</p>
+<p>This, and other ecological networks datasets, are available from the <a href="https://www.globalwebdb.com/">Global Food Web Database</a>.</p>
 <p>The code below will enable you to download the edgelist file and use it to create an adjacency matrix representation of the network. Two representations of the network then remain available: the Edgelist representation (<code>benguela.EL</code>) and the Adjacency Matrix representation (<code>benguela.AM</code>).</p>
 <pre class="r"><code>library(RCurl)
 x &lt;- getURL(&quot;https://raw.githubusercontent.com/mlurgi/networks_for_r/master/datasets/benguela.edgelist&quot;)
@@ -273,10 +289,329 @@ benguela.AM &lt;- matrix(0, max(benguela.EL), max(benguela.EL))
 
 # Introduce ones to the matrix to represent interactions between species
 benguela.AM[benguela.EL] &lt;- 1</code></pre>
+</div>
+<div id="species-and-interactions-as-vertices-and-links" class="section level2">
+<h2>1.3- Species and interactions as vertices and links</h2>
+<p>In abstract representations of ecological communities as networks, nodes represent species and links amongst them denote ecological interactions happening between the represented species.</p>
+<p><strong>Adjacency matrices</strong> are matrix representations of networks where elements of the matrix denote the presence of a link (i.e. interaction) between the species represented by the row and the species represented by the column. Thus, to represent a food web composed of S species as a matrix we need a SxS matrix in order to be able to represent all possible interaction between the S species. The number of species in the network can be calculated thus as the number of rows or the number of columns.</p>
+<p>Using the Benguela food web adjacency matrix <code>benguela.AM</code>, you can calculate the number of species.</p>
+<p>In an adjacency matrix, all species are represented by columns and rows. Counting the number of columns or rows in the adjacency matrix will let you obtain the number of species in the food web. In R, you can use the <code>dim</code> function to look at the matrix <strong>dimensions</strong>.</p>
+<pre class="r"><code># species richness
+S &lt;- dim(benguela.AM)[1]</code></pre>
+<p>Similarly, since interactions are represented as ones in the matrix, if you <code>sum</code> all the values in the matrix, you will get the number of interactions.</p>
+<pre class="r"><code># number of links
+L &lt;- sum(benguela.AM)</code></pre>
+</div>
+<div id="interactions-in-bipartite-networks" class="section level2">
+<h2>1.4- Interactions in bipartite networks</h2>
+<p>Food webs, like that for the Benguela ecosystem studied above, are network representation of who eats whom relationships in an ecological community. As such, there are no distinct subset of species among which interactions are not possible. This is why adjacency matrices for representing food webs contain the total number of species as rows and also as columns. In theory, any interaction is possible.</p>
+<p>Other types of ecological networks, however, like for example, plant-animal mutualistic networks (like the figure below) or host-parasite interaction networks, exhibit a bipartite structure. In this type of networks, species can be classified into two distinct groups where interactions do not occur (or are forbidden) among members of the same group. For example, in a plant-animal mutualistic network, plants do not interact with plants and animal mutualists do not interact among them. This feature allows for a more concise matrix representation of bipartite networks.</p>
+<center>
+<img src="lesson-images/plant-pollinator.png" />
+</center>
+<p><strong>Example of a plant-animal pollinator bipartite network.</strong> Image taken from MacGregor, CJ et al. (2015) <em>Pollination by nocturnal Lepidoptera, and the effects of light pollution, a review</em>. <strong>Ecological Entomology</strong>. 40, 187-198.</p>
+<p>As we saw above, the equivalent representation of an adjacency matrix for a bipartite network is called an incidence matrix. In incidence matrices one set of species are represented as rows (e.g. hosts/plants), and the other set of species as columns (e.g. visitors/mutualists). Thus, the way of counting species in an incidence matrix representing a mutualistic (bipartite) network is different from that used to count species in adjacency matrices representing food webs.</p>
+<p>For a bipartite ecological network represented by an incidence matrix with size HxV, where H is the number of rows and V is the number of columns, the number of species in the network is equal to H + V.</p>
+<p>As an example, we load a matrix representing a bipartite network of interactions between anemones and several species of fish living within them in South-East Asia. This network was taken from Ollerton, J. et al. (2007) <em>Finding NEMO: nestedness engendered by mutualistic organization in anemonefish and their hosts</em>. <strong>Proceedings of the Royal Society B</strong>. 274, 591-598.</p>
+<p>Try and calculate the total number of anemone <em>and</em> fish species in the network. Remember that in a bipartite network, one set of species (in this case, anemones) are represented as columns, while the other set (in this case, fishes) are represented as rows.</p>
+<pre class="r"><code>library(RCurl)
+y &lt;- getURL(&quot;https://raw.githubusercontent.com/mlurgi/networks_for_r/master/datasets/anemonefish.txt&quot;)
+anemonef &lt;- read.table(text = y)
+names(anemonef) &lt;- paste(&quot;A&quot;, 1:10, sep = &quot;&quot;)
+row.names(anemonef) &lt;- paste(&quot;F&quot;, 1:26, sep = &quot;&quot;)       
+anemonef &lt;- as.matrix(anemonef)
+
+### The number of fish species in the network is the number of rows
+n_fish &lt;- dim(anemonef)[1]
+### The number of anemone species is the number of columns
+n_anemone &lt;- dim(anemonef)[2]
+
+### So, the total number of species is the sum of these two quantities
+S &lt;- n_fish + n_anemone
+
+### Whereas the total number of interactions is still the sum of the matrix
+L &lt;- sum(anemonef)</code></pre>
+</div>
+<div id="networks-as-graphs" class="section level2">
+<h2>1.5- Networks as graphs</h2>
+<p>As we have seen, edge lists and adjacency matrices are convenient ways in which interaction networks can be represented. However, more flexible formats for representing networks are needed when we want to perform more complex actions on networks, or even just for visualisation purposes.</p>
+<p>Several computer programming libraries have been especially developed to construct and manipulate graphs. These libraries make it easy and widely accessible to work with and study networks. Amongst the most popular the <a href="https://networkx.github.io/">NetworkX</a> complex networks library for <a href="https://www.python.org/">Python</a> and the <a href="https://igraph.org/">igraph</a> package for network analysis, which can be used on several platforms, including <a href="https://www.r-project.org/">R</a>. For the rest of this course we will be using <code>igraph</code> to create and manipulate ecological networks.</p>
+<p>To install and load igraph on your R workspace run the following commands:</p>
+<pre class="r"><code>## Install igraph
+install.packages(&quot;igraph&quot;)
+
+## Load igraph into workspace
+library(igraph)</code></pre>
+<p>To start getting familiar with igraph we will start by creating some simple networks.</p>
+<div id="weaving-networks-from-scratch" class="section level3">
+<h3>1.5.1- Weaving networks from scratch</h3>
+<p>The following instructions will walk you through a simple example in which you will create a small network:</p>
+<p>1.- First create a vector called <code>species</code> with the numbers from 1 to 10</p>
+<p>2.- Then create a network by adding the <code>species</code> as <code>vertices</code> to an empty graph</p>
+<p>3.- Create an interaction between species 5 and 7</p>
+<p>4.- Create 10 other interactions between any species you want</p>
+<pre class="r"><code>require(igraph)</code></pre>
+<pre><code>## Loading required package: igraph</code></pre>
+<pre><code>## 
+## Attaching package: &#39;igraph&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     decompose, spectrum</code></pre>
+<pre><code>## The following object is masked from &#39;package:base&#39;:
+## 
+##     union</code></pre>
+<pre class="r"><code># Ten species
+species &lt;- 1:10
+network &lt;- graph.empty() + vertices(species)
+
+# Link between species 5 and 7
+network[5,7] &lt;- 1</code></pre>
+</div>
+<div id="converting-matrix-to-igraph-object" class="section level3">
+<h3>1.5.2- Converting matrix to igraph object</h3>
+<p>If we have an adjacency matrix and we want an igraph object representing the same network, without the need to create the network from scratch, igraph offers the functionality of creating graphs from adjacency matrices. Just use the function <code>graph.adjacency(A)</code>, where A is your adjacency matrix.</p>
+<p>Check out the documentation for <a href="http://igraph.org/r/doc/graph_from_adjacency_matrix.html">graph.adjacency</a>, including additional parameters that you can use to create your network. Similarly, to create a graph from an edgelist, you can use the <code>graph_from_edgelist</code>function from igraph.</p>
+<p>We can convert the network for the Benguela ecosystem, into and igraph object using the following code.</p>
+<pre class="r"><code>library(RCurl)
+x &lt;- getURL(&quot;https://raw.githubusercontent.com/mlurgi/networks_for_r/master/datasets/benguela.edgelist&quot;)
+benguela.EL &lt;- read.table(text = x) 
+benguela.EL &lt;- as.matrix(benguela.EL)
+
+# Create an adjacency matrix called benguela.AM, containing only zeros
+benguela.AM &lt;- matrix(0, max(benguela.EL), max(benguela.EL))
+
+# Introduce ones to the matrix to represent interactions between species
+benguela.AM[benguela.EL] &lt;- 1
+
+# Convert Benguela adjacency matrix to an igraph network
+benguela.network &lt;- graph.adjacency(benguela.AM)</code></pre>
+</div>
+<div id="drawing-networks" class="section level3">
+<h3>1.5.3- Drawing networks</h3>
+<p>The network representations we have explored so far are great for manipulating them and calculating properties over them. However, to gain an intuitive idea of what the networks we are analysing look like, or if we want to show them in publications or websites, it is sometimes desirable to draw them as graphs: with dots representing nodes/species and lines connecting them representing links/interactions. In pretty much the same way we saw in the introductory video.</p>
+<p>Of course, drawing a network on a whiteboard using coloured pens is easy. Doing that on a computer or writing code in R to do it, might be more of a challenge. Fortunately, libraries such as igraph offer these functionalities. The <a href="http://igraph.org/r/doc/plot.igraph.html">plot</a> function from the igraph library takes as an input an igraph object and produces a graphical representation of the network.</p>
+<p>Let’s try it!</p>
+<pre class="r"><code># Plotting your network
+plot(network)</code></pre>
+<p>If the instructions above worked well you will be able to see something like this:</p>
+<center>
+<img src="lesson-images/first-network.png" />
+</center>
+<p>What about the Benguela ecosystem network…</p>
+<pre class="r"><code># Plot the Benguela food web
+plot(benguela.network, edge.arrow.size = 0.2)</code></pre>
+<p><img src="lesson-2_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>This representation of the Benguela web looks a bit messy. Don’t worry! We will explore ways of making networks more beautiful later on.</p>
+</div>
+</div>
+<div id="network-properties" class="section level2">
+<h2>1.6- Network Properties</h2>
+<p>Now that we have an igraph representation of our network(s), we can calculate several of its properties.</p>
+<div id="graph-connectivity-food-web-connectance" class="section level3">
+<h3>1.6.1- Graph connectivity / Food web connectance</h3>
+<p>If we think of the network we just constructed as a food web, we can calculate the number of species and links (what we did previously on adjacency matrices) thus:</p>
+<pre class="r"><code># number of species
+S &lt;- vcount(network)
+
+# number of interactions
+L &lt;- ecount(network)</code></pre>
+<p>The functions <code>vcount</code> and <code>ecount</code> from the igraph library let you count the number of nodes and links on a graph, respectively.</p>
+<p>Having counted the number of species and links in our newly built food web, we can start calculating more interesting prorperties such as connectivity. In food webs connectivity can be quantified as the average number of interactions per species (L/S, i.e. the mean number of interactions species in the network have), and <code>Connectance</code> (L/S<sup>2</sup>, i.e. the fraction of links present in the network out of all possible links).</p>
+<pre class="r"><code># average number of interactions species
+L.S &lt;- L/S
+
+# food web connectance
+C &lt;- L/S^2</code></pre>
+<p>In the case of the adjacency matrix (A) representation of a food web, we know that it contains all the links in our network represented by 1’s. Hence, the number of links in our network is simply sum(A). Similarly we have also learnt that the number of species (at least for a food web) equals the number of rows (or columns) in the matrix: nrow(A).</p>
+<p>Hence, the connectance of our food web represented by matrix A is calculated as: sum(A)/(nrow(A)<sup>2</sup>). Try this on your network above and you should obtain the same quantity we now have in <code>C</code>. <strong>HINT:</strong> To obtain the adjacency matrix representation of an igraph object you can use the <code>as_adjacency_matrix</code> function.</p>
+<p>For the Benguela network we can calculate connectivity properties:</p>
+<pre class="r"><code># Calculate connectance
+connectance &lt;- ecount(benguela.network) / vcount(benguela.network)^2 
+
+# Print connectance va
+print(paste0(&#39;Connectance of Benguela network =&#39;, round(connectance,2)))</code></pre>
+<pre><code>## [1] &quot;Connectance of Benguela network =0.25&quot;</code></pre>
+<pre class="r"><code># Calculate number of links per species
+links.per.species &lt;- ecount(benguela.network) / vcount(benguela.network)</code></pre>
+</div>
+<div id="connectance-in-bipartite-networks" class="section level3">
+<h3>1.6.2- Connectance in bipartite networks</h3>
+<p>We have learnt how to calculate the connectance of ecological networks in general: it is simply the fraction of realised links out of the possible ones. Additionally, we have explored methods to quantify connectance in food webs based on the information extracted either from the adjacency matrix or the igraph representation of our networks.</p>
+<p>We have also learnt that the way in which bipartite networks are represented in incidence matrices is fundamentally different from the way in which we represent food webs in adjacency matrices. Keeping that in mind, we need to find out ways of finding out what would be: 1.- the correct way of finding out the number of species in a bipartite network from our matrix representation; and 2.- the total possible number of links in a bipartite network (remember that links between species in the same group are ‘forbidden’).</p>
+<p>Using the fish-anemone interaction network that we used previously, we can calculate the total number of possible links as the product of the number of species on one side (i.e. fish) times the number of species on the other side (i.e. anemone). This will give us the total number of links if every fish species would be found to interact with each anemone species. Connectance of this network is then simply the total number of links divided by this quantity.</p>
+<pre class="r"><code>library(RCurl)
+y &lt;- getURL(&quot;https://raw.githubusercontent.com/seblun/networks_datacamp/master/datasets/anemonefish.txt&quot;)
+anemonef &lt;- read.table(text = y)
+names(anemonef) &lt;- paste(&quot;A&quot;, 1:10, sep = &quot;&quot;)
+row.names(anemonef) &lt;- paste(&quot;F&quot;, 1:26, sep = &quot;&quot;)       
+anemonef &lt;- as.matrix(anemonef)
+
+# Calculate conectance of anemoref
+bipartite.connectance &lt;- sum(anemonef) / (dim(anemonef)[1] * dim(anemonef)[2])</code></pre>
+<p>Igraph lets us manipulate bipartite networks in a similar way to unipartite ones. We can load the incidence matrix above using the following instruction:</p>
+<pre class="r"><code>anemonef.network &lt;- graph_from_incidence_matrix(anemonef, directed = TRUE, mode = &#39;in&#39;)</code></pre>
+<p>And calculate its connectance thus:</p>
+<pre class="r"><code># Calculate conectance of anemoref
+bipartite.connectance &lt;- ecount(anemonef.network) / (sum(V(anemonef.network)$type) * (vcount(anemonef.network) - sum(V(anemonef.network)$type)) )</code></pre>
+<p>As a fun exercise you can try and calculate the average number of links per species in this network!</p>
+<p>Aside from the connectivity measures that we learnt in the previous section, more interesting properties can be calculated on ecological networks. In this chapter, we introduce some of these properties and how to calculate them.</p>
+</div>
+<div id="horizontal-diversity-generality-and-vulnerability" class="section level3">
+<h3>1.6.3- Horizontal Diversity : Generality and Vulnerability</h3>
+<p>Ecological networks are all about species and their interactions. In food webs, these interactions represent consumer-resource relationships, so the set of relationships that a consumer has with its prey is considered the ‘breadth’ of its diet. This diet breadth is a measure of the generality of the consumer species and a mean generality index can be calculated across the network to have an idea of how generalist are species in the network on average. We can calculate generality on the matrix representation of our food webs using the following function:</p>
+<pre class="r"><code>## Mean generality of species in the network
+Generality &lt;- function(M){
+  return(sum(colSums(M))/sum((colSums(M)!=0)));
+}</code></pre>
+<p>Similarly, we can obtain a measure of the average number of consumers that resources on our networks have (i.e. vulnerability) using the following function on our adjacency matrix:</p>
+<pre class="r"><code>## Mean vulnerability of the species in the network
+Vulnerability &lt;- function(M){
+  return(sum(rowSums(M))/sum((rowSums(M)!=0)));
+}</code></pre>
+<p>To be able to compare these quantities across different networks, they are usually normalised by the average number of links per species (<code>L/S</code>).</p>
+<p>If we are interested in these quantities at the species level, we simply count their prey or predator numbers or their <code>degree</code> in the network:</p>
+<pre class="r"><code>## In-degree or number of prey of all species in the network
+InDegree &lt;- function(M){
+  return(colSums(M));
+}
+
+## Out-degree or number of predators of all species in the network
+OutDegree &lt;- function(M){
+  return(rowSums(M));
+}</code></pre>
+<p>Even though these measures are useful to have an idea of the average diet breadth and number of consumers across species in our networks, in many occasions it is desirable to look at the deviation of these properties, since we can have within the same network generalist species such as this guy on the left… … alongside very specialist species, such as this guy on the right…</p>
+<p><img src="lesson-images/wolf.jpg" width="325" /> <img src="lesson-images/panda.jpg" width="350" /></p>
+<p>To assess variability in diet breadth and the degree of vulnerability of species in a food web, metrics such as the standard deviation of normalised generality and vulnerability are useful. These properties can be calculated using the following formulae:</p>
+<p>      <img src="https://latex.codecogs.com/svg.latex?\Large&space;G_{i}&space;=&space;\frac{1}{L/S}\sum_{j=1}^{S}a_{ji}" title="Generality" />            <img src="https://latex.codecogs.com/svg.latex?\Large&space;V_{i}&space;=&space;\frac{1}{L/S}\sum_{j=1}^{S}a_{ij}" title="Vulnerability" /></p>
+<p>where a<sub>ij</sub> are the i,j values of the adjacency matrix <code>A</code> representing the food web.</p>
+<p>Using R code they can be calculated thus:</p>
+<pre class="r"><code>## Standard deviation of generality:
+SDGenerality &lt;- function(M){
+  return(sd(colSums(M) / (sum(M)/dim(M)[1]) ));
+}
+
+## Standard deviation of vulnerability:
+SDVulnerability &lt;- function(M){
+  return(sd(rowSums(M) / (sum(M)/dim(M)[1]) ));
+}</code></pre>
+</div>
+<div id="vertical-diversity-fraction-of-species-types" class="section level3">
+<h3>1.6.4- Vertical Diversity : Fraction of Species Types</h3>
+<p>In food webs, we can categorise species according to the role the perform from an ecosystem functioning point of view. Basal resources are species at the base of food chains. They are in charge of converting organic and inorganic compounds into biomass such as, for example, plants or phytoplankton. It is interesting to know the fraction of species in food webs that belong to this category.</p>
+<p><img src="lesson-images/food-chain.png" style="float: right;margin-right: 7px;margin-top: 7px;" /></p>
+<pre class="r"><code>## Fraction of basal species
+FractionOfBasal &lt;- function(M){
+  M_temp &lt;- M;
+  diag(M_temp) &lt;- 0;
+  
+  b_sps &lt;- sum(which(InDegree(M_temp) == 0) %in% which(OutDegree(M_temp) &gt;= 1));
+  
+  return(b_sps / dim(M)[1]);
+}</code></pre>
+<p>Similarly, knowing the fraction of species belonging to intermediate and top consumer categories can give us information about the degree of predation pressure and top-down regulation expected in the network, and its corresponding community, being analysed.</p>
+<pre class="r"><code>## Fraction of top predator species
+FractionOfTop &lt;- function(M){
+  M_temp &lt;- M;
+  diag(M_temp) &lt;- 0;
+  
+  t_sps &lt;- sum(which(InDegree(M_temp) &gt;= 1) %in% which(OutDegree(M_temp) == 0));
+  
+  return(t_sps / dim(M)[1]);
+}</code></pre>
+<pre class="r"><code>## Fraction of intermediate consumer species
+FractionOfIntermediate &lt;- function(M){
+  M_temp &lt;- M;
+  diag(M_temp) &lt;- 0;
+  
+  i_sps &lt;- sum(which(InDegree(M_temp) &gt;= 1) %in% which(OutDegree(M_temp) &gt;= 1));
+  
+  return(i_sps / dim(M)[1]);
+}</code></pre>
+<p>For the Benguela food web we can obtain these properties using the functions defined above.</p>
+<pre class="r"><code>library(RCurl)
+x &lt;- getURL(&quot;https://raw.githubusercontent.com/mlurgi/networks_for_r/master/datasets/benguela.edgelist&quot;)
+benguela.EL &lt;- read.table(text = x) 
+benguela.EL &lt;- as.matrix(benguela.EL)
+
+# Create an adjacency matrix called benguela.AM, containing only zeros
+benguela.AM &lt;- matrix(0, max(benguela.EL), max(benguela.EL))
+
+# Introduce ones to the matrix to represent interactions between species
+benguela.AM[benguela.EL] &lt;- 1
+
+gen &lt;- Generality(benguela.AM)
+vul &lt;- Vulnerability(benguela.AM)
+sdgen &lt;- SDGenerality(benguela.AM)
+sdvul &lt;- SDVulnerability(benguela.AM)
+B &lt;- FractionOfBasal(benguela.AM)
+I &lt;- FractionOfIntermediate(benguela.AM)
+T &lt;- FractionOfTop(benguela.AM)</code></pre>
+</div>
+<div id="vertical-complexity-mean-food-chain-length" class="section level3">
+<h3>1.6.5- Vertical Complexity : Mean Food Chain Length</h3>
+<p>Food chains like those illustrated in the figure above are the exception rather than the norm in nature. Ecological communities are way more complex than this, such as the Benguela food web we saw before. You can imagine a real ecological community as a collection of interconnected food chains. One way to summarise this complexity is to calculate the average length of food chains in the network, i.e. the average number of links from basal resources to top predators or mean food chaing length.</p>
+<p>To be able to quantify this, we need to visit all paths in our network running from each basal species to each top predator species. This is a computing intensive task that, for large networks, requires large computational resources (including long execution times). In graph theory and network topology, there is considerable research devoted into how to best count <a href="https://en.wikipedia.org/wiki/Average_path_length">average paths in networks</a>. If you are interested, this is a fascinating area of research and you can play with functions such as <a href="https://igraph.org/r/doc/distances.html">distances</a> on igraph to find out more.</p>
+<p>In food webs, the paths we are interested in are special because they all start in basal resources and they all stop at top predators. So, the way in which we should count those paths is a bit different than what functions such as <code>distances</code> do. Fortunately, there exist libraries for food web analysis that can help us calculate metrics and statistics particularly tailored for food webs. One such a package is <a href="http://quicklizard99.github.io/cheddar/">cheddar</a>. Cheddar let’s you calculate all of the food web properties we have seen so far and many more. We will take advantage of cheddar to calculate mean food chain length. This will also get you familiar with cheddar and you can explore many more functionalities offered by the package.</p>
+<p>Calculating mean food chain length using cheddar:</p>
+<pre class="r"><code>MeanFoodChainLength &lt;- function(M){
+  require(cheddar)
+  M &lt;- t(M)
+  node &lt;- 1:dim(M)[1];
+  for(n in 1:length(node)){
+    node[n] &lt;- paste(node[n],&#39;-&#39;);
+  }
+  
+  pm &lt;- matrix(M, ncol=dim(M)[2], dimnames=list(node, node), byrow=TRUE);
+  
+  # We need to convert our adjacency matrix into a Chedday community object.
+  # For this, we yse PredationMatrixToLinks()
+  community &lt;- Community(nodes=data.frame(node=node), trophic.links=PredationMatrixToLinks(pm), properties=list(title=&#39;Community&#39;));
+  
+  # We remove cannibalistic links to avoid entering an infinte loop when calculating path lengths
+  community &lt;- RemoveCannibalisticLinks(community, title=&#39;community&#39;);
+ 
+  chain.stats &lt;- TrophicChainsStats(community)
+  ch_lens &lt;- (chain.stats$chain.lengths + 1)
+  
+  return(sum(ch_lens)/length(ch_lens));
+}</code></pre>
+</div>
+<div id="degree-distributions" class="section level3">
+<h3>1.6.6- Degree Distributions</h3>
+<p>Degree distributions constitute a convenient graphical representation of the probabilities of finding a node in a network possessing a certain number of links. This property is important because the shape of the degree distribution of complex networks has been linked to their robustness to random and targeted attacks to their nodes. In particular, networks with degree distributions that follow a <em>power law</em>, which are called scale free networks, are robust against random attacks due to the prevalence of nodes with a small number of links.</p>
+<p>Even though the prevalence of truly scale free networks (in the sense of the degree distributions following exactly a power law) has been disputed, networks with degree distributions that display a ‘fat tail’ have been identified in many natural and technological systems from social networks to the internet. Ecological networks are not an exception. This suggests that common underlying principles might be involved in the formation of these networks.</p>
+<p>Given its recognised importance and relevance for network persistence we might be interested in obtaining the degree distribution of our ecological networks.</p>
+<p>To get the degree distribution of the Benguela network we can follow the instructions below. Since the degree distribution of <a href="https://www.nature.com/articles/nature04927">ecological networks has been suggested to generally follow a truncated power law</a>, we fit that curve to our data.</p>
+<pre class="r"><code># degrees of the nodes
+degs &lt;- degree(benguela.network, mode=&#39;all&#39;)
+
+occur = as.vector(table(degs))
+occur = occur/sum(occur)
+p = occur/sum(occur)
+y = rev(cumsum(rev(p)))
+x = as.numeric(names(table(degs)))
+
+plot(x, y, log=&quot;xy&quot;, xlab =&#39;log k&#39;, ylab=&#39;log Pc(k)&#39;, type=&#39;p&#39;, col=&#39;black&#39;, pch=16)
+
+box(lwd=1.5)
+
+# and we fit a truncated power law to the data
+temp &lt;- data.frame(x,y)
+mod1 &lt;- nls(y ~ (x^-a*exp(-x/b)), data = temp, start = list(a = 1, b = 1))
+
+# add fitted curve
+lines(temp$x, predict(mod1, list(x = temp$x)), col=&#39;red&#39;)</code></pre>
+<p><img src="lesson-2_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+</div>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+<p>Montoya, J., Pimm, S. &amp; Solé, R. (2006) Ecological networks and their fragility. <strong><em>Nature</em></strong> 442, 259–264.</p>
+<p>Newman, M. E. J. (2003) The Structure and Function of Complex Networks. <strong><em>SIAM Rev.</em></strong> 45, 2 (2003), 167–256.</p>
 <hr />
 </div>
-<div id="continue-to-ecological-networks-species-and-interactions" class="section level2">
-<h2><a href="lesson-3.html" class="continue-link">Continue to Ecological networks: Species and interactions</a></h2>
+<div id="continue-to-the-assembly-of-ecological-networks-across-spatial-scales" class="section level2">
+<h2><a href="lesson-3.html" class="continue-link">Continue to The Assembly of Ecological Networks Across Spatial Scales</a></h2>
 </div>
 
   </div> <!-- lessonContent -->
