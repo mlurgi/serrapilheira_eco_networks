@@ -54,6 +54,10 @@ Special thanks go to Dr Ricardo Martínez-García for the invitation to particip
 
 I hope you enjoy this material. If you have any questions, comments, suggestions, or simply would like to discuss any of the topics presented here, I would be happy to talk to you. Just email me at: (miguel.lurgi@swansea.ac.uk)
 
+The material put here together has been collected by me over the years and reflects my personal views on the different topics. Please use any ideas, models, inspiration emanating from this course at your own risk and discretion.
+
+I am happy to share this under openly and freely with anyone interested in community ecology and networks!
+
 
 ***
 ## [Continue to Network Structure: Construction and Metrics](lesson-2.html){.continue-link}

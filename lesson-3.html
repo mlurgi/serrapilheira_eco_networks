@@ -239,9 +239,17 @@ $(".main-container").removeClass("main-container").removeClass("container-fluid"
 </center>
 <p><strong>Species-area relationship of showing bird species richness as a function of island size in the West Indies.</strong> Image taken from Preston, FW (1962) <em>The canonical distribution of commonness and rarity: Part I</em>. <strong><em>Ecology</em></strong>. 43:2, 185-215.</p>
 <p>The seminal paper by <a href="https://www.jstor.org/stable/1931976">Preston in 1962</a> building upon Arrhenius work and presenting SARs like the one above for different faunas, presented canonical values for the parameters of the power law form of the SARs:</p>
-<p><span class="math display"><em>S</em> = <em>c</em><em>A</em><sup><em>z</em></sup></span></p>
+<p><img style="vertical-align:middle" src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%0AS%20%3D%20c%20A%5Ez%20%20%20%20%20%0A" alt="
+S = c A^z     
+" title="
+S = c A^z     
+" class="math display" /></p>
 <p>where <em>S</em> is species richness, <em>c</em> is a proportionality constant, <em>A</em> is the area size, and <em>z</em> is the scaling exponent of the relationship. Applying the logarithm to both sides of the equation above, we can linearize and obtain the expression:</p>
-<p><span class="math display"><em>l</em><em>n</em>(<em>S</em>) = <em>l</em><em>n</em>(<em>c</em>) + <em>z</em> * <em>l</em><em>n</em>(<em>A</em>)</span></p>
+<p><img style="vertical-align:middle" src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%0Aln%28S%29%20%3D%20ln%28c%29%20%2B%20z%20%2A%20ln%28A%29%0A" alt="
+ln(S) = ln(c) + z * ln(A)
+" title="
+ln(S) = ln(c) + z * ln(A)
+" class="math display" /></p>
 <p>Making easy to fit a straight line to the log-log relationship of species richness with area size, and the reason why most of the times we see that relationship represented as in the plot above.</p>
 <p>The value of <em>z</em> across systems was shown by Preston, and many others after him, to be in the range of 0.1 and 0.5 and usually around the value of 0.25. The existence of this canonical value suggests profound general principles of community richness, and makes it a powerful predictive tool that has been used ever since in biodiversity conservation and studies of extinction during biotic collapse. The value of <em>c</em> and its universality is more debated (see <a href="http://ecflora.cavehill.uwi.edu/bio_courses/ECOL2453/pdfs/species%20area%20relationship.pdf">Lomolino’s account</a> for a nice discussion of the topic).</p>
 </div>
@@ -249,19 +257,118 @@ $(".main-container").removeClass("main-container").removeClass("container-fluid"
 <h2>2.2- The Theory of Island Biogeography</h2>
 <p>The discovery of ‘true ecological laws’ such as SARs represented an important advance for the field and for our efforts to better understand biodiversity and its distribution. However, as Simon Levin (<a href="https://esajournals.onlinelibrary.wiley.com/doi/10.2307/1941447">1992</a>) elegantly puts it:</p>
 <p><strong><em>“Understanding patterns in terms of the processes that produce them is the essence of science, and is the key to the development of principles for management.”</em></strong></p>
-<p>In 1967, two of the most prominent ecologists, Edward O. Wilson and Robert MacArthur, attempted to provide a mechanistic explanation for the distributional patterns of species using a graphical and mathematical framework. This framework has become to be known as the Theory of Island Biogeography. Ever since their development, the Theory of Island Biogeography has formed the backbone of our thinking on species distributions and accummulation of species with area.</p>
+<p>In 1967, two of the most prominent ecologists, <a href="https://en.wikipedia.org/wiki/Robert_H._MacArthur">Robert H. MacArthur</a> and <a href="https://en.wikipedia.org/wiki/E._O._Wilson">Edward O. Wilson</a>, attempted to provide a mechanistic explanation for the distributional patterns of species using a graphical and mathematical framework. This framework has become to be known as the Theory of Island Biogeography. Ever since its development, the Theory of Island Biogeography has formed the backbone of our thinking on species distributions and accumulation of species with area.</p>
+<p>The Theory of Island Biogeography poses that the number of species at equilibrium on a given island (or isolated patch of habitat) is given by a compromise between the rates of colonisation and extinction of species. In particular:</p>
+<p><img style="vertical-align:middle" src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%0AS%20%3D%20%5Cfrac%7BcS_p%7D%7B%28c%2Be%29%7D%0A" alt="
+S = \frac{cS_p}{(c+e)}
+" title="
+S = \frac{cS_p}{(c+e)}
+" class="math display" /> where <em>S</em> is the number of species on a given island, <em>S<sub>p</sub></em> is the number of species in the species pool and <em>c</em> and <em>e</em> are the extinction and colonisation rates respectively. MacArthur and Wilson went on and developed a series of theoretical expectations based on the expectation that the colonisation and extinction rates on islands should vary predictably with two main aspects of their geography: 1.- their distance from the mainland (where the species pool is located), and 2.- their size.</p>
+<p>Different configurations of distance from the mainland on the one hand, influencing colonisation <strong><em>-the closer an island is to the mainland the higher its probability of being colonised by a species-</em></strong>; and area size on the other, influencing extinctions <strong><em>-the smaller an island the higher the chances a species would go extinct on it due to the limited availability of resources, habitat, etc that accompanies small areas-</em></strong>, thus produce different equilibria in species richness.</p>
+<center>
+<img src="lesson-images/theory-island-bio.png" width="500" />
+</center>
+<p>The theoretical framework proposed by the Theory of Island Biogeography has been applied on several settings where species richness in relatively isolated patches depend to one extent or another on a given species pool. Examples of this include mountaintops, forest fragments, or organic particles suspended in the ocean waiting to be colonised by microorganisms.</p>
+<p>What about if the interest is in understanding the distribution of a single species across a landscape of patches of habitat?</p>
 </div>
-<div id="extending-the-theory" class="section level2">
-<h2>2.3- Extending the Theory</h2>
+<div id="metapopulations" class="section level2">
+<h2>2.3- Metapopulations</h2>
+<p>In spatially explicit settings, in which several patches of suitable habitat are present, we might be interest in understanding and predicting the occupancy of a species across this landscape (i.e. the fraction of patches that a species can occupy). This exact same question was in the mind of Richard Levins in 1969 when he was trying to predict how much of a crop (habitat) would be attacked (colonised) by a given pest species (coloniser).</p>
+<p>He realised that this problem could be formalised mathematically using a simple model that accounts for <em>colonisation</em> and <em>extinction</em> rates of the species at local ‘patches’ of suitable habitat. Levin’s thus proposed, for the first time, a metapopulation model that would lay the foundations of metapopulation theory. The model took the form of a differential equation expressing the rate of change in the fraction of patches colonised through time as a function of <em>colonisation</em> and <em>extinction</em>.</p>
+<p><img style="vertical-align:middle" src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%0A%5Cfrac%7Bdp%7D%7Bdt%7D%20%3D%20cp%281-p%29%20-%20ep%0A" alt="
+\frac{dp}{dt} = cp(1-p) - ep
+" title="
+\frac{dp}{dt} = cp(1-p) - ep
+" class="math display" /> where <em>p</em> is the fraction of patches of habitat occupied by the species, and <em>c</em> and <em>e</em> are the colonisation and extinction rates of empty and occupied patches respectively. Solving this equation to its equilibrium, i.e. by making <img style="vertical-align:middle" src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cfrac%7Bdp%7D%7Bdt%7D%20%3D%200" alt="\frac{dp}{dt} = 0" title="\frac{dp}{dt} = 0" class="math inline" /> we obtain the equilibrium <img style="vertical-align:middle" src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20p%5E%2A%20%3D%201%20-%20e%2Fc" alt="p^* = 1 - e/c" title="p^* = 1 - e/c" class="math inline" />.</p>
+<p>Ordinary differential equations (ODEs), such as the Levins’ metapopulation model, can be solved analytically (as we just did above when we found the equilibrium value <img style="vertical-align:middle" src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20p%5E%2A" alt="p^*" title="p^*" class="math inline" />) but can also be solved numerically. Numerically solving an ODE involves a series of mathematical tricks that allow us to <strong><em>approximate</em></strong> the next value of variable of interest based on a previous value and an infinitesimally small time over which it has changed using the tools of <strong><em>calculus</em></strong>. Luckily, nowadays all those mathematical complexities have conveniently been packed for us into software libraries that we can use out of the box to solve our equations. In R, one such library is called <strong>deSolve</strong>.</p>
+<p>We can thus implement the Levins’ metapopulation model and solve it numerically:</p>
+<pre class="r"><code># Simulating the Levins’ metapopulation model in continuous time
+# import the numerical integration library
+require(deSolve)
+
+# This function implements the model
+levins &lt;- function(t, p, parameters) {
+  with(as.list(c(p, parameters)), {
+    dp &lt;- c*p*(1-p) - e*p
+    return(list(dp))
+  }) 
+}
+
+# we define the parameters of the model: c = colonisation rate, e = extinction rate
+parameters &lt;- c(c=0.15, e=0.05)
+Initial.p &lt;- c(p=.1)
+out.L &lt;- data.frame(ode(y=Initial.p, times=1:100, func=levins, parms=parameters))
+
+# the plotting library
+require(ggplot2)
+
+# plot the results
+qplot(x=out.L[,1], y=out.L[,2], geom=&quot;line&quot;, ylab=&quot;p&quot;, xlab=&quot;time&quot;)  +
+  annotate(&quot;text&quot;, 75, .3, label=expression(over(dp,dt)==cp(1-p)-ep))</code></pre>
+<p><img src="lesson-3_files/figure-html/setup-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<p>In the example above we set the parameter values to <img style="vertical-align:middle" src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20c%3D0.15" alt="c=0.15" title="c=0.15" class="math inline" /> and <img style="vertical-align:middle" src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20e%3D0.05" alt="e=0.05" title="e=0.05" class="math inline" />. Using the expression for <img style="vertical-align:middle" src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20p%5E%2A" alt="p^*" title="p^*" class="math inline" /> that we derived earlier we can calculate the exact equilibrium value for <em>p</em> and compare it to the outcome of our integration procedure. Try it out!</p>
+<p>Using the code above, we can also perform some exhaustive explorations of the parameter space to evaluate the changes on the system’s behaviour when the values for the colonisation and extinction rates are altered. This can be useful to test hypotheses and make predictions about the effects of changes on colonisation and / or extinction rates due to external forcing, like for example environmental stressors.</p>
+<pre class="r"><code># Exploring the parameters’ space for the Levins metapopulation model
+extinctions &lt;- seq(0.01,1,length.out=30)        # range of values for e
+colonisations &lt;- seq(0.01,1,length.out=30)      # range of values for c
+
+# we create an empty matrix to store our results
+N &lt;- matrix(0, nrow=length(extinctions), ncol=length(colonisations))
+
+# the nested for loop to go over the e values and the c values
+for(rep in 1:length(extinctions)){
+  ext &lt;- extinctions[rep]
+  for(rep2 in 1:length(colonisations)){
+    col &lt;- colonisations[rep2]
+    prms &lt;- c(c=col, e=ext)
+    Initial.p &lt;- c(p=.1)
+    
+    # we use a larger time period to ensure equilibrium is achieved for all simulations
+    out.L &lt;- data.frame(ode(y=Initial.p, times=1:100, func=levins, parms=prms))     
+    N[rep, rep2] &lt;- out.L[100,2]
+  }
+} 
+
+require(viridis)
+fields::image.plot(x = colonisations, 
+      z = t(N), 
+      y = extinctions, 
+      legend.lab = &#39;fraction occupied patches&#39;, col=viridis(128),
+      xlab=&#39;colonisation rate&#39;, ylab=&#39;extinction rate&#39;)</code></pre>
+<p><img src="lesson-3_files/figure-html/unnamed-chunk-1-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<p>Metapopulations are a handy way of thinking about spatially explicit populations in which local dynamics and demographic processes are more or less independent but some exchange of individuals via <strong><em>dispersal</em></strong> occurs amongst populations. The simplest models like the Levins’ model above make several assumptions. For example, it is a central assumption that <strong><em>all patches have the same local conditions</em></strong>, i.e. there is no spatial heterogeneity, which might be realistic for the pests invading crops that Levins was studying. That assumption however, is likely to be violated in many natural systems in which, inevitably, some patches of habitats are “better” than others. By being “better” we mean that the growth rate of the population inhabiting a better patch is higher than the growth rate in a population in a “worse” patch.</p>
+<p>Situations like this give rise to phenomena such as <strong><em>source-sink dynamics</em></strong>, in which source patches produce an excess of individuals that will then go on an disperse to other patches. If those patches receiving individuals from outside are in general bad for growth (i.e. growth rates of the populations within them are negative), they can’t really be sustained unless they have a constant influx from more prosperous patches. These former patches are thus sinks. When considered at the large spatial scale (i.e. the whole set of patches together) then the metapopulation will be considered to persist, whereas if we focus on only those “worse” patches we might think that the population is doomed to collapse.</p>
+<center>
+<img src="lesson-images/butterfly-metapop.png" width="500" />
+</center>
+<p>So, populations can persist regionally as a metapopulation even if some local populations might not persist for long.</p>
+<p>Time also plays a role, with the quality of patches changing through time, making the metapopulation dynamics even more complex and harder to understand.</p>
+</div>
+<div id="metacommunities" class="section level2">
+<h2>2.5- Metacommunities</h2>
+<p>To add even more complexity to this whole picture we have to remember that all of these colonisations and extinctions to and from patches by a single species does not really happen in isolation. It happens in a community context (i.e. within communities containing other species) that is very dynamic. This realisation gave rise to metacommunity theory: a framework designed to think about spatially explicit local communities of many species connected via dispersal. Pretty much like a metapopulation but involving many species that might be interacting.</p>
+<center>
+<img src="lesson-images/metacom-paradigms.png" width="400" />
+</center>
+<center>
+<strong>The four paradigms of metacommunity theory for two competing species.</strong> (a) patch-dynamics, (b) species sorting, (c) mass effects, and (d) neutral . Image taken from Leibold, MA (2004).
+</center>
+<p><br></p>
+<p>In 2004, Leibold and colleagues, proposed a way of thinking about metacommunities that revolves around a combination of 4 <em>metacommunity paradigms</em>. These metacommunity paradigms summarise the ways in which local dynamics between species and the environment interact with regional dynamics of dispersal to give rise to regional patterns of biodiversity. In the patch dynamics paradigm (a in the figure above) landscape scale persistence and coexistence is given by a trade off between colonisation and competition. In this case species A is a superior competitor but poor coloniser (shown by the dashed arrows vs the thick arrows of B), whereas species B is a good coloniser but a bad competitor, so it is not able to colonise species A’s habitat (the square shaped large boxes). The species sorting paradigm (b in the figure) poses that competition is the strongest process determining species presence and as such dispersal is weak in general and all species are only found in their corresponding matching habitats (matching shapes of species and habitats). In the mass effects scenario (c), dispersal is so strong that it overrides any competitive advantage that species might have, allowing them to coexist everywhere. Finally, the neutral paradigm (d) suggests that all species are exactly the same and hence there are no real differences between communities at local scales.</p>
+<p>This way of thinking about the multi-scale character of biodiversity and the patterns of biodiversity distribution has prompted much research into the mechanisms that give rise to biodiversity patterns across spatial scales. Theoretical frameworks like this can not only aid the understanding of community assembly but also the prediction of the potential effects of habitat loss on biodiversity.</p>
 </div>
 <div id="network-area-relationships" class="section level2">
-<h2>2.4- Network-Area Relationships</h2>
+<h2>2.6- Network-Area Relationships</h2>
+<p>This way of thinking has <a href="https://www.nature.com/articles/s41559-018-0517-3">recently allowed us to extend the ideas of SARs into multispecies communities</a>. In particular, to the way that properties related to the networks of species interactions that characterise natural communities changes across spatial scales.</p>
 </div>
 <div id="references" class="section level2">
 <h2>References</h2>
 <p>Arrhenius, O (1921) Species and area. <strong><em>Journal of Ecology</em></strong>, 9:1, 95-99.</p>
+<p>Leibold, MA et al. (2004), The metacommunity concept: a framework for multi-scale community ecology. <strong><em>Ecology Letters</em></strong>, 7, 601-613.</p>
 <p>Levin, SA (1992), The problem of pattern and scale in ecology: The Robert H. MacArthur award lecture. <strong><em>Ecology</em></strong>, 73, 1943-1967.</p>
+<p>Levins, R (1969) Some demographic and genetic consequences of environmental heterogeneity for biological control. <strong><em>Bulletin of the Entomological Society of America</em></strong>, 15(3), 237–240.</p>
 <p>Lomolino, MV (2000) Ecology’s most general, yet protean pattern: The species-area relationship. <strong><em>Journal of Biogeography</em></strong>, 27, 17-26.</p>
+<p>MacArthur RH, Wilson EO (1967). The theory of island biogeography. Princeton, N.J: Princeton University Press.</p>
 <p>Preston, FW (1962) The canonical distribution of commonness and rarity: Part I. <strong><em>Ecology</em></strong>, 43:2, 185-215.</p>
 </div>
 <div id="continue-to-networks-as-graphs" class="section level2">

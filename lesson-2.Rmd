@@ -359,7 +359,6 @@ bipartite.connectance <- ecount(anemonef.network) / (sum(V(anemonef.network)$typ
 
 As a fun exercise you can try and calculate the average number of links per species in this network!
 
-
 Aside from the connectivity measures that we learnt in the previous section, more interesting properties can be calculated on ecological networks. In this chapter, we introduce some of these properties and how to calculate them.
 
 ### 1.6.3- Horizontal Diversity : Generality and Vulnerability
@@ -568,9 +567,11 @@ lines(temp$x, predict(mod1, list(x = temp$x)), col='red')
 
 ## References
 
-Montoya, J., Pimm, S. & Solé, R. (2006) Ecological networks and their fragility. ***Nature*** 442, 259–264.
+Montoya, J., Pimm, S. & Solé, R. (2006) Ecological networks and their fragility. ***Nature***, 442, 259–264.
 
-Newman, M. E. J. (2003) The Structure and Function of Complex Networks. ***SIAM Rev.*** 45, 2 (2003), 167–256.
+Newman, M. E. J. (2003) The Structure and Function of Complex Networks. ***SIAM Rev.***, 45(2), 167–256.
+
+Ollerton, J. et al. (2007) Finding NEMO: nestedness engendered by mutualistic organization in anemonefish and their hosts. **Proceedings of the Royal Society B**, 274, 591-598. 
 
 ***
 ## [Continue to The Assembly of Ecological Networks Across Spatial Scales](lesson-3.html){.continue-link}
