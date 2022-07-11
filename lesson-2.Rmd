@@ -567,6 +567,8 @@ lines(temp$x, predict(mod1, list(x = temp$x)), col='red')
 
 ## References
 
+Bascompte, J and Jordano P (2007) Plant-Animal Mutualistic Networks: The Architecture of Biodiversity. ***Annual Review of Ecology, Evolution, and Systematics*** 38(1), 567-593.
+
 Montoya, J., Pimm, S. & Solé, R. (2006) Ecological networks and their fragility. ***Nature***, 442, 259–264.
 
 Newman, M. E. J. (2003) The Structure and Function of Complex Networks. ***SIAM Rev.***, 45(2), 167–256.
