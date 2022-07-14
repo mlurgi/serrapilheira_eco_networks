@@ -46,9 +46,11 @@ The links to the left provide quick access to each of the topics we will be disc
 
 # Acknowledgements
 
-I would like to thank the **International Centre for Theoretical Physics** of the **South American Institute for Fundamental Research** and the **Serrapilheira** program for the opportunity to participate in the Training Program in Quantitative Biology and Ecology and to provide the funding to travel to Brazil.
+I would like to thank the **International Centre for Theoretical Physics** of the **South American Institute for Fundamental Research** and the **Serrapilheira Institute** for the opportunity to participate in the Training Program in Quantitative Biology and Ecology and to provide the funding to travel to Brazil.
 
 Special thanks go to Dr Ricardo Martínez-García for the invitation to participate in this program.
+
+Thanks to Lucie (Thompson) for providing snippets of code developed during her PhD project.
 
 # Disclaimer
 

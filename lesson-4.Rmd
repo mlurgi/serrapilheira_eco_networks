@@ -28,11 +28,42 @@ Given this, current research has focused on identifying potential universal driv
 <center>
 ![](lesson-images/taheri.jpeg){width="400px"}
 </center>
-**Effects of land cover and climate on species range shifts** Image taken from Taheri et al. (2021). 
+<center>
+**Effects of land cover and climate on species range shifts** Image taken from Taheri et al. (2021).
+</center>
 
-The first step in the analysis of range shifts is quantifying the actual shifts:
+The first step in the analysis of range shifts is quantifying the actual shifts. Below we can see an example on how to calculate these shifts. We use the **Breeding and wintering bird distributions in Britain and Ireland from citizen science bird atlases** dataset provided by the British Trust of Ornithology (BTO). The dataset can be downloaded from the BTO [website](https://www.bto.org/our-science/data/what-data-are-available). In this example we quantify range shift as the shift in the leading edge (northern boundary) of the biogeographical distribution of the species. Alternative ways of quantifying shifts exist and you can find many examples in the literature!
+
+To facilitate data sharing and loading from a remote server, I have subset the species provided in the BTO database to include only those present in more than 500 and less that 3000 10km grid cells in the map of the main British Isle.
+
+**VERY IMPORTANT:** If you are going to use these data for your own projects please do not use it straight from this repository. Refer to the BTO's website (link above) and follow their instructions and guidelines concerning data usage.
 
 ```{r}
+# load the required libraries
+library(ggplot2) 
+library(tidyverse)
+library(sp)
+library(rnaturalearth)
+
+## Load map
+sf_UK  <- ne_countries(scale = "medium", country = 'United Kingdom', returnclass = "sf")
+
+# Coordinate reference system
+proj.latlon <- CRS("+proj=longlat +datum=WGS84")
+
+# some other parameters for the coordinate projection system
+ukgrid <- "+init=epsg:27700"
+latlong <- "+init=epsg:4326"
+
+## BTO Distribution data
+BTO_distrib <- read.csv("https://raw.githubusercontent.com/mlurgi/serrapilheira_eco_networks/master/datasets/bto/distributions-filtered.csv", header=T) # period, sp code, season and grid for GB and Ireland
+
+## BTO Species names data
+BTO_sp <- read.csv("https://raw.githubusercontent.com/mlurgi/serrapilheira_eco_networks/master/datasets/bto/species_lookup.csv", header=T)
+
+## BTO grid data
+BTO_grid <- read.csv("https://raw.githubusercontent.com/mlurgi/serrapilheira_eco_networks/master/datasets/bto/grid_square_coordinates_lookup.csv", header=T)
+
 
 ```
 
@@ -51,16 +82,51 @@ A second universal response to climate change is changes on body size. Both with
 Taken together, these three rules can help us generate hypotheses on the potential effects of warming on natural communities. In particular, it would be expected (and it has been demonstrated in natural populations), that both individuals within species (by reaching maturity earlier) are becoming smaller in general, and the body size distributions of species within communities are being shifted towards smaller values. This has profound consequences for the networks of ecological interactions between species.
 
 ### Vital rates
-A further observed effect of warming on 
+A further observed effect of warming on natural populations is a generalised [increase on the pace of life](https://theconversation.com/live-fast-die-small-how-global-heating-is-simplifying-the-worlds-ecosystems-144976). Productivity and respiration have been observed to increase with temperature in aquatic mesocosms, impacting the balance between the distribution of individuals of different species across trophic levels.
+
+Ecological interactions such as predator-prey relationships have been observed to be affected by these changes in vital rates. Predators live faster, and as such they need to eat more prey to satisfy their metabolic demands. In controlled experiments, attack rates of predators have been observed to increase with temperature, while at the same time handling time (the time a predator employs in processing a prey item) has been observed to decrease. These phenomena prompt an increase in the strength of predator-prey interactions, making the effects of predator populations on their prey stronger. If sustained over large ecological time scales, this trend has the potential to lead to the extinction of prey species, and their predator itself as a consequence.
+
+### Consequences for ecological interactions
+
+The species' responses to warming identified above, either acting along or in tandem, have the potential to prompt a radical reorganisation of ecosystems across the globe. This reorganisation can facilitate the emergence of novel communities from climate change in which networks of species interactions display different structural properties relative to the communities from which they originated. These changes in structure can have profound consequences for the persistence and stability of ecosystems.
+
+In particular, **novel communities are expected to be characterised by**:
+
+1.- A reduction of species body sizes <br>
+2.- A shift in the distribution of body sizes within communities (with a dominance of small species)<br>
+3.- The loss of specialised interactions (due to the range expansion of species that encounter new partners)<br>
+4.- An increase in the strength of ecological interactions<br>
+5.- Enemy release as prey move at a different pace than their predators<br>
+6.- A loss of generalist consumers (from source communities from which species move out)<br>
+7.- New interactions for generalist consumers (within sink communities into which species move in)<br>
+
+<center>
+![](lesson-images/novel-communities.png){width="400px"}
+</center>
+<center>
+**Effects of warming on species interactions** Image taken from Lurgi et al. (2012).
+</center>
+
+## 3.2 Invasions
+
+
+## 3.3 Habitat loss
 
 
 ## References
 
 Cowie, R.H., Bouchet, P. and Fontaine, B. (2022) The Sixth Mass Extinction: fact, fiction or speculation? ***Biological Reviews***, 97, 640-663.
 
+Lurgi, M. et al. (2012) Novel communities from climate change. ***Phil. Trans. Roy. Soc. B.*** 367, 2913-2922.
+
 Parmesan, C., Ryrholm, N., Stefanescu, C. et al. (1999) Poleward shifts in geographical ranges of butterfly species associated with regional warming. ***Nature***, 399, 579–583.
 
+Rall, BC. et al. (2012) Universal temperature and body-mass scaling of feeding rates. ***Phil. Trans. Roy. Soc. B.*** 367(1605), 2923-2934.
+
 Taheri, S, García-Callejas, D, Araújo, MB. (2021) Discriminating climate, land-cover and random effects on species range dynamics. ***Global Change Biology***, 27, 1309– 1317. 
+
+Yvon-Durocher, G. et al. (2010) Warming alters the metabolic balance of ecosystems. ***Phil. Trans. Roy. Soc. B.*** 365(1549), 2117-2126.
+
 
 
 ## [Continue to Food Web Properties](lesson-5.html){.continue-link}
