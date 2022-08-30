@@ -61,6 +61,8 @@ The discovery of 'true ecological laws' such as SARs represented an important ad
 
 ***"Understanding patterns in terms of the processes that produce them is the essence of science, and is the key to the development of principles for management."***
 
+![](lesson-images/wilson-macarthur.png){width="200px" style="float:right; padding-left:10px"}
+
 In 1967, two of the most prominent ecologists, [Robert H. MacArthur](https://en.wikipedia.org/wiki/Robert_H._MacArthur) and [Edward O. Wilson](https://en.wikipedia.org/wiki/E._O._Wilson), attempted to provide a mechanistic explanation for the distributional patterns of species using a graphical and mathematical framework. This framework has become to be known as the Theory of Island Biogeography. Ever since its development, the Theory of Island Biogeography has formed the backbone of our thinking on species distributions and accumulation of species with area.
 
 The Theory of Island Biogeography poses that the number of species at equilibrium on a given island (or isolated patch of habitat) is given by a compromise between the rates of colonisation and extinction of species. In particular:
@@ -195,7 +197,7 @@ Using an extension of the Theory of Island Biogeography, and a meta-community mo
 
 ***An Island Biogeography model for food webs:*** In this model, species occupancy depends not only on colonisation and extinction rates, but also on trophic constraints enforced in which a species can only be present in the community if at least one of its prey (as defined by the food web structure) is also present. Except for basal species which can be first colonisers.
 
-```{r fig.align='center', message=FALSE, warning=FALSE, out.width="60%", eval=TRUE}
+```{r, trophic-biogeography, fig.align='center', message=FALSE, warning=FALSE, out.width="60%", eval=FALSE}
 source('funcs.r')
 # we explore the model using a colonisation rate and several values of extinction rates
 # the ratio between these values determines the equilibrium number of species
@@ -309,7 +311,7 @@ On the x-axis we plot the ratio between colonisation and extinction as a proxy f
 
 To try to understand the effect of dispersal on metacommunities on the shape of species interaction netwworks across spatial scales, we extended the island biogeography model into a metacommunity in which each local community is represented by the network of ecological interactions happening between the species in the community (similar to the model above). These community networks are then connected to other "local" networks via dispersal. In this way a ***network of networks*** configuration emerges. Colonisation of patches from a mainland is still present.
 
-```{r warning=FALSE, message=FALSE, out.width="60%", fig.align='center'}
+```{r, metacom-model, warning=FALSE, message=FALSE, out.width="60%", fig.align='center', eval=FALSE}
 euc.dist <- function(x1, x2) sqrt(sum((x1 - x2) ^ 2))
 islands <- 75
 

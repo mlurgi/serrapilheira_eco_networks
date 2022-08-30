@@ -267,14 +267,169 @@ have revealed that both land cover and climate both differentially
 affect species that are more distributed towards the north vs more
 southernly species.</p>
 <center>
-<img src="lesson-images/taheri.jpeg" width="400" />
+<div class="figure">
+<img src="lesson-images/taheri.jpeg" width="600" alt="" />
+<p class="caption"><strong>Effects of land cover and climate on species
+range shifts.</strong> Image taken from Taheri et al. (2021).</p>
+</div>
 </center>
-<center>
-<strong>Effects of land cover and climate on species range
-shifts</strong> Image taken from Taheri et al. (2021).
-</center>
-<p>The first step in the analysis of range shifts is quantifying the
-actual shifts:</p>
+<p><br> The first step in the analysis of range shifts is quantifying
+the actual shifts. Below we can see an example on how to calculate these
+shifts. We use the <strong>Breeding and wintering bird distributions in
+Britain and Ireland from citizen science bird atlases</strong> dataset
+provided by the British Trust of Ornithology (BTO). The dataset can be
+downloaded from the BTO <a
+href="https://www.bto.org/our-science/data/what-data-are-available">website</a>.
+In this example we quantify range shift as the shift in the leading edge
+(northern boundary) of the biogeographical distribution of the species.
+Alternative ways of quantifying shifts exist and you can find many
+examples in the literature!</p>
+<p>To facilitate data sharing and loading from a remote server, I have
+subset the species provided in the BTO database to include only those
+present in more than 500 and less that 3000 10km grid cells in the map
+of the main British Isle.</p>
+<p><strong>VERY IMPORTANT:</strong> If you are going to use these data
+for your own projects please do not use it straight from this
+repository. Refer to the BTO’s website (link above) and follow their
+instructions and guidelines concerning data usage.</p>
+<pre class="r"><code># load the required libraries
+library(ggplot2) 
+library(tidyverse)
+library(sp)
+library(rnaturalearth)
+library(egg)
+
+## Load map
+sf_UK  &lt;- ne_countries(scale = &quot;medium&quot;, country = &#39;United Kingdom&#39;, returnclass = &quot;sf&quot;)
+
+# Coordinate reference system
+proj.latlon &lt;- CRS(&quot;+proj=longlat +datum=WGS84&quot;)
+
+# some other parameters for the coordinate projection system
+ukgrid &lt;- &quot;+init=epsg:27700&quot;
+latlong &lt;- &quot;+init=epsg:4326&quot;
+
+## BTO Distribution data
+BTO_distrib &lt;- read.csv(&quot;https://raw.githubusercontent.com/mlurgi/serrapilheira_eco_networks/master/datasets/bto/distributions-filtered.csv&quot;, header=T) # period, sp code, season and grid for GB and Ireland
+
+## BTO Species names data
+BTO_sp &lt;- read.csv(&quot;https://raw.githubusercontent.com/mlurgi/serrapilheira_eco_networks/master/datasets/bto/species_lookup.csv&quot;, header=T)
+
+## BTO grid data
+BTO_grid &lt;- read.csv(&quot;https://raw.githubusercontent.com/mlurgi/serrapilheira_eco_networks/master/datasets/bto/grid_square_coordinates_lookup.csv&quot;, header=T)
+
+
+# Subset distribution data to Britain. This is no longer necessary due to the pre-filtered database, but I left it here for illustration
+BTO_distrib &lt;- as_tibble(BTO_distrib) %&gt;% filter(island==&quot;B&quot; &amp; season==&quot;B&quot; &amp; resolution==10)
+
+# The BTO data is split into three periods: &quot;1968-72&quot; &quot;1988-91&quot; &quot;2008-11&quot;, which we term here P.1, P.2 and P.3 respectively
+BTO_distrib$periodN &lt;- paste0(&quot;P.&quot;, as.numeric(droplevels(as.factor(BTO_distrib$period))))
+
+# this is a numerical code assigned by the BTO to each species, to resolve it, we use the species_lookup dictionary
+BTO_distrib$Spec &lt;- paste0(&quot;Sp&quot;, BTO_distrib$speccode)
+BTO_distrib$Pres &lt;- 1
+
+#####################
+# Grid and BTO Locations
+
+# Coordinates: We obtain the coordinates of the centre for each grid cell
+Coord10 &lt;- as_tibble(BTO_grid) %&gt;%
+  dplyr::filter(resolution==10 &amp; order&lt;5) %&gt;%
+  dplyr::group_by(grid) %&gt;%
+  dplyr::summarise(long = mean(long), lat = mean(lat))
+
+# Merge the grid cell information with the grid cells in the distribution data
+Loc10 &lt;- BTO_distrib %&gt;% dplyr::select(grid) %&gt;% distinct(grid)
+
+# Join coordinates to location data
+Loc10 &lt;- Loc10 %&gt;%  left_join(Coord10)
+# Filter missing coordinates
+Loc10 &lt;- Loc10 %&gt;%  filter(!is.na(long) &amp; !is.na(lat))
+
+# Plot the coordinates on the map to make sure they make sense
+ggplot(data = sf_UK) + geom_sf() +
+  geom_point(data = Loc10, aes(x = long, y = lat), size = 1, shape = 23, fill = &quot;darkred&quot;)
+
+# Join coordinates to occurrence data
+BTO_distrib &lt;- BTO_distrib %&gt;%  left_join(Loc10, by=&#39;grid&#39;)
+BTO_distrib &lt;- BTO_distrib %&gt;% filter(!is.na(long) &amp; !is.na(lat))
+
+
+#####################
+# BTO Species
+
+## 3 different periods
+period &lt;- unique(BTO_distrib$period)
+period
+
+# Nb of grid cells species have been observed
+Ngrid &lt;- BTO_distrib %&gt;%
+  dplyr::group_by(speccode, periodN) %&gt;%
+  dplyr::summarise(ngrid = n()) # group size
+Ngrid &lt;- pivot_wider(Ngrid, id_cols = speccode, names_from = periodN, values_from =ngrid)
+
+Spec &lt;- as.tibble(BTO_sp)
+Spec  &lt;- Spec %&gt;%  left_join(Ngrid, by = c(&quot;speccode&quot; = &quot;speccode&quot;))
+
+# We only consider species present in at least 50 cells across all time periods
+Spec  &lt;- Spec %&gt;% filter(P.1&gt;=50 &amp; P.2&gt;=50 &amp; P.3&gt;=50) 
+
+
+# Now that we have the data organised we can look at the range shift of some sample species through time
+safe_colorblind_palette &lt;- c(&quot;#88CCEE&quot;, &quot;#CC6677&quot;, &quot;#DDCC77&quot;)
+
+#################
+loc = merge(Loc10, BTO_distrib[which(BTO_distrib$speccode == 95),])
+Spec[which(Spec$speccode == 95),]
+
+a &lt;- ggplot(data = sf_UK) + geom_sf() + geom_point(data = loc, aes(x = long, y = lat, colour = period), size = 1, shape = 15) + scale_colour_manual(values = safe_colorblind_palette[1:3])+
+  geom_hline(yintercept = max(BTO_distrib$lat), linetype=&quot;dashed&quot;) + geom_hline(yintercept = min(BTO_distrib$lat), linetype=&quot;dashed&quot;) + 
+  ggtitle(&quot;Mergus merganser&quot;) + ylab(&quot;&quot;) + xlab(&quot;&quot;) + theme_classic(base_size =  11) + theme(legend.position = &#39;none&#39;)
+
+#################
+loc = merge(Loc10, BTO_distrib[which(BTO_distrib$speccode == 272),])
+Spec[which(Spec$speccode == 272),]
+
+b &lt;- ggplot(data = sf_UK) + geom_sf() + geom_point(data = loc, aes(x = long, y = lat, colour = period), size = 1, shape = 15) + scale_colour_manual(values = safe_colorblind_palette[1:3])+
+  geom_hline(yintercept = max(BTO_distrib$lat), linetype=&quot;dashed&quot;) + geom_hline(yintercept = min(BTO_distrib$lat), linetype=&quot;dashed&quot;) + 
+  ggtitle(&quot;Streptopelia turtur&quot;) + ylab(&quot;&quot;) + xlab(&quot;&quot;) + theme_classic(base_size =  11) + theme(legend.position = &#39;top&#39;)
+
+#################
+loc = merge(Loc10, BTO_distrib[which(BTO_distrib$speccode == 120),])
+Spec[which(Spec$speccode == 120),]
+
+c &lt;- ggplot(data = sf_UK) + geom_sf() + geom_point(data = loc, aes(x = long, y = lat, colour = period), size = 1, shape = 15) + scale_colour_manual(values = safe_colorblind_palette[1:3])+
+  geom_hline(yintercept = max(BTO_distrib$lat), linetype=&quot;dashed&quot;) + geom_hline(yintercept = min(BTO_distrib$lat), linetype=&quot;dashed&quot;) + 
+  ggtitle(&quot;Falco subbuteo&quot;) + ylab(&quot;&quot;) + xlab(&quot;&quot;) + theme_classic(base_size =  11) + theme(legend.position = &#39;none&#39;)
+
+ggarrange(a,b,c,nrow=1)
+
+#####################
+# And lastly, we compute range shifts!
+
+## Here we quantify range shift as the difference in mean location of the 20 most northern records (leading edge) between the time period P.1 and the time period P.3. I.e. the northern edge shift from 1972 to 2011
+spec_speccode &lt;- Spec$speccode
+df_rangeshift &lt;- data.frame(speccode=spec_speccode)
+for(i in 1:nrow(Spec)){
+lat.all_P.1 &lt;- sort(data.frame(BTO_distrib %&gt;% filter(speccode == spec_speccode[i], periodN==&quot;P.1&quot;) %&gt;% dplyr::select(lat))$lat)
+  lat.all_P.3 &lt;- sort(data.frame(BTO_distrib %&gt;% filter(speccode == spec_speccode[i], periodN==&quot;P.3&quot;) %&gt;% dplyr::select(lat))$lat)
+  
+  # leading edge position
+  lat.max20_P.1 &lt;- tail(sort(lat.all_P.1), 20)
+  lat.max20_P.3 &lt;- tail(sort(lat.all_P.3), 20)
+  
+  # position of original latitudinal centre
+  df_rangeshift$lat_centre_P.1[i] &lt;- mean(lat.all_P.1)
+  
+  # difference in latitude
+  df_rangeshift$shift_max20_P.1.3[i] &lt;- mean(lat.max20_P.3) - mean(lat.max20_P.1)
+}
+
+# Now we plot the range shifts ranked by magnitude
+plot(rank(df_rangeshift$shift_max20_P.1.3), df_rangeshift$shift_max20_P.1.3, pch=16, xlab=&#39;rank&#39;, ylab=&#39;northern edge shift&#39;)
+
+# And how the shift relates to the centre of the range...
+plot(df_rangeshift$lat_centre_P.1, df_rangeshift$shift_max20_P.1.3, pch=16, xlab=&#39;latitudinal centre&#39;, ylab=&#39;range shift&#39;)</code></pre>
 </div>
 <div id="body-size" class="section level3">
 <h3>Body size</h3>
@@ -333,11 +488,18 @@ along or in tandem, have the potential to prompt a radical
 reorganisation of ecosystems across the globe. This reorganisation can
 facilitate the emergence of novel communities from climate change in
 which networks of species interactions display different structural
-properties relative to the communities from which they originated. This
+properties relative to the communities from which they originated. These
 changes in structure can have profound consequences for the persistence
-and stability of theses systems.</p>
-<p>In particular, novel communities are expected to be characterised
-by:</p>
+and stability of ecosystems.</p>
+<center>
+<img src="lesson-images/novel-communities.png" width="400" />
+</center>
+<center>
+<strong>Effects of warming on species interactions</strong> Image taken
+from Lurgi et al. (2012).
+</center>
+<p>In particular, <strong>novel communities are expected to be
+characterised by</strong>:</p>
 <p>1.- A reduction of species body sizes <br> 2.- A shift in the
 distribution of body sizes within communities (with a dominance of small
 species)<br> 3.- The loss of specialised interactions (due to the range
@@ -347,28 +509,321 @@ move at a different pace than their predators<br> 6.- A loss of
 generalist consumers (from source communities from which species move
 out)<br> 7.- New interactions for generalist consumers (within sink
 communities into which species move in)<br></p>
-<center>
-<img src="lesson-images/novel-communities.png" width="400" />
-</center>
-<center>
-<strong>Effects of warming on species interactions</strong> Image taken
-from Lurgi et al. (2012).
-</center>
 </div>
 </div>
-<div id="invasions" class="section level2">
-<h2>3.2 Invasions</h2>
+<div id="extinctions-and-invasions" class="section level2">
+<h2>3.2 Extinctions and Invasions</h2>
+<p><img src="lesson-images/invasions-framework.png"
+style="float:right; padding-left:10px" width="450" /></p>
+<p>Due to the intricate networks of ecological interactions between
+species within ecosystems, the addition or removal of species can have
+profound consequences for community composition. Cascading effects of
+these perturbations through the network of interactions can cause
+secondary extinctions, the extent of which highly depend on the topology
+and structural properties of the network. Surprisingly, <a
+href="https://royalsocietypublishing.org/doi/10.1098/rstb.2008.0219">networks
+that resemble the structure of food webs are less robust</a> to
+extinctions (i.e. node deletion) than those with more random topologies.
+Similarly, the addition of new species into fully assembled model food
+webs drastically reduces their complexity by prompting a series of
+cascading extinctions and the concomitant effects they cause.</p>
+<p>This highlights the fragility of ecological networks and poses the
+pressing challenge of developing predictive frameworks capable of
+helping us understand the full extent of the consequences of extinctions
+and invasions on complex ecological networks in order to design sound
+ecosystem conservation strategies.</p>
+<p>The development of predictive frameworks for complex ecosystems
+relies on mathematical and computational tools. One approach is the use
+of ordinary differential equations (ODEs) to simulate network dynamics.
+The history of dynamical modelling of this kind in ecology began back in
+the 1920’s with the works by Alfred J. Lotka and Vito Volterra. Lotka
+and Volterra developed independently a similar set of two coupled
+differential equations to study the dynamics of biological systems in
+general (Lotka) and the effect of restricting fisheries for predatory
+fish in the Adriatic Sea (Volterra). These equations have become to be
+known as the Lotka-Volterra model, and it is one of the most used
+mathematical models in ecology to study the temporal dynamics of
+predator and prey populations.</p>
+<p><img src="lesson-images/lotka-volterra.png"
+style="float:right; padding-left:10px" width="200" /></p>
+<p><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cfrac%7Bdx%7D%7Bdt%7D%20%3D%20%5Calpha%20x%20-%20%5Cbeta%20xy"
+alt="\frac{dx}{dt} = \alpha x - \beta xy"
+title="\frac{dx}{dt} = \alpha x - \beta xy" class="math display" /> <br>
+<img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cfrac%7Bdy%7D%7Bdt%7D%20%3D%20%5Cdelta%20xy%20-%20%5Cgamma%20y"
+alt="\frac{dy}{dt} = \delta xy - \gamma y"
+title="\frac{dy}{dt} = \delta xy - \gamma y" class="math display" />
+where <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20x" alt="x"
+title="x" class="math inline" /> and <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20y" alt="y"
+title="y" class="math inline" /> are the abundances of prey and predator
+respectively, and <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Calpha%2C%20%5Cbeta%2C%5Cdelta%2C"
+alt="\alpha, \beta,\delta," title="\alpha, \beta,\delta,"
+class="math inline" /> and <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cgamma"
+alt="\gamma" title="\gamma" class="math inline" /> are the model
+parameters that control the intrinsic growth rate of the prey species,
+the prey loss due to predatory attack, the gain of the predator when
+consuming prey (which includes the efficiency of the energy transfer
+across trophic levels), and the death rate of predators,
+respectively.</p>
+<p>For a very nice mathematical analytical treatment of these equations
+and their implications for population dynamics and community stability
+see a <a href="https://stefanoallesina.github.io/Sao_Paulo_School/">very
+nice exposition of the topic</a> developed by <a
+href="https://ecologyandevolution.uchicago.edu/faculty/stefano-allesina-phd">Prof
+Stefano Allesina</a> for a previous edition of the ICTP-SAIFR School on
+Community Ecology: From Patterns to Principles.</p>
+<p>Here, our focus is on how to use these coupled equations to simulate
+dynamics of many species in a network with a given pattern of
+connectivity that determines these interactions. In the general case of
+the equations above, when extended to many species we can write the
+equations in a comprised format thus:</p>
+<p><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cfrac%7BdN_i%7D%7Bdt%7D%20%3D%20N_i%20%5Cleft%28r_i%20%2B%20%5Csum_%7Bj%3D1%7D%5E%7Bn%7D%20%5Calpha_%7Bij%7DN_j%20%5Cright%29%20%2C%20i%20%3D%201%20...%20n"
+alt="\frac{dN_i}{dt} = N_i \left(r_i + \sum_{j=1}^{n} \alpha_{ij}N_j \right) , i = 1 ... n"
+title="\frac{dN_i}{dt} = N_i \left(r_i + \sum_{j=1}^{n} \alpha_{ij}N_j \right) , i = 1 ... n"
+class="math display" /> where <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20N_i" alt="N_i"
+title="N_i" class="math inline" /> are the abundance of species <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20i" alt="i"
+title="i" class="math inline" />, <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20r_i" alt="r_i"
+title="r_i" class="math inline" /> is the intrinsic growth (or death)
+rate of species <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20i" alt="i"
+title="i" class="math inline" /> (positive for intrinsically growing
+basal species, and negative for consumers), and the <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Calpha_%7Bij%7D"
+alt="\alpha_{ij}" title="\alpha_{ij}" class="math inline" />’s represent
+the interaction coefficients between species. If we further compact all
+interaction coefficients into matricial form, and represent abundances
+and growth rates as vectors we obtain:</p>
+<p><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cfrac%7BdN%7D%7Bdt%7D%20%3D%20N%20%2A%20%28r%2BAN%29"
+alt="\frac{dN}{dt} = N * (r+AN)" title="\frac{dN}{dt} = N * (r+AN)"
+class="math display" /></p>
+<p>To solve a system of ODEs like the one above numerically, we can use
+programming libraries available that perform the numerical integration
+for us. These are available across many platforms, although here we
+stick to R.</p>
+<pre class="r"><code># loading required libraries
+require(deSolve)
+require(igraph)
+
+# Defining the generalised Lotka-Volterra model
+# Taken from Allesina&#39;s code (see link in the text)
+generalised.LV &lt;- function(t, x, parameters){
+  with(as.list(c(x, parameters)), {
+    x[x &lt; 10^-8] &lt;- 0 # to avoid prevent numerical problems
+    dxdt &lt;- x * (b + A %*% x)
+    list(dxdt)
+  })
+}
+
+# This function is for performing simulation experiments
+run_community_dynamics &lt;- function(A, b){
+  nb_species &lt;- dim(A)[1]           # the number of species
+  nb_pos &lt;- length(which(A &gt; 0))        # the number of + interactions
+  nb_neg &lt;- length(which(A &lt; 0))        # the number of - interactions
+  pos &lt;- runif(nb_pos, 0, 0.05) # uniform distribution positive effects
+  neg &lt;- runif(nb_neg, -0.5, 0) # uniform distribution negative effects
+
+  A[A&lt;0] &lt;- neg
+  A[A&gt;0] &lt;- pos
+  
+  # initial abundances from a uniform distribution between 0 and 1
+  N0 &lt;- runif(nb_species, 0.01, .1)
+  
+  # definition of time
+  t.values &lt;- seq(0, 500, by=0.01)
+  
+  # here we set the values of the parameters that the equations take
+  params &lt;- list(b = b, A = A)
+  
+  # solve numerically
+  glv.out &lt;- ode(y = N0, times = t.values, func = generalised.LV, parms = params)
+  return(glv.out)
+}
+
+set.seed(924)               # setting seed for reproducibility
+
+# We define the interaction matrix / network A
+A &lt;- matrix(c(-1,-1,0,0,-1,0,
+              1,0,-1,1,0,0,
+              0,1,0,0,0,0,
+              0,-1,0,-1,-1,0,
+              1,0,0,1,0,-1,
+              0,0,0,0,1,0), 6, 6, byrow = TRUE)
+
+
+# here we run the simulations using the network above
+b &lt;- c(1, -0.02, -0.02, 1, -0.02, -0.02)
+output &lt;- run_community_dynamics(A, b)
+
+# And we plot the results...
+##### Stuff for layouting the network ######
+## This is just layouting instructions for the network to look pretty. Don’t waste too much time in this
+food_web_layout &lt;- matrix(c( -1.37859603, -3.5772072,
+                             -1.37859603, -0.0374094,
+                             -1.37859603,  3.5772072,
+                             1.37859603, -3.5772072,
+                             1.37859603, -0.0374094,
+                             1.37859603,   3.5772072), 6, 2, byrow=TRUE)
+
+# This is to ensure we plot the network as we want to see it
+A_plot &lt;- t(A)
+diag(A_plot) &lt;- 0
+g &lt;- graph_from_adjacency_matrix(A_plot)
+
+# defining the colours for the figures
+colours &lt;- c(&#39;red2&#39;, &#39;black&#39;, &#39;darkolivegreen3&#39;, &#39;darkcyan&#39;, &#39;darkorchid1&#39;, &#39;blue&#39;)
+##################
+
+
+par(fig=c(0,10,0,10)/10)
+par(mar=c(5,5,0,0))
+matplot((output[,c(2:7)]), type = &#39;l&#39;, lty = 1, lwd = 2, ylab=&#39;Abudance&#39;, xlab=&#39;Time&#39;,col= colours, ylim=c(0,5))
+par(fig=c(6.5,9.5,5.5,10)/10)
+par(new=T, mar=c(0,0,0,1))
+plot(g, layout=food_web_layout, vertex.color = colours, vertex.label.color=&#39;white&#39;, vertex.size=25, vertex.label.cex=1)</code></pre>
+<p><img src="lesson-4_files/figure-html/generalised-lv-1.png" width="672" /></p>
+<p>On models like this we can then remove or add species and assess the
+effect that those perturbations have on the resulting community. For
+example, removing species 4 from the network above results in more
+stable populations of consumers (i.e. less drastic fluctuations) and
+reduced abundance of top predator species (compare abundances of top
+species 3 across plots).</p>
+<p><img src="lesson-4_files/figure-html/extinction-1.png" width="672" /></p>
+<p>One of the challenges in setting up models like the Generalised
+Lotka-Volterra is that when many species are considered, it is difficult
+to find a combination of parameters (growth rates and interaction terms)
+that yield persistent communities (i.e. the system becomes quickly
+unstable for many species). This difficulty has been tackled by many
+ecologists over the last few decades and the current models used to
+simulate ecological dynamics in complex networks have increased in
+complexity and level of biological and ecological detail. One of the
+most popular formulations currently used by food web ecologists to model
+dynamics in complex food webs is the <strong>Bio-Energetic
+Model</strong>. The Bio-Energetic Model incorporates the scaling of
+vital rates with species body size (given by trophic position in the
+food web), as well as more realistic (saturating) functional responses.
+This additions make the system more stable and capable of maintaining
+many interacting species.</p>
+<p>In a couple of recent papers, I used this model to investigate <a
+href="https://www.frontiersin.org/articles/10.3389/fevo.2014.00036/full">the
+effects of invasions of complex food webs comprising many species</a>
+(~60) and also, by making the species’ vital rates dependent not only on
+body size but also temperature, to explore the <a
+href="https://royalsocietypublishing.org/doi/full/10.1098/rspb.2020.2622">synergistic
+effects of increased temperatures and invasions on food webs</a>. If you
+are interested you can explore this modelling framework which is
+available from my repository: <a
+href="https://github.com/mlurgi/temperature-dependent-invasions"
+class="uri">https://github.com/mlurgi/temperature-dependent-invasions</a></p>
 </div>
 <div id="habitat-loss" class="section level2">
 <h2>3.3 Habitat loss</h2>
+<p>In 1974, the pioneering tropical ecologist Daniel H. Janzen, while
+studying the complex ecosystems of Costa Rica, realised that the lack of
+sufficient habitat for a species (due to habitat loss) can create
+situations in which, even if populations of the species still persist,
+they are no longer able to perform their ecological functions due to a
+reduced capacity of fulfilling the ecological interactions that would
+allow them to perform these functions. This realisation led him to
+conclude that even if the consequences of habitat loss are not apparent
+when looking at biodiversity loss (i.e. species do not go extinct), they
+are no longer interacting in a way that maintains true biodiversity in
+the sense of a healthy ecosystem. Janzen wrote:</p>
+<p><strong><em>” What escapes the eye, however, is a much more insidious
+kind of extinction: the extinction of ecological
+interactions.”</em></strong> <em>Daniel H. Janzen (1974).</em></p>
+<p>Ecological interactions then, and the complex networks they form, are
+expected to be lost much earlier than species. Evaluating the effects of
+habitat loss based solely on measures of species diversity can paint a
+misleading picture, <a
+href="https://theconversation.com/habitat-loss-doesnt-just-affect-species-it-impacts-networks-of-ecological-relationships-117687">leading
+us to greatly underestimate the actual damage on ecosystem
+organisation</a>.</p>
+<div class="figure" style="text-align: right">
+<img src="lesson-images/habitat-loss-plant-pol-networks.png" alt="**Effects of habitat loss on network structure.** Image taken from Hagen et al. (2012)" width="60%" />
+<p class="caption">
+<strong>Effects of habitat loss on network structure.</strong> Image
+taken from Hagen et al. (2012)
+</p>
+</div>
+<p>Habitat loss can also have biased effects on the organisation of
+networks of ecological interactions by differentially affecting
+different species groups. For example, larger animal species in
+ecosystems usually require larger areas to maintain viable populations.
+This means that in fragmented habitats we should expect to observe a
+bias towards smaller species, with the corresponding changes expected on
+network structure due to this targeted loss.</p>
+<p>To investigate the effects of habitat loss on complex ecological
+networks we can use models such as those discussed during the previous
+section (<a href="lesson-3.html">The Assembly of Ecological Networks
+Across Spatial Scales</a>). In those models habitat loss can be
+simulated by removing nodes from the network of available patches.
+Alternatively, space can be considered more explicitly, as for example
+using individual-based models, in which simulated individuals move
+around in an artificial ecosystem. In a recent study, we investigated
+the effects of habitat loss on multiplex ecological networks comprising
+2 interaction types, trophic and mutualistic interactions. Our results
+show that different types of habitat loss (either random loss across the
+landscape, continuous loss where entire large fractions of the habitat
+are destroyed, or intermediate more clustered habitat loss scenarios).
+By preventing individuals from finding each other across the landscape,
+encounters between predators and prey are reduced in random habitat loss
+scenarios, decreasing the interaction strengths between species.
+Contiguous habitat loss on the other hand, by ‘compressing’ the
+landscape of available habitat, makes interactions more likely and
+increase the strengths of these interactions, in turn decreasing
+community stability.</p>
+<center>
+<div class="figure">
+<img src="lesson-images/h-loss-stability.png" width="600" alt="" />
+<p class="caption"><strong><em>Habitat loss, interaction strengths and
+temporal variability.</em></strong> a–c Mean interaction strength (IS)
+averaged over all interactions, and mean coefficient of variation in
+species abundances averaged over all species (CV population). d–f IS as
+a linear predictor for mean CV population, with low and high HL
+communities indicated by blue and red circles respectively.</p>
+</div>
+</center>
+<p>Our individual-based framework to investigate the effects of habitat
+loss on complex species interaction networks is available as a Python
+application here: <a
+href="https://github.com/cm1788/Stability-of-multitrophic-communities-under-habitat-loss"
+class="uri">https://github.com/cm1788/Stability-of-multitrophic-communities-under-habitat-loss</a>.
+Feel free to try it!</p>
 </div>
 <div id="references" class="section level2">
 <h2>References</h2>
-<p>Cowie, R.H., Bouchet, P. and Fontaine, B. (2022) The Sixth Mass
+<p>Cowie, RH, Bouchet, P and Fontaine, B (2022) The Sixth Mass
 Extinction: fact, fiction or speculation? <strong><em>Biological
 Reviews</em></strong>, 97, 640-663.</p>
+<p>Dunne, JA. and Williams RJ (2009) Cascading extinctions and community
+collapse in model food webs. <strong><em>Phil. Trans. R. Soc.
+B</em></strong> 364, 1711–1723.</p>
+<p>Hagen, M. et al. (2012) Biodiversity, species interactions and
+ecological networks in a fragmented world. <strong><em>Adv. in Ecol.
+Res.</em></strong>, 46, 89-210.</p>
+<p>Janzen, DH (1974) The deflowering of Central America.
+<strong><em>Natural History</em></strong>, 83(4):48-53.</p>
+<p>Leakey, RE, &amp; Lewin R. (1995) <em>The sixth extinction: Patterns
+of life and the future of humankind.</em> Doubleday, New York.
+pp. 271.</p>
 <p>Lurgi, M. et al. (2012) Novel communities from climate change.
 <strong><em>Phil. Trans. Roy. Soc. B.</em></strong> 367, 2913-2922.</p>
+<p>Lurgi, M., Galiana, N., López BC., Joppa, LN. and Montoya, JM. (2014)
+Network complexity and species traits mediate the effects of biological
+invasions on dynamic food webs. <strong><em>Frontiers in Ecology and
+Evolution</em></strong>, 2:36.</p>
 <p>Parmesan, C., Ryrholm, N., Stefanescu, C. et al. (1999) Poleward
 shifts in geographical ranges of butterfly species associated with
 regional warming. <strong><em>Nature</em></strong>, 399, 579–583.</p>
