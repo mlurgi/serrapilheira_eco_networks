@@ -5,6 +5,7 @@ output:
     pandoc_args:  "--webtex"
     toc_float: false
     fig_caption: true
+    self_contained: false
     includes:
       before_body: [include_header.html, include_lessons_nav.html]
       after_body: [include_lessons_nav_end.html, include_footer.html]
@@ -491,7 +492,7 @@ These models have provided important insights into the dynamics of epidemiologic
 
 In individual-based models, "rules" of interaction at the individual level are defined and the system level behaviour emerges from these interactions at lower organisational scales. In the app below you can explore the use of a simple individual-based model for ant behaviour using the NetLogo modelling platform. The flexibility of the platform allows for easy definition of individual-level rules of interaction and parameter values manipulation.
 
-<iframe width='900px' height='900px' src="http://www.netlogoweb.org/launch#http://www.netlogoweb.org/assets/modelslib/Sample%20Models/Biology/Virus.nlogo">
+<iframe style="width:900px; height:900px;" src="http://www.netlogoweb.org/launch#http://www.netlogoweb.org/assets/modelslib/Sample%20Models/Biology/Virus.nlogo" data-external="1">
   <p>Your browser does not support iframes</p>
 </iframe>
 
