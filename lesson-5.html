@@ -212,7 +212,8 @@ $(".main-container").removeClass("main-container").removeClass("container-fluid"
     <a id="nav-lesson-2" href="lesson-2.html">1.- Network Structure: Construction and Metrics</a>
     <a id="nav-lesson-3" href="lesson-3.html">2.- The Assembly of Ecological Networks Across Spatial Scales</a>
     <a id="nav-lesson-4" href="lesson-4.html">3.- Effects of Global Change on Complex Communities</a>
-    <a id="nav-lesson-5" href="lesson-5.html">Food Web Properties</a>
+    <a id="nav-lesson-5" href="lesson-5.html">4.- Ecological Applications</a>
+    <a id="nav-lesson-6" href="lesson-6.html">5.- The Complex Microbiome</a>
    
   </div>
   <div class="lessonContent">
@@ -253,6 +254,8 @@ forbid any kind of human activities. For obvious reasons
 economic growth), establishing protected areas with the highest level of
 protection is very difficult. Strictly protected areas are thus usually
 found in remote locations of little interest or value to humans.</p>
+<p><img src="lesson-images/protected-areas-birds.png"
+style="float:left; padding-right:10px" width="400" /></p>
 <p>Ideally, rather than setting them up in locations of little economic
 interest to humans, protected areas should be designed in such a way to
 obtain the most effective outcome to protect biodiversity, either at the
@@ -262,8 +265,6 @@ models and theory that rely heavily on spatial biodiversity
 considerations akin to those explored in section 2 (e.g. Moilanen et
 al. 2009). Mechanistic ecological models can thus help us define
 effective conservation strategies.</p>
-<p><img src="lesson-images/protected-areas-birds.png"
-style="float:left; padding-right:10px" width="400" /></p>
 <p>In spite of the availability of these frameworks, many protected
 areas around the world are still set up as a last resort when particular
 habitats are threatened and only a fraction of them is left. In many
@@ -721,8 +722,106 @@ by that amount:</p>
 class="section level2">
 <h2>Controlling Disease Spread in Wildlife Populations</h2>
 <p>Disease spread within wildlife populations is a major issue of
-conservation concern.</p>
-<iframe width="1000px" height="1000px" src="http://www.netlogoweb.org/launch#http://www.netlogoweb.org/assets/modelslib/Sample%20Models/Biology/Ants.nlogo">
+conservation concern. Traditionally, the behaviour of disease dynamics
+in populations is studied using SIR(S)-type models. SIR(S) models, as in
+Susceptible, Infected, and Recovered (or Susceptible -again-), are
+state-based models in which the focus is on tracking the dynamics of the
+number (or fraction) of susceptible, infected, and recovered (or
+susceptible again) individuals within the population through time. These
+kind of models are specified thus:</p>
+<p><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cfrac%7BdS%7D%7Bdt%7D%20%3D%20-%5Cbeta%20%5Ctimes%20I%20%5Ctimes%20S"
+alt="\frac{dS}{dt} = -\beta \times I \times S"
+title="\frac{dS}{dt} = -\beta \times I \times S" class="math display" />
+<img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cfrac%7BdI%7D%7Bdt%7D%20%3D%20%5Cbeta%20%5Ctimes%20I%20%5Ctimes%20S%20-%20%5Cgamma%20%5Ctimes%20I"
+alt="\frac{dI}{dt} = \beta \times I \times S - \gamma \times I"
+title="\frac{dI}{dt} = \beta \times I \times S - \gamma \times I"
+class="math display" /></p>
+<p><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cfrac%7BdR%7D%7Bdt%7D%20%3D%20%5Cgamma%20%5Ctimes%20I"
+alt="\frac{dR}{dt} = \gamma \times I"
+title="\frac{dR}{dt} = \gamma \times I" class="math display" /></p>
+<p>where <em>S</em> is the number / fraction of susceptible, <em>I</em>
+of infected and <em>R</em> of recovered individuals. Susceptible
+individuals become infected with an infectious contact rate of <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cbeta"
+alt="\beta" title="\beta" class="math inline" /> when encountering an
+infected individual, and infected individuals recover from the disease
+at a rate <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cgamma"
+alt="\gamma" title="\gamma" class="math inline" />. In SIR models,
+infected individuals exit the system when they move to the recovered
+state. In SIS models, on the other hand, infected individuals become
+again susceptible can become infected again.</p>
+<p>The code below provides an implementation of the SIR model and the
+resulting dynamics when the model is integrated through time.</p>
+<pre class="r"><code># Code for the implementation of the SIR model for disease dynamics
+# Taken from: https://rpubs.com/choisy/sir
+
+require(deSolve)
+sir_equations &lt;- function(time, variables, parameters) {
+  with(as.list(c(variables, parameters)), {
+    dS &lt;- -beta * I * S
+    dI &lt;-  beta * I * S - gamma * I
+    dR &lt;-  gamma * I
+    return(list(c(dS, dI, dR)))
+  })
+}
+
+# definition of parameters and their values
+parameters_values &lt;- c(
+  beta  = 0.004, # infectious contact rate (/person/day)
+  gamma = 0.5    # recovery rate (/day)
+)
+
+
+# the initial conditions for the model
+initial_values &lt;- c(
+  S = 999,  # number of susceptibles at time = 0
+  I =   1,  # number of infectious at time = 0
+  R =   0   # number of recovered (and immune) at time = 0
+)
+
+# time
+time_values &lt;- seq(0, 10, by= 0.001)
+
+# giving the model to the solver with parameter values and time
+sir_values_1 &lt;- ode(y = initial_values, times = time_values, func = sir_equations, parms = parameters_values)
+
+# formatting
+sir_values_1 &lt;- as.data.frame(sir_values_1)
+
+# plotting the results
+with(sir_values_1, {
+# plotting the time series of susceptibles:
+  plot(time, S, type = &quot;l&quot;, col = &quot;blue&quot;, xlab = &quot;time (days)&quot;, ylab = &quot;number of people&quot;)
+# adding the time series of infectious:
+  lines(time, I, col = &quot;red&quot;)
+# adding the time series of recovered:
+  lines(time, R, col = &quot;green&quot;)
+})
+
+# adding a legend:
+legend(&quot;right&quot;, c(&quot;susceptibles&quot;, &quot;infectious&quot;, &quot;recovered&quot;), col = c(&quot;blue&quot;, &quot;red&quot;, &quot;green&quot;), lty = 1, bty = &quot;n&quot;)</code></pre>
+<p><img src="lesson-5_files/figure-html/SIR-1.png" width="672" /></p>
+<p>These models have provided important insights into the dynamics of
+epidemiological systems and have been applied to understand and predict
+specific epidemics. Disease transmission is however, an inherently
+individual-to-individual interaction problem process. In some instances,
+<strong><em>the mechanisms of interaction that might affect the outcome
+of disease transmission dynamics cannot be investigated using
+system-level models</em></strong> like the equations above. One solution
+to this is the use of individual-based models.</p>
+<p>In individual-based models, “rules” of interaction at the individual
+level are defined and the system level behaviour emerges from these
+interactions at lower organisational scales. In the app below you can
+explore the use of a simple individual-based model for ant behaviour
+using the NetLogo modelling platform. The flexibility of the platform
+allows for easy definition of individual-level rules of interaction and
+parameter values manipulation.</p>
+<iframe width="800px" height="800px" src="http://www.netlogoweb.org/launch#http://www.netlogoweb.org/assets/modelslib/Sample%20Models/Biology/Ants.nlogo">
 <p>
 Your browser does not support iframes
 </p>
@@ -760,9 +859,9 @@ href="https://doi.org/10.1016/S0169-5347(01)02194-2"
 class="uri">https://doi.org/10.1016/S0169-5347(01)02194-2</a>.</p>
 <hr />
 </div>
-<div id="continue-to-parameters" class="section level2">
-<h2><a href="lesson-6.html" class="continue-link">Continue to
-Parameters</a></h2>
+<div id="continue-to-the-complex-microbiome" class="section level2">
+<h2><a href="lesson-6.html" class="continue-link">Continue to The
+Complex Microbiome</a></h2>
 </div>
 
   </div> <!-- lessonContent -->

@@ -431,4 +431,4 @@ Yvon-Durocher, G. et al. (2010) Warming alters the metabolic balance of ecosyste
 
 
 
-## [Continue to Food Web Properties](lesson-5.html){.continue-link}
+## [Continue to Ecological Applications](lesson-5.html){.continue-link}

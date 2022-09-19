@@ -21,10 +21,9 @@ To counter the effects of these stressors, different conservation measures are a
 
 One of the prime examples of measures adopted specifically aimed at protecting biodiversity is the establishment of protected areas for conservation. Protected areas are pieces of land (or water, in the case of marine protected areas) within which human activities are reduced to one extent or another. Different levels of protection exist, depending on the type and magnitude of human activities allowed within. In the strictest sense, protected areas with the highest level of protection forbid any kind of human activities. For obvious reasons (e.g. exploitation of natural resources for the benefit of humans and economic growth), establishing protected areas with the highest level of protection is very difficult. Strictly protected areas are thus usually found in remote locations of little interest or value to humans.
 
-Ideally, rather than setting them up in locations of little economic interest to humans, protected areas should be designed in such a way to obtain the most effective outcome to protect biodiversity, either at the species or the ecosystems level. Research efforts aiming at designing effective protected areas have been developed grounded on mechanistic models and theory that rely heavily on spatial biodiversity considerations akin to those explored in section 2 (e.g. Moilanen et al. 2009). Mechanistic ecological models can thus help us define effective conservation strategies.
-
-
 ![](lesson-images/protected-areas-birds.png){width="400px" style="float:left; padding-right:10px"}
+
+Ideally, rather than setting them up in locations of little economic interest to humans, protected areas should be designed in such a way to obtain the most effective outcome to protect biodiversity, either at the species or the ecosystems level. Research efforts aiming at designing effective protected areas have been developed grounded on mechanistic models and theory that rely heavily on spatial biodiversity considerations akin to those explored in section 2 (e.g. Moilanen et al. 2009). Mechanistic ecological models can thus help us define effective conservation strategies.
 
 In spite of the availability of these frameworks, many protected areas around the world are still set up as a last resort when particular habitats are threatened and only a fraction of them is left. In many instances, the effectiveness of these protected areas is not known. Recent efforts have have been focusing on obtaining a better understanding of this. Cazalis et al. ([2020](https://doi.org/10.1038/s41467-020-18230-0)) (plot on the left) showed that when looking at the number of species of forest birds, the effect of protected areas in tropical forests on biodiversity is negligible, and in some cases even detrimental. This picture changes when focusing on specific species groups. Disparate results like this highlight the need for obtaining a better understanding of conservation actions, such as protected areas, on biodiversity at regional to global scales. In particular, we need a better understanding of how effective are these areas at protecting other facets of biodiversity, such as species interactions.
 
@@ -416,9 +415,81 @@ legend('top', c("rabbit", "s_m", "roo", "fox", "cat", "dingo"), pch = "-", col =
 
 ## Controlling Disease Spread in Wildlife Populations
 
-Disease spread within wildlife populations is a major issue of conservation concern.
+Disease spread within wildlife populations is a major issue of conservation concern. Traditionally, the behaviour of disease dynamics in populations is studied using SIR(S)-type models. SIR(S) models, as in Susceptible, Infected, and Recovered (or Susceptible -again-), are state-based models in which the focus is on tracking the dynamics of the number (or fraction) of susceptible, infected, and recovered (or susceptible again) individuals within the population through time. These kind of models are specified thus:
 
-<iframe width='1000px' height='1000px' src="http://www.netlogoweb.org/launch#http://www.netlogoweb.org/assets/modelslib/Sample%20Models/Biology/Ants.nlogo">
+$$
+\frac{dS}{dt} = -\beta \times I \times S
+$$
+$$
+\frac{dI}{dt} = \beta \times I \times S - \gamma \times I
+$$
+
+$$
+\frac{dR}{dt} = \gamma \times I
+$$
+
+where *S* is the number / fraction of susceptible, *I* of infected and *R* of recovered individuals. Susceptible individuals become infected with an infectious contact rate of $\beta$ when encountering an infected individual, and infected individuals recover from the disease at a rate $\gamma$. In SIR models, infected individuals exit the system when they move to the recovered state. In SIS models, on the other hand, infected individuals become again susceptible can become infected again.
+
+The code below provides an implementation of the SIR model and the resulting dynamics when the model is integrated through time.
+
+```{r, SIR, warning=FALSE, error=FALSE, message=FALSE}
+
+# Code for the implementation of the SIR model for disease dynamics
+# Taken from: https://rpubs.com/choisy/sir
+
+require(deSolve)
+sir_equations <- function(time, variables, parameters) {
+  with(as.list(c(variables, parameters)), {
+    dS <- -beta * I * S
+    dI <-  beta * I * S - gamma * I
+    dR <-  gamma * I
+    return(list(c(dS, dI, dR)))
+  })
+}
+
+# definition of parameters and their values
+parameters_values <- c(
+  beta  = 0.004, # infectious contact rate (/person/day)
+  gamma = 0.5    # recovery rate (/day)
+)
+
+
+# the initial conditions for the model
+initial_values <- c(
+  S = 999,  # number of susceptibles at time = 0
+  I =   1,  # number of infectious at time = 0
+  R =   0   # number of recovered (and immune) at time = 0
+)
+
+# time
+time_values <- seq(0, 10, by= 0.001)
+
+# giving the model to the solver with parameter values and time
+sir_values_1 <- ode(y = initial_values, times = time_values, func = sir_equations, parms = parameters_values)
+
+# formatting
+sir_values_1 <- as.data.frame(sir_values_1)
+
+# plotting the results
+with(sir_values_1, {
+# plotting the time series of susceptibles:
+  plot(time, S, type = "l", col = "blue", xlab = "time (days)", ylab = "number of people")
+# adding the time series of infectious:
+  lines(time, I, col = "red")
+# adding the time series of recovered:
+  lines(time, R, col = "green")
+})
+
+# adding a legend:
+legend("right", c("susceptibles", "infectious", "recovered"), col = c("blue", "red", "green"), lty = 1, bty = "n")
+
+```
+
+These models have provided important insights into the dynamics of epidemiological systems and have been applied to understand and predict specific epidemics. Disease transmission is however, an inherently individual-to-individual interaction problem process. In some instances, ***the mechanisms of interaction that might affect the outcome of disease transmission dynamics cannot be investigated using system-level models*** like the equations above. One solution to this is the use of individual-based models.
+
+In individual-based models, "rules" of interaction at the individual level are defined and the system level behaviour emerges from these interactions at lower organisational scales. In the app below you can explore the use of a simple individual-based model for ant behaviour using the NetLogo modelling platform. The flexibility of the platform allows for easy definition of individual-level rules of interaction and parameter values manipulation.
+
+<iframe width='800px' height='800px' src="http://www.netlogoweb.org/launch#http://www.netlogoweb.org/assets/modelslib/Sample%20Models/Biology/Ants.nlogo">
   <p>Your browser does not support iframes</p>
 </iframe>
 
@@ -439,4 +510,4 @@ Zavaleta, ES, Hobbs, RJ, & Mooney HA (2001) Viewing invasive species removal in 
 
 ***
 
-## [Continue to Parameters](lesson-6.html){.continue-link}
+## [Continue to The Complex Microbiome](lesson-6.html){.continue-link}

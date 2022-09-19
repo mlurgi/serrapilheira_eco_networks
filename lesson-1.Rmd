@@ -25,7 +25,7 @@ The content will be delivered in 5 sessions comprising 1.5 hours of lecture. We 
 1.- Network Structure: Construction and Metrics \
 2.- The Assembly of Ecological Networks Across Spatial Scales \
 3.- Effects of Global Change on Complex Communities \
-4.- Ecological Applications: Invasive Species Management \
+4.- Ecological Applications \
 5.- The Complex Microbiome \
 
 # Housekeeping
