@@ -226,15 +226,35 @@ $(".main-container").removeClass("main-container").removeClass("container-fluid"
 </div>
 
 
-<p>Welcome to the Ecological Networks component of the Community Ecology and Biodiversity module of the <a href="https://www.ictp-saifr.org/qbioprogram/">Training Program in Quantitative Biology and Ecology</a>. I have developed this material to guide the lectures that we will in person.</p>
+<p>Welcome to the Ecological Networks component of the Community Ecology
+and Biodiversity module of the <a
+href="https://www.ictp-saifr.org/qbioprogram/">Training Program in
+Quantitative Biology and Ecology</a>. I have developed this material to
+guide the lectures that we will in person.</p>
 <div id="overview" class="section level1">
 <h1>Overview</h1>
-<p>During this series of lectures we will learn how to think about species in communities made of many species and their interactions. We will probe their organisational patterns and look at tools that will allow us to better understand the mechanisms behind their assembly and their responses to perturbations.</p>
-<p>We will do this focusing on very well known mathematical objects called networks (or graphs). The advantage of doing this is that we have a large body of theory and analytical tools at our disposal to develop a good understanding of the structure of these objects. As we will see during the course of the lectures, there is also a large set of modelling tools available that allow us to predict the behaviour of networked systems (such as food webs) based on their network structure and the rules governing the nodes’ behaviour. This is sometimes referred to as <strong>network dynamics</strong>.</p>
-<p>To illustrate some of the concepts that we will touch upon, I will rely on computer code developed in the R programming language. Code snippets will thus be embedded throughout the course that can be run on any platform with an installation of R.</p>
+<p>During this series of lectures we will learn how to think about
+species in communities made of many species and their interactions. We
+will probe their organisational patterns and look at tools that will
+allow us to better understand the mechanisms behind their assembly and
+their responses to perturbations.</p>
+<p>We will do this focusing on very well known mathematical objects
+called networks (or graphs). The advantage of doing this is that we have
+a large body of theory and analytical tools at our disposal to develop a
+good understanding of the structure of these objects. As we will see
+during the course of the lectures, there is also a large set of
+modelling tools available that allow us to predict the behaviour of
+networked systems (such as food webs) based on their network structure
+and the rules governing the nodes’ behaviour. This is sometimes referred
+to as <strong>network dynamics</strong>.</p>
+<p>To illustrate some of the concepts that we will touch upon, I will
+rely on computer code developed in the R programming language. Code
+snippets will thus be embedded throughout the course that can be run on
+any platform with an installation of R.</p>
 <div id="syllabus" class="section level2">
 <h2>Syllabus</h2>
-<p>The content will be delivered in 5 sessions comprising 1.5 hours of lecture. We will cover the following topics:</p>
+<p>The content will be delivered in 5 sessions comprising 1.5 hours of
+lecture. We will cover the following topics:</p>
 <p>1.- Network Structure: Construction and Metrics<br />
 2.- The Assembly of Ecological Networks Across Spatial Scales<br />
 3.- Effects of Global Change on Complex Communities<br />
@@ -245,28 +265,63 @@ $(".main-container").removeClass("main-container").removeClass("container-fluid"
 </div>
 <div id="housekeeping" class="section level1">
 <h1>Housekeeping</h1>
-<p>As mentioned in the overview, we will be using R to illustrate some concepts and have some fun running code and producing nice pictures. For that, please install <a href="https://www.r-project.org/">R</a> on your computer, as well as any editor of your choice to write scripts of computer code. A convenient way of writing and running R code is to use an integrated development environment (IDE) specifically designed for R: <a href="https://www.rstudio.com/">RStudio</a></p>
-<p>We will be using a series of third party libraries developed on R to perform different operations and manipulations on data, perform simulations, and carry on different kind of analyses. Like R itself, the packages that will be using during this tutorial are free and open source. You can install required R packages from the CRAN repository using the function <code>install.packages</code>. For example:</p>
+<p>As mentioned in the overview, we will be using R to illustrate some
+concepts and have some fun running code and producing nice pictures. For
+that, please install <a href="https://www.r-project.org/">R</a> on your
+computer, as well as any editor of your choice to write scripts of
+computer code. A convenient way of writing and running R code is to use
+an integrated development environment (IDE) specifically designed for R:
+<a href="https://www.rstudio.com/">RStudio</a></p>
+<p>We will be using a series of third party libraries developed on R to
+perform different operations and manipulations on data, perform
+simulations, and carry on different kind of analyses. Like R itself, the
+packages that will be using during this tutorial are free and open
+source. You can install required R packages from the CRAN repository
+using the function <code>install.packages</code>. For example:</p>
 <pre class="r"><code>install.packages(&quot;igraph&quot;)</code></pre>
-<p>The instruction above installs the <a href="https://igraph.org/">igraph package for network analysis</a>. We will be using that package a lot! So, feel free to play around with it in between sections.</p>
+<p>The instruction above installs the <a
+href="https://igraph.org/">igraph package for network analysis</a>. We
+will be using that package a lot! So, feel free to play around with it
+in between sections.</p>
 </div>
 <div id="navigation" class="section level1">
 <h1>Navigation</h1>
-<p>The links to the left provide quick access to each of the topics we will be discussing during the topic. Feel free to access each of them independently, or just following the ‘Continue’ links at the bottom of each page.</p>
+<p>The links to the left provide quick access to each of the topics we
+will be discussing during the topic. Feel free to access each of them
+independently, or just following the ‘Continue’ links at the bottom of
+each page.</p>
 </div>
 <div id="acknowledgements" class="section level1">
 <h1>Acknowledgements</h1>
-<p>I would like to thank the <strong>International Centre for Theoretical Physics</strong> of the <strong>South American Institute for Fundamental Research</strong> and the <strong>Serrapilheira</strong> program for the opportunity to participate in the Training Program in Quantitative Biology and Ecology and to provide the funding to travel to Brazil.</p>
-<p>Special thanks go to Dr Ricardo Martínez-García for the invitation to participate in this program.</p>
+<p>I would like to thank the <strong>International Centre for
+Theoretical Physics</strong> of the <strong>South American Institute for
+Fundamental Research</strong> and the <strong>Serrapilheira
+Institute</strong> for the opportunity to participate in the Training
+Program in Quantitative Biology and Ecology and to provide the funding
+to travel to Brazil.</p>
+<p>Special thanks go to Dr Ricardo Martínez-García for the invitation to
+participate in this program.</p>
+<p>Thanks to Lucie (Thompson) for providing snippets of code developed
+during her PhD project.</p>
 </div>
 <div id="disclaimer" class="section level1">
 <h1>Disclaimer</h1>
-<p>I hope you enjoy this material. If you have any questions, comments, suggestions, or simply would like to discuss any of the topics presented here, I would be happy to talk to you. Just email me at: (<a href="mailto:miguel.lurgi@swansea.ac.uk" class="email">miguel.lurgi@swansea.ac.uk</a>)</p>
-<p>The material put here together has been collected by me over the years and reflects my personal views on the different topics. Please use any ideas, models, inspiration emanating from this course at your own risk and discretion.</p>
-<p>I am happy to share this under openly and freely with anyone interested in community ecology and networks!</p>
+<p>I hope you enjoy this material. If you have any questions, comments,
+suggestions, or simply would like to discuss any of the topics presented
+here, I would be happy to talk to you. Just email me at: (<a
+href="mailto:miguel.lurgi@swansea.ac.uk"
+class="email">miguel.lurgi@swansea.ac.uk</a>)</p>
+<p>The material put here together has been collected by me over the
+years and reflects my personal views on the different topics. Please use
+any ideas, models, inspiration emanating from this course at your own
+risk and discretion.</p>
+<p>I am happy to share this under openly and freely with anyone
+interested in community ecology and networks!</p>
 <hr />
-<div id="continue-to-network-structure-construction-and-metrics" class="section level2">
-<h2><a href="lesson-2.html" class="continue-link">Continue to Network Structure: Construction and Metrics</a></h2>
+<div id="continue-to-network-structure-construction-and-metrics"
+class="section level2">
+<h2><a href="lesson-2.html" class="continue-link">Continue to Network
+Structure: Construction and Metrics</a></h2>
 </div>
 </div>
 

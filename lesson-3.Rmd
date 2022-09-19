@@ -79,6 +79,8 @@ Different configurations of distance from the mainland on the one hand, influenc
 ![](lesson-images/theory-island-bio.png){width="500px"}
 </center>
 
+<br>
+
 The theoretical framework proposed by the Theory of Island Biogeography has been applied on several settings where species richness in relatively isolated patches depend to one extent or another on a given species pool. Examples of this include mountaintops, forest fragments, or organic particles suspended in the ocean waiting to be colonised by microorganisms.
 
 What about if the interest is in understanding the distribution of a single species across a landscape of patches of habitat?

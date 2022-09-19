@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>4.- Ecological Applications</title>
+
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<meta name="description" content="Turn your analyses into high quality documents, reports, presentations and dashboards with R Markdown. Use a productive notebook interface to weave together narrative text and code to produce elegantly formatted output. Use multiple languages including R, Python, and SQL. R Markdown supports a reproducible workflow for dozens of static and dynamic output formats including HTML, PDF, MS Word, Beamer, HTML5 slides, Tufte-style handouts, books, dashboards, shiny applications, scientific articles, websites, and more." />
+
+<link rel="icon" type="image/png" href="images/favicon.png" />
+
+<script type="text/javascript" src="js/redirect.js"></script>
+<script type="text/javascript" src="js/rmarkdown.js"></script>
+<script type="text/javascript" src="js/ga.js"></script>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="css/rmarkdown.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div id="rStudioHeader" class="alwaysShrunk">
+  <div class="innards bandContent">
+    <div>
+      <a class="productName" href="index.html">Community Ecology and Biodiversity</a>
+      <div class="Networks">    </div>
+    </div>
+
+    <div id="menu">
+      <div id="menuToggler"></div>
+      <div id="menuItems">
+        <a class="menuItem" href="lesson-1.html">Get Started</a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<style type="text/css">
+#TOC {
+  margin-left: 35px;
+  margin-top: 90px;
+}
+</style>
+
+<script type="text/javascript">
+$(".main-container").removeClass("main-container").removeClass("container-fluid").addClass("footerPushDown");
+</script>
+
+
+<div id="pageContent" class="standardPadding">
+  <div class="articleBandContent">
+<div class="lessonPage">
+  <div class="lessonsNav">
+    <a id="nav-lesson-1" href="lesson-1.html">Introduction</a>
+    <a id="nav-lesson-2" href="lesson-2.html">1.- Network Structure: Construction and Metrics</a>
+    <a id="nav-lesson-3" href="lesson-3.html">2.- The Assembly of Ecological Networks Across Spatial Scales</a>
+    <a id="nav-lesson-4" href="lesson-4.html">3.- Effects of Global Change on Complex Communities</a>
+    <a id="nav-lesson-5" href="lesson-5.html">Food Web Properties</a>
+   
+  </div>
+  <div class="lessonContent">
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore"><strong>4.- Ecological
+Applications</strong></h1>
+
+</div>
+
+
+<p>As we saw in the previous section, different stressors associated to
+global change are prompting a dramatic re-organisation of ecosystems
+worldwide. Their most studied and noticeable effect is species loss, but
+another facet of biodiversity, species interactions, is also
+affected.</p>
+<p>To counter the effects of these stressors, different conservation
+measures are adopted. In many cases these measures are devised in an
+ad-hoc manner and rarely consider the full consequences of adopting
+them.</p>
+<div id="protected-areas-for-biodiversity-conservation"
+class="section level2">
+<h2>Protected Areas for Biodiversity Conservation</h2>
+<p><img src="lesson-images/protected-areas.png"
+style="float:right; padding-left:10px" width="500" /></p>
+<p>One of the prime examples of measures adopted specifically aimed at
+protecting biodiversity is the establishment of protected areas for
+conservation. Protected areas are pieces of land (or water, in the case
+of marine protected areas) within which human activities are reduced to
+one extent or another. Different levels of protection exist, depending
+on the type and magnitude of human activities allowed within. In the
+strictest sense, protected areas with the highest level of protection
+forbid any kind of human activities. For obvious reasons
+(e.g. exploitation of natural resources for the benefit of humans and
+economic growth), establishing protected areas with the highest level of
+protection is very difficult. Strictly protected areas are thus usually
+found in remote locations of little interest or value to humans.</p>
+<p>Ideally, rather than setting them up in locations of little economic
+interest to humans, protected areas should be designed in such a way to
+obtain the most effective outcome to protect biodiversity, either at the
+species or the ecosystems level. Research efforts aiming at designing
+effective protected areas have been developed grounded on mechanistic
+models and theory that rely heavily on spatial biodiversity
+considerations akin to those explored in section 2 (e.g. Moilanen et
+al. 2009). Mechanistic ecological models can thus help us define
+effective conservation strategies.</p>
+<p><img src="lesson-images/protected-areas-birds.png"
+style="float:left; padding-right:10px" width="400" /></p>
+<p>In spite of the availability of these frameworks, many protected
+areas around the world are still set up as a last resort when particular
+habitats are threatened and only a fraction of them is left. In many
+instances, the effectiveness of these protected areas is not known.
+Recent efforts have have been focusing on obtaining a better
+understanding of this. Cazalis et al. (<a
+href="https://doi.org/10.1038/s41467-020-18230-0">2020</a>) (plot on the
+left) showed that when looking at the number of species of forest birds,
+the effect of protected areas in tropical forests on biodiversity is
+negligible, and in some cases even detrimental. This picture changes
+when focusing on specific species groups. Disparate results like this
+highlight the need for obtaining a better understanding of conservation
+actions, such as protected areas, on biodiversity at regional to global
+scales. In particular, we need a better understanding of how effective
+are these areas at protecting other facets of biodiversity, such as
+species interactions.</p>
+<p>At the <a
+href="https://www.swansea.ac.uk/bioscience/research-and-impact/computational-ecology-lab/">Computational
+Ecology Lab</a> we are working towards this understanding from a network
+perspective, with the ultimate goal of assessing the effectiveness of
+protected areas in protecting species interactions networks and the
+properties that they confer to ecosystems.</p>
+</div>
+<div id="managing-invasive-species-the-community-context-matters"
+class="section level2">
+<h2>Managing Invasive Species: The Community Context Matters</h2>
+<p><img src="lesson-images/cascades.png"
+style="float:right; padding-left:10px" width="350" /></p>
+<p>One of the classical results in theoretical food web ecology is the
+importance of the potential for cascading effects of species removals
+(or disturbance) on other species in the ecosystem (e.g. Pimm, 1982).
+Ever since then, field ecologists set out find examples of this in
+Nature. It turns out there are many! (see Estes et al., 2011 for a
+review).</p>
+<p>This realisation is important because it has profound implications
+for the ways we approach ecosystems. It not only highlights the indirect
+effects that species might have on each other when they are tangled in a
+complex networks of species interactions in ecosystems, but it also warm
+us of the potential hidden effects that can be caused on ecosystems by
+the disturbance of individual species. These effects might not be
+apparent until they become irreversible. For example, secondary
+extinctions after the removal or introductions of species.</p>
+<p>One scenario in which these indirect effects are of fundamental
+importance is when developing management strategies for invasive
+species. Once invasive species have established themselves in native
+ecosystems, they become integral part of the ecosystem structure and
+dynamics. Actions aimed at removing established alien species are thus
+expected to produce changes in the ecosystem comparable to those
+resulting from removing other native species.</p>
+<p>The figure below (taken from Zavaleta et al. 2001) shows some
+examples of the likely effects of removing invasive species that have
+been established in ecosystems either by themselves or with other alien
+species.</p>
+<center>
+<img src="lesson-images/invasive-species-ecosystem-view.png"
+width="600" />
+</center>
+<center>
+<strong>Invasive species removal from an ecosystem perspective</strong>
+Idealized food webs indicating trophic interactions between species.
+Closed boxes represent exotic species and open boxes represent native
+species. Arrow thickness indicates the strength of trophic interaction.
+Font size represents population size. (a) shows a community containing a
+single exotic predator. In (b), removal of this predator increases
+native prey populations. (c) shows a community containing both an exotic
+predator and an exotic herbivore. In (d), removal of only the exotic
+predator releases the exotic herbivore population, with cascading
+impacts on two plant species. (e) shows a community containing both an
+exotic herbivore and an exotic plant species. In (f), removal of the
+exotic herbivore only releases the exotic plant population. <em>Image
+and caption taken from Zavaleta et al. (2001)</em>.
+</center>
+<p><br></p>
+<p>Predicting the full effects of invasive species removal on ecosystems
+can be a difficult task, especially if we aim at more quantitative
+predictions than those shown in the figure. In <a
+href="https://doi.org/10.1111/1365-2664.13188">2018</a> we aimed at this
+focusing on the Australian semi-arid ecosystem, which has been invaded
+by several introduced species such as the European rabbit
+(<em>Oryctolagus cuniculus</em>), the red fox (<em>Vulpes vulpes</em>),
+and the feral cat (<em>Felis catus</em>). We aimed at obtaining a better
+understanding of the potential cascading effects of managing (by
+killing) rabbits (the invasive species focus of control actions) on the
+rest of the ecosystem, with a particular emphasis on small marsupial
+species. In Australia, the introduction of rabbits in particular, has
+been identified as one of the causes of extinction and drastic decline
+of several endemic marsupial species. It is then important to understand
+the full effects of potential management actions aimed at protecting
+these species.</p>
+<p><img src="lesson-images/australian-food-web.png"
+style="float:right; padding-left:10px" width="350" /></p>
+<p>To tackle this problem we adopted a model similar in spirit to the
+Generalised Lotka-Volterra model introduced in the previous section but
+in discrete time. When modelling ecological dynamics of species
+displaying non-overlapping generations, discrete time (or difference,
+rather than differential) equations are usually adopted. In this example
+functional responses (i.e. the predation effect of predator over prey)
+and the numerical responses (i.e. the growth of a species population
+accounting for intrinsic growth, consumption and loss to predation) are
+modeled independently and are different across species. The food web
+modeled can be seen on the right, and the equations governing the
+numerical and functional responses of the herbivores are presented
+below. The remaining equations are similar with slight modifications
+depending on the shape of functional and numerical responses of the
+different species observed in empirical studies. The full set of
+equations is not presented here for simplicity, but you are welcome to
+find the full details of the model in <a
+href="https://besjournals.onlinelibrary.wiley.com/doi/10.1111/1365-2664.13188">Lurgi
+et al. 2018</a>.</p>
+<p>Numerical response of herbivores:</p>
+<p><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20r_%7BN%2Ct%7D%20%3D%20-a_N%20%2B%20c_N%20%5B1-exp%28-d_NV_%7Bt-1%7D%29%5D%20-%20P_%7Bt-1%7D"
+alt="r_{N,t} = -a_N + c_N [1-exp(-d_NV_{t-1})] - P_{t-1}"
+title="r_{N,t} = -a_N + c_N [1-exp(-d_NV_{t-1})] - P_{t-1}"
+class="math display" /></p>
+<p>where <em>N</em> is the species identifier, <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20r_%7BN%2Ct%7D"
+alt="r_{N,t}" title="r_{N,t}" class="math inline" /> is the growth rate
+of species <em>N</em> at time <em>t</em>, <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20a_N" alt="a_N"
+title="a_N" class="math inline" /> its maximum instantaneous rate of
+decline, <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20c_N" alt="c_N"
+title="c_N" class="math inline" /> is the rate at which <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20a_N" alt="a_N"
+title="a_N" class="math inline" /> is ameliorated, <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20d_N" alt="d_N"
+title="d_N" class="math inline" /> is the demographic efficiency of
+species <em>N</em>, <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20V_%7Bt%20-%201%7D"
+alt="V_{t - 1}" title="V_{t - 1}" class="math inline" /> is the pasture
+biomass at previous time step, and <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20P_%7Bt%20-%201%7D"
+alt="P_{t - 1}" title="P_{t - 1}" class="math inline" /> is the total
+predation pressure on species <em>N</em> from all its predators during
+the previous time step.</p>
+<p>Functional responses of herbivores:</p>
+<p><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20B_%7Bt%2CN%7D%20%3D%20%28w_N%5E%7B3%2F4%7D%29%20v_N%20%5B1-exp%28-V_t%2Ff_N%29%5D%20X_%7Bt-1%7D"
+alt="B_{t,N} = (w_N^{3/4}) v_N [1-exp(-V_t/f_N)] X_{t-1}"
+title="B_{t,N} = (w_N^{3/4}) v_N [1-exp(-V_t/f_N)] X_{t-1}"
+class="math display" /> where <em>B</em> is the biomass harvested for
+consumption from the resources, <em>w</em> is the average body weight,
+<img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20v" alt="v"
+title="v" class="math inline" /> is the maximum consumption rate of the
+herbivore species, <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20V_t" alt="V_t"
+title="V_t" class="math inline" /> is the vegetation biomass at time
+<em>t</em>, <em>f</em> is the foraging efficiency of the herbivore, and
+<img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20X_%7Bt%20-%201%7D"
+alt="X_{t - 1}" title="X_{t - 1}" class="math inline" /> is the
+abundance of the herbivore in the previous time step.</p>
+<p>The computer code for this model (including the equations not shown
+above but that can be found in the paper) is presented below. You can
+use this code to run simulations that will yield the results of
+experiments modeling the disturbance (in the form of decreased
+abundance, to simulate culling) of rabbits in the ecosystem and the
+corresponding effects on the other species in the food web within which
+it is embedded.</p>
+<p>Before defining the model we need to initialise a series of
+empirically derived parameters. All this information comes from
+intensive study of the system. This illustrates the fact that modelling
+for ecological applications is very often a very data intensive
+task.</p>
+<pre class="r"><code>#### Parameter values
+veg_term1 &lt;- 55.12
+veg_term2 &lt;- 0.0153
+veg_term3 &lt;- 0.00056
+veg_term4 &lt;- 2.5
+
+min_fox &lt;- 0.0001
+min_cat &lt;- 0.0001
+
+roo_weight &lt;- 26
+
+##### fox parameters
+min_r_fox &lt;- 0.56
+upper_r_fox &lt;- 0.77
+d_fox &lt;- 3.2            # demographic efficiency
+
+max_c_fr &lt;- 1.096
+max_c_fb &lt;- 1.096
+
+# half saturation density for functional responses
+hs_rab_f &lt;- 1.32      # over rabbit
+hs_bilby_f &lt;- 0.99    # over bilby
+##### end fox parameters
+
+##### cat parameters
+min_r_cat &lt;- 0.56
+upper_r_cat &lt;- 0.81
+d_cat &lt;- .6  # this is the demographic efficiency for cats - varied between 2 and 5 in Robley&#39;s report
+
+max_c_cr &lt;- 0.874
+max_c_cb &lt;- 2.874
+
+# half saturation density for functional responses
+hs_rab_c &lt;- 0.5       # over rabbit
+hs_bilby_c &lt;- 0.99    # over bilby
+##### end cat parameters
+
+##### small native mammal parameters
+bilby_weight &lt;- 0.782
+min_r_bilby &lt;- 4.6
+upper_r_bilby &lt;- 5.5
+d_bilby &lt;- 0.0045
+##### end small native mammal parameters
+
+##### rabbit parameters
+rabbit_weight &lt;- 0.782
+min_r_rabbit &lt;- 4.6
+upper_r_rabbit &lt;- 5.5
+d_rabbit &lt;- 0.0045
+
+# the following two parameters are applied to both rabbits and small mammals
+max_c_rv &lt;- 0.068       # maximum intake of vegetation by rabbit
+f_rv &lt;- 138             # foraging efficiency of rabbit on vegetation
+###### end rabbit parameters
+
+
+##### dingo parameters
+max_c_dk &lt;- 0.68      # maximum intake rate of kangaroo
+f_dk &lt;- .1            # foraging efficiency on kangaroo
+
+max_c_dr &lt;- 0.2       # maximum intake rate of rabbit
+f_dr &lt;- .4            # foraging efficiency on rabbit
+
+min_r_dingo &lt;- 1.22   # maximum rate of decrease
+max_r_dingo &lt;- 0.63
+d_dingo &lt;- 2.5       # demographic efficiency of dingo
+K_dingo &lt;- 0.003      # carrying capacity of dingo per hectare
+
+d_int_fox &lt;- .7      # maximun killing rate of fox
+d_int_cat &lt;- .3       # maximum killing rate of cat
+
+f_df &lt;- 0.3           # foraging efficiency on fox
+f_dc &lt;- 0.3           # foraging efficiency on cat
+##### end dingo parameters
+
+##### kangaroo parameters
+min_r_roo &lt;- 1.6      # maximum rate of decrease of kangaroo
+upper_r_roo &lt;- 1.7496
+d_roo &lt;- 142.9
+
+max_c_kv &lt;- 0.086
+f_kv &lt;- 34
+##### end kangaroo parameters</code></pre>
+<p>Once the parameters above are defined, we can implement the model
+equations.</p>
+<pre class="r"><code># This function contains the model specifications. It executes one single iteration of the model
+# following the mathematical formulation presented in Lurgi et al. (2018) Journal of Applied Ecology
+ExecuteIterationGeneralised &lt;- function(current_abs, i, current_qt, kill=&#39;&#39;, fraction=0){
+  ###### species order (and index) in current_abs (and next_abs) (vectors of abundances):
+  ###### vegetation (1), rabbit (2), small-mammal (3), kangaroo (4), fox (5), cat (6), dingo (7)
+  
+  veg &lt;- current_abs[1]
+  rabbits &lt;- current_abs[2]
+  bilby &lt;- current_abs[3]
+  roos &lt;- current_abs[4]
+  fox &lt;- current_abs[5]
+  cat &lt;- current_abs[6]
+  dingoes &lt;- current_abs[7]
+  
+  if(current_qt == 3){
+    if(kill == &#39;rabbit&#39;){ rabbits &lt;- rabbits - (rabbits * fraction) }
+    if(kill == &#39;dingo&#39; ){ dingoes &lt;- dingoes - (dingoes * fraction) }
+    if(kill == &#39;fox&#39;){ fox &lt;- fox - (fox * fraction) }
+    if(kill == &#39;cat&#39;){ cat &lt;- cat - (cat * fraction) }
+  }
+  
+  R &lt;- rainfall_data[ceiling(i/4),(current_qt+1)]
+  
+  ####### gains (numerical responses)
+  veg_per_ha &lt;- veg/8000
+  
+  veg_growth &lt;- (-veg_term1) - (veg_term2 * veg_per_ha) - (veg_term3 * (veg_per_ha**2)) + (veg_term4 * R)
+  
+  veg_growth &lt;- veg_growth * 8000
+  
+  g_rabbits &lt;- ( ( (max_c_fr / rabbit_weight) * ((rabbits)**2))  / ( ((hs_rab_f*8000)**2) + (rabbits)**2) )
+  rabbits_taken_fox &lt;- ((365/4) * ( ((fox) * g_rabbits)  / (rabbits) )) 
+  
+  g_rabbits_cat &lt;- (( (max_c_cr / rabbit_weight) * (rabbits)) / (( hs_rab_c * 8000) + (rabbits)))
+  rabbits_taken_cat &lt;- ((365/4) * ( ((cat) * g_rabbits_cat)  / (rabbits) )) 
+  
+  g_bilbies &lt;- ( ( (max_c_fb/ bilby_weight) * (bilby))  / ( (hs_bilby_f * 8000) + (bilby)) )
+  bilbies_taken_fox &lt;- ((365/4) * ( ((fox) * g_bilbies * (1 - (g_rabbits/max_c_fr)) )  / (bilby) ))
+  
+  g_bilbies_cat &lt;- ( ( (max_c_cb / bilby_weight) * (bilby))  / ( (hs_bilby_c * 8000) + (bilby)) )
+  bilbies_taken_cat &lt;- ((365/4) * ( ((cat) * g_bilbies_cat * (1 - (g_rabbits_cat/max_c_cr)) )  / (bilby) ))
+  
+  bilby &lt;- (bilby *  exp( (-min_r_bilby + (upper_r_bilby *(1 - exp(-d_bilby*veg/8000) ))) - bilbies_taken_fox - bilbies_taken_cat ) ) 
+  
+  if(is.na(bilby) | bilby &lt; (0.08*8000)){
+    bilby &lt;- (0.08*8000)
+  }
+  
+  #functional response of dingo
+  I_dingo &lt;- .745 * (1-exp(-(roos/8000)/f_dk))
+  I_dingo_rab &lt;- max_c_dr * (1-exp(-(rabbits/8000)/f_dr))
+  dingo_numerical &lt;- ( (-min_r_dingo + ((I_dingo + I_dingo_rab) * d_dingo)) )
+  
+  ##### in the following the variable &#39;dingo_numerical&#39;, which is actually the rate
+  ##### of increase of the dingo, is divided by 4 because this is an annual rate of increase
+  ##### see Forsyth&#39;s code for details...
+  if(dingo_numerical &lt; 0){
+    dingoes &lt;- dingoes * exp(dingo_numerical/4)
+  }else{
+    dingo_numerical &lt;- (dingo_numerical * ( 1 - (dingoes / (K_dingo * 8000) )))/4  #### 24 is the carrying capacity for dingo at 8000 ha
+    if(dingo_numerical &gt; max_r_dingo){
+      dingo_numerical &lt;- (max_r_dingo)/4
+    }
+    dingoes &lt;- dingoes * exp(dingo_numerical)
+  }
+  
+  if(is.na(dingoes) | dingoes &lt; (0.0000025 * 8000)){
+    dingoes &lt;- (0.0000025 * 8000)
+  }
+  
+  ##### kangaroos taken by dingo
+  roos_taken &lt;-  dingoes * I_dingo
+  #### numerical response of kangaroo
+  roos &lt;- (roos * exp( ( - min_r_roo + (upper_r_roo * ( 1 - exp( - (veg/8000) / d_roo ) )) )/4  )) - roos_taken
+  
+  if(is.na(roos) | roos &lt; (0.001 * 8000)){
+    roos &lt;- (0.001 * 8000)
+  }
+  
+  #### rabbits losses and numerical reponses
+  rabbits_taken_dingo &lt;- ((365/4) * ( ((dingoes) * I_dingo_rab)  / (rabbits) )) 
+  rabbits_taken &lt;- rabbits_taken_fox + rabbits_taken_cat + rabbits_taken_dingo
+  rabbits &lt;- (rabbits *  exp( (- min_r_rabbit + (upper_r_rabbit *(1 - exp(-d_rabbit*veg/8000) ))) -  rabbits_taken  )) 
+  
+  if(is.na(rabbits) | rabbits &lt; (0.08*8000)){
+    rabbits &lt;- (0.08 * 8000)
+  }
+  
+  # numerical responses of fox and cat
+  # d_int is the predator intake efficiency - in this case how good they are at killing the other predators
+  I_dingo_fox &lt;- d_int_fox * (1 - exp(-(fox/8000)/f_df))
+  fox_killed_dingo &lt;- ((dingoes * I_dingo_fox) * (365/4))
+  fox &lt;- (fox * (exp( -min_r_fox + (upper_r_fox * (1 - exp(-d_fox*(rabbits/8000 + bilby/8000) ) ) ))) - fox_killed_dingo)
+  
+  # from the report: r =−a+c(1−e−dR)−hF
+  I_dingo_cat &lt;- d_int_cat * (1-exp(-(cat/8000)/f_dc))
+  cat_killed_dingo &lt;- ((dingoes * I_dingo_cat) * (365/4))
+  cat &lt;- (cat * exp( -min_r_cat + (upper_r_cat * (1 - exp(-d_cat * (rabbits/8000+bilby/8000) ) )) ) - cat_killed_dingo)
+  
+  if(fox &lt; (min_fox*8000)){
+    fox &lt;- (min_fox * 8000)
+  }
+  
+  if(cat &lt; (min_cat * 8000)){
+    cat &lt;- (min_cat * 8000)
+  }
+  
+  veg &lt;- veg + veg_growth
+  
+  ######## vegetation losses (functional responses of herbivores)
+  veg_taken_rabbits &lt;- ((rabbits) * ( ( max_c_rv * (1-exp(-(veg/8000)/f_rv)) * (rabbit_weight**(0.75)) ) * (365/4) ))
+  veg_taken_bilby &lt;- ((bilby) * ( ( max_c_rv * (1-exp(-(veg/8000)/f_rv)) * (rabbit_weight**(0.75)) ) * (365/4) ))
+  veg_taken_roos &lt;- (roos * ( ( max_c_kv * (1-exp(-(veg/8000)/f_kv)) * (roo_weight**(0.75)) ) * (365/4) ))
+  
+  veg &lt;- veg - veg_taken_rabbits - veg_taken_bilby - veg_taken_roos
+  
+  if(veg &lt; 0){ veg &lt;- 10 }
+  
+  next_abs &lt;- c(veg, rabbits, bilby, roos, fox, cat, dingoes)
+  
+  responses &lt;- c(veg_taken_rabbits, veg_taken_bilby, veg_taken_roos, rabbits_taken_fox, bilbies_taken_fox, rabbits_taken_cat, bilbies_taken_cat, rabbits_taken_dingo, roos_taken, fox_killed_dingo, cat_killed_dingo)
+  
+  return(list(next_abs=next_abs, responses=responses))
+}</code></pre>
+<p>As you can see in the code above, one of the defining features of
+applied models (i.e. those targeted to a particular system for which we
+want to obtain specific predictions) are full of parameters that have
+very specific and precise values. These values are usually (as in this
+case) extracted from empirical information that has been collected over
+many years of study of the corresponding system. This illustrates
+<strong>one of the key differences between developing ecological models
+to study specific systems, commonly for very applied problems (like the
+example above), and ecological models to construct theory and derive
+theoretical expectations on the behaviour of a broader class of
+systems</strong> (like the Generalised Lotka-Volterra example discussed
+in the previous section).</p>
+<p>Now that we have the implementation of the model, we can run some
+simulations and study the behaviour of the system.</p>
+<pre class="r"><code># Seed to ensure reproducibility
+set.seed(9315)
+
+# numbers of time step in the simulation
+steps &lt;- 600
+
+# values extracted from empirical observations of the abundance ranges of each species
+veg &lt;- runif(1, min=1600000, max=3200000)
+rabbit &lt;- runif(1, min=17600, max=120000)
+sm &lt;- runif(1, min=17600, max=120000)
+roo &lt;- runif(1, min=400, max=1600)
+fox &lt;- runif(1, min=48, max=72)
+cat &lt;- runif(1, min=7.2, max=17.6)
+dingo &lt;- runif(1, min=2.4, max=24)
+
+dynamics &lt;- array(dim=c(steps, 7))
+dynamics[1,] &lt;- c(veg, rabbit, sm, roo, fox, cat, dingo)
+
+steps_per_qt &lt;- ceiling(steps/4)+1
+
+#### rainfall data from Lerida (Yathong)
+rainfall_data &lt;- data.frame(&#39;1&#39;=rnorm(steps_per_qt,99,69), &#39;2&#39;=rnorm(steps_per_qt,87,67), &#39;3&#39;=rnorm(steps_per_qt,82,39), &#39;4&#39;=rnorm(steps_per_qt,80,49))
+rainfall_data[rainfall_data &lt; 0] &lt;- 0
+
+current_qt &lt;- 1
+
+# the species to be managed
+sp &lt;- &#39;rabbit&#39;
+
+# the management level
+l &lt;- 0
+
+for(i in 1:(steps-1)){
+  cur_abs &lt;- dynamics[i,]
+  
+  # control is only applied for a fraction of the simulation between timesteps 200 and 400
+  if(i &gt;= 201 &amp; i &lt;= 400){
+    exec &lt;- ExecuteIterationGeneralised(cur_abs, i, current_qt, sp, l)
+    next_abs &lt;- exec$next_abs
+  }else{
+    exec &lt;- ExecuteIterationGeneralised(cur_abs, i, current_qt)
+    next_abs &lt;- exec$next_abs
+  }
+  
+  dynamics[(i+1),] &lt;- next_abs
+  current_qt &lt;- (current_qt+1)%%4
+}
+
+matplot(log10(dynamics[,-1]), type=&#39;l&#39;, lty=1, col=c(1,2,3,4,5,6), ylim=c(-.5,7), ylab = &#39;log10(abundance)&#39;, xlab = &#39;timestep&#39;)
+legend(&#39;top&#39;, c(&quot;rabbit&quot;, &quot;s_m&quot;, &quot;roo&quot;, &quot;fox&quot;, &quot;cat&quot;, &quot;dingo&quot;), pch = &quot;-&quot;, col = c(1,2,3,4,5,6), box.lwd=0, y.intersp = 1.5, horiz=TRUE, lwd=3, adj=c(1,1.5))</code></pre>
+<p><img src="lesson-5_files/figure-html/simulations-australian-web-1.png" width="672" /></p>
+<p>And if we change the value of parameter <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20l" alt="l"
+title="l" class="math inline" /> from the code above to any other value
+between 0 and 1, such as for example, 0.9, we can see <strong>what
+happens in the community when the rabbit abundance is reduced</strong>
+by that amount:</p>
+<p><img src="lesson-5_files/figure-html/simulations-australian-web-with-control-1.png" width="672" /></p>
+</div>
+<div id="controlling-disease-spread-in-wildlife-populations"
+class="section level2">
+<h2>Controlling Disease Spread in Wildlife Populations</h2>
+<p>Disease spread within wildlife populations is a major issue of
+conservation concern.</p>
+<iframe width="1000px" height="1000px" src="http://www.netlogoweb.org/launch#http://www.netlogoweb.org/assets/modelslib/Sample%20Models/Biology/Ants.nlogo">
+<p>
+Your browser does not support iframes
+</p>
+</iframe>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+<p>Cazalis, V, Princé, K, Mihoub, JB et al. (2020) Effectiveness of
+protected areas in conserving tropical forest birds. <strong><em>Nature
+Communications</em></strong> 11, 4461. <a
+href="https://doi.org/10.1038/s41467-020-18230-0"
+class="uri">https://doi.org/10.1038/s41467-020-18230-0</a></p>
+<p>Estes, JA, Terborgh, J, Brashares, JS, Power ME, Berger, J, et
+al. (2011). Trophic downgrading of planet Earth.
+<strong><em>Science</em></strong>, 333:6040, 301-306. <a
+href="https://www.science.org/doi/abs/10.1126/science.1205106"
+class="uri">https://www.science.org/doi/abs/10.1126/science.1205106</a></p>
+<p>Moilanen, Atte, Wilson, Kerrie, &amp; Possingham, Hugh (Eds.) (2009)
+<em>Spatial Conservation Prioritization: Quantitative Methods and
+Computational Tools</em>. Oxford University Press, Oxford; New York.</p>
+<p>Lurgi, M, Ritchie, EG &amp; Fordham, DA. (2018) Eradicating abundant
+invasive prey could cause unexpected and varied biodiversity outcomes:
+The importance of multispecies interactions. <strong><em>Journal of
+Applied Ecology</em></strong>, 55, 2396– 2407. <a
+href="https://doi.org/10.1111/1365-2664.13188"
+class="uri">https://doi.org/10.1111/1365-2664.13188</a></p>
+<p>Pimm, SL (1982). <em>Food webs. Population and Community Biology
+Series</em>. Springer, Dordrecht. <a
+href="https://doi.org/10.1007/978-94-009-5925-5_1"
+class="uri">https://doi.org/10.1007/978-94-009-5925-5_1</a></p>
+<p>Zavaleta, ES, Hobbs, RJ, &amp; Mooney HA (2001) Viewing invasive
+species removal in a whole-ecosystem context. <strong><em>Trends in
+Ecology &amp; Evolution</em></strong>, 16:8, 454-459. <a
+href="https://doi.org/10.1016/S0169-5347(01)02194-2"
+class="uri">https://doi.org/10.1016/S0169-5347(01)02194-2</a>.</p>
+<hr />
+</div>
+<div id="continue-to-parameters" class="section level2">
+<h2><a href="lesson-6.html" class="continue-link">Continue to
+Parameters</a></h2>
+</div>
+
+  </div> <!-- lessonContent -->
+</div> <!-- lessonPage -->
+
+
+<script type="text/javascript">
+  var lesson = window.location.href.match(/lesson-[0-9]+/g);
+  if (lesson !== null) {
+    lesson = 'nav-' + lesson[0];
+    $('#'+lesson).addClass('current');
+  }
+
+  $('#show-answer').on("click", function() {
+    $('#show-answer').addClass('showing');
+    $('#model-answer').addClass('showing');
+  })
+</script>
+  </div> <!-- articleBandContent -->
+</div> <!-- pageContent -->
+
+<div id="rStudioFooter" class="band full">
+<div class="bandContent">
+  <div id="copyright">© Copyright 2016 - 2020 RStudio, PBC</div>
+  <div id="logos">
+    <a href="https://twitter.com/rstudio" class="footerLogo twitter"></a>
+    <a href="https://github.com/rstudio" class="footerLogo gitHub"></a>
+    <a href="https://www.linkedin.com/company/rstudio-pbc" class="footerLogo linkedIn"></a>
+    <a href="https://www.facebook.com/rstudioinc/" class="footerLogo facebook"></a>
+  </div>
+</div>
+</div>
+
+<!-- bizible -->
+<script type="text/javascript" src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
+
+<!-- disqus -->
+<div id="disqus_thread" class="standardPadding"></div>
+<script type="text/javascript" src="js/disqus.js"></script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<script type="text/javascript" src="js/external-links.js"></script>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
