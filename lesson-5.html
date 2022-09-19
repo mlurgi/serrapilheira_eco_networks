@@ -272,15 +272,16 @@ instances, the effectiveness of these protected areas is not known.
 Recent efforts have have been focusing on obtaining a better
 understanding of this. Cazalis et al. (<a
 href="https://doi.org/10.1038/s41467-020-18230-0">2020</a>) (plot on the
-left) showed that when looking at the number of species of forest birds,
-the effect of protected areas in tropical forests on biodiversity is
-negligible, and in some cases even detrimental. This picture changes
-when focusing on specific species groups. Disparate results like this
-highlight the need for obtaining a better understanding of conservation
-actions, such as protected areas, on biodiversity at regional to global
-scales. In particular, we need a better understanding of how effective
-are these areas at protecting other facets of biodiversity, such as
-species interactions.</p>
+left) showed that <strong><em>when looking at the number of species of
+forest birds, the effect of protected areas in tropical forests on
+biodiversity is negligible, and in some cases even
+detrimental</em></strong>. This picture changes when focusing on
+specific species groups. Disparate results like this highlight the need
+for obtaining a better understanding of conservation actions, such as
+protected areas, on biodiversity at regional to global scales. In
+particular, we need a better understanding of how effective are these
+areas at protecting other facets of biodiversity, such as species
+interactions.</p>
 <p>At the <a
 href="https://www.swansea.ac.uk/bioscience/research-and-impact/computational-ecology-lab/">Computational
 Ecology Lab</a> we are working towards this understanding from a network
@@ -293,12 +294,12 @@ class="section level2">
 <h2>Managing Invasive Species: The Community Context Matters</h2>
 <p><img src="lesson-images/cascades.png"
 style="float:right; padding-left:10px" width="350" /></p>
-<p>One of the classical results in theoretical food web ecology is the
-importance of the potential for cascading effects of species removals
-(or disturbance) on other species in the ecosystem (e.g. Pimm, 1982).
-Ever since then, field ecologists set out find examples of this in
-Nature. It turns out there are many! (see Estes et al., 2011 for a
-review).</p>
+<p>One of the classical results in theoretical food web ecology is
+<strong><em>the importance of the potential for cascading effects of
+species removals (or disturbance) on other species in the
+ecosystem</em></strong> (e.g. Pimm, 1982). Ever since then, field
+ecologists set out find examples of this in Nature. It turns out there
+are many! (see Estes et al., 2011 for a review).</p>
 <p>This realisation is important because it has profound implications
 for the ways we approach ecosystems. It not only highlights the indirect
 effects that species might have on each other when they are tangled in a
@@ -358,20 +359,21 @@ these species.</p>
 style="float:right; padding-left:10px" width="350" /></p>
 <p>To tackle this problem we adopted a model similar in spirit to the
 Generalised Lotka-Volterra model introduced in the previous section but
-in discrete time. When modelling ecological dynamics of species
-displaying non-overlapping generations, discrete time (or difference,
-rather than differential) equations are usually adopted. In this example
-functional responses (i.e. the predation effect of predator over prey)
-and the numerical responses (i.e. the growth of a species population
-accounting for intrinsic growth, consumption and loss to predation) are
-modeled independently and are different across species. The food web
-modeled can be seen on the right, and the equations governing the
-numerical and functional responses of the herbivores are presented
-below. The remaining equations are similar with slight modifications
-depending on the shape of functional and numerical responses of the
-different species observed in empirical studies. The full set of
-equations is not presented here for simplicity, but you are welcome to
-find the full details of the model in <a
+in discrete time. <strong><em>When modelling ecological dynamics of
+species displaying non-overlapping generations, discrete time (or
+difference, rather than differential) equations are usually
+adopted.</em></strong> In this example functional responses (i.e. the
+predation effect of predator over prey) and the numerical responses
+(i.e. the growth of a species population accounting for intrinsic
+growth, consumption and loss to predation) are modeled independently and
+are different across species. The food web modeled can be seen on the
+right, and the equations governing the numerical and functional
+responses of the herbivores are presented below. The remaining equations
+are similar with slight modifications depending on the shape of
+functional and numerical responses of the different species observed in
+empirical studies. The full set of equations is not presented here for
+simplicity, but you are welcome to find the full details of the model in
+<a
 href="https://besjournals.onlinelibrary.wiley.com/doi/10.1111/1365-2664.13188">Lurgi
 et al. 2018</a>.</p>
 <p>Numerical response of herbivores:</p>
@@ -650,12 +652,12 @@ want to obtain specific predictions) are full of parameters that have
 very specific and precise values. These values are usually (as in this
 case) extracted from empirical information that has been collected over
 many years of study of the corresponding system. This illustrates
-<strong>one of the key differences between developing ecological models
-to study specific systems, commonly for very applied problems (like the
-example above), and ecological models to construct theory and derive
-theoretical expectations on the behaviour of a broader class of
-systems</strong> (like the Generalised Lotka-Volterra example discussed
-in the previous section).</p>
+<strong><em>one of the key differences between developing ecological
+models to study specific systems, commonly for very applied problems
+(like the example above), and ecological models to construct theory and
+derive theoretical expectations on the behaviour of a broader class of
+systems</em></strong> (like the Generalised Lotka-Volterra example
+discussed in the previous section).</p>
 <p>Now that we have the implementation of the model, we can run some
 simulations and study the behaviour of the system.</p>
 <pre class="r"><code># Seed to ensure reproducibility
@@ -816,14 +818,18 @@ system-level models</em></strong> like the equations above. One solution
 to this is the use of individual-based models.</p>
 <div id="technical-note-individual-based-models" class="section level3">
 <h3>Technical note: Individual-based models</h3>
-<p>In individual-based models, “rules” of interaction at the individual
-level are defined and the system level behaviour emerges from these
-interactions at lower organisational scales. In the app below you can
-explore the use of a simple individual-based model for ant behaviour
-using the NetLogo modelling platform. The flexibility of the platform
-allows for easy definition of individual-level rules of interaction and
-parameter values manipulation.</p>
-<iframe style="width:900px; height:900px;" src="http://www.netlogoweb.org/launch#http://www.netlogoweb.org/assets/modelslib/Sample%20Models/Biology/Virus.nlogo" data-external="1">
+<p>In individual-based models, <strong><em>“rules” of interaction at the
+individual level are defined and the system level behaviour emerges from
+these interactions at lower organisational scales</em></strong>. In the
+app below you can explore the use of a simple individual-based model for
+ant behaviour using the NetLogo modelling platform. The flexibility of
+the platform allows for easy definition of individual-level rules of
+interaction and parameter values manipulation.</p>
+<p><strong><em>NOTE</em></strong>: If the frame below doesn’t load visit
+<a
+href="http://www.netlogoweb.org/launch#http://www.netlogoweb.org/assets/modelslib/Sample%20Models/Biology/Virus.nlogo">this
+URL</a>.</p>
+<iframe style="width:900px; height:900px;" src="https://www.netlogoweb.org/launch#https://www.netlogoweb.org/assets/modelslib/Sample%20Models/Biology/Virus.nlogo" data-external="1">
 <p>
 Your browser does not support iframes
 </p>
