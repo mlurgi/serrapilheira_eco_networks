@@ -487,22 +487,51 @@ legend("right", c("susceptibles", "infectious", "recovered"), col = c("blue", "r
 
 These models have provided important insights into the dynamics of epidemiological systems and have been applied to understand and predict specific epidemics. Disease transmission is however, an inherently individual-to-individual interaction problem process. In some instances, ***the mechanisms of interaction that might affect the outcome of disease transmission dynamics cannot be investigated using system-level models*** like the equations above. One solution to this is the use of individual-based models.
 
+### Technical note: Individual-based models
+
 In individual-based models, "rules" of interaction at the individual level are defined and the system level behaviour emerges from these interactions at lower organisational scales. In the app below you can explore the use of a simple individual-based model for ant behaviour using the NetLogo modelling platform. The flexibility of the platform allows for easy definition of individual-level rules of interaction and parameter values manipulation.
 
-<iframe width='800px' height='800px' src="http://www.netlogoweb.org/launch#http://www.netlogoweb.org/assets/modelslib/Sample%20Models/Biology/Ants.nlogo">
+<iframe width='900px' height='900px' src="http://www.netlogoweb.org/launch#http://www.netlogoweb.org/assets/modelslib/Sample%20Models/Biology/Virus.nlogo">
   <p>Your browser does not support iframes</p>
 </iframe>
 
 
+### The spread of Devil Facial Tumour Disease (DFTD) in Tasmanian devil metapopulations
+
+![](lesson-images/devil-tumour.png){width="350px" style="float:right; padding-left:10px"}
+
+The last remnants of Tasmanian devil populations in Tasmania, Australia, have been drastically decreasing due to the introduction of a transmissible cancer, DFTD, in 1996. By means of local aggressive interactions between individuals the cancer is capable of spreading between them, having profound consequences for population persistence. Obtaining a good understanding of the drivers of disease spread in these wild populations is of fundamental importance to be able to develop sound conservation measures to protect the species from collapse.
+
+<center>
+![***From habitat maps to metapopulation.*** Taking the map of preferred habitats of Tasmanian devils across the island of Tasmania, we defined a network of local patches of devil populations linked by dispersal corridors according to a threshold distance between patches.](lesson-images/habitat2metapop.png){width="600px"}
+
+</center>
+
+
+In an effort to tackle this problem, [we developed an individual-based metapopulation model](https://doi.org/10.3390/pathogens10121592) in which local dynamics of interactions between individuals interact with regional scale processes of dispersal across local populations in a metapopulation to give rise to large scale dynamics of disease spread. This model not only was capable of reproducing the wavefront of disease spread across the island of Tasmania, but allowed us to identify the conditions of dispersal and local contact distance under which this is expected to happen.
+
+![](lesson-images/Disp_0.007_Contact_0.3_BP_0.4.gif){width="300px" style="float:left; padding-right:10px"}
+
+***Check the full code for this project here!*** [https://github.com/RowanDurrant/DFTD](https://github.com/RowanDurrant/DFTD), including the local rules of interaction defined to simulate disease transmission between individuals and movement across the landscape.
+
+Using this information, and the model parameterised in this way, we designed conservation management strategies aimed at reducing the spread of the disease across the metapopulation. Our results suggest that if metapopulations of Tasmanian devils were to be managed -by isolating certain patches from the metapopulation- using a landscape scale approach based on betweenness centrality of patches (a measurement of how central a local population is within the network of patches), the proportion of patches infected at the landscape level is considerably lower than if a random approach, or even one based solely on the degree (i.e. number of dispersal corridors arriving at and emanating from a given patch) is taken. In other words, if local patches to be isolated from the metapopulation are selected based on their betweeness centrality, the proportion of infected patches remains lower than if alternative topology-oriented strategies are adopted.
+
+Note that in terms of population size and within-population genetic variation, both strategies yield similar, i.e. a decrease in both quantities as more patches are isolated.
+
+<center>
+![***Effects of fragmentation on DFTD spread in Tasmanian devil metapopulations.*** Metapopulation size (A), proportion of individuals infected within the metapopulation (B) and mean within-population genetic diversity index (C) are influenced by the number of populations isolated from the metapopulation. Proportion of populations infected is also influenced by whether populations are isolated based on the population’s centrality in the metapopulation (i.e., betweenness), its connectivity (i.e., degree) or at random (B). Colours represents different population isolation methods.](lesson-images/results-devils.png){width="800px"}
+
 ## References
 
-Cazalis, V, Princé, K, Mihoub, JB et al. (2020) Effectiveness of protected areas in conserving tropical forest birds. ***Nature Communications*** 11, 4461. https://doi.org/10.1038/s41467-020-18230-0
+Cazalis V, Princé K, Mihoub JB et al. (2020) Effectiveness of protected areas in conserving tropical forest birds. ***Nature Communications*** 11, 4461. https://doi.org/10.1038/s41467-020-18230-0
+
+Durrant R, Hamede R, Wells K & Lurgi M. (2021) Disruption of metapopulation structure reduces Tasmanian devil facial tumour disease spread at the expense of abundance and genetic diversity. ***Pathogens***, 10:12, 1592. https://doi.org/10.3390/pathogens10121592.
 
 Estes, JA, Terborgh, J, Brashares, JS, Power ME, Berger, J, et al. (2011). Trophic downgrading of planet Earth. ***Science***, 333:6040, 301-306. https://www.science.org/doi/abs/10.1126/science.1205106
 
-Moilanen, Atte, Wilson, Kerrie, & Possingham, Hugh (Eds.) (2009) *Spatial Conservation Prioritization: Quantitative Methods and Computational Tools*. Oxford University Press, Oxford; New York.
-
 Lurgi, M, Ritchie, EG & Fordham, DA. (2018) Eradicating abundant invasive prey could cause unexpected and varied biodiversity outcomes: The importance of multispecies interactions. ***Journal of Applied Ecology***, 55, 2396– 2407. https://doi.org/10.1111/1365-2664.13188
+
+Moilanen, Atte, Wilson, Kerrie, & Possingham, Hugh (Eds.) (2009) *Spatial Conservation Prioritization: Quantitative Methods and Computational Tools*. Oxford University Press, Oxford; New York.
 
 Pimm, SL (1982). *Food webs. Population and Community Biology Series*. Springer, Dordrecht. https://doi.org/10.1007/978-94-009-5925-5_1
 
