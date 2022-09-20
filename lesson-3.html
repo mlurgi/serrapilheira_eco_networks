@@ -272,8 +272,8 @@ law</strong>!</p>
 <center>
 <p><img src="lesson-images/sar-west-indies.png" width="500" /></p>
 </center>
-<p><strong>Species-area relationship of showing bird species richness as
-a function of island size in the West Indies.</strong> Image taken from
+<p><strong>Species-area relationship showing bird species richness as a
+function of island size in the West Indies.</strong> Image taken from
 Preston, FW (1962) <em>The canonical distribution of commonness and
 rarity: Part I</em>. <strong><em>Ecology</em></strong>. 43:2,
 185-215.</p>
@@ -302,9 +302,10 @@ the value of 0.25. The existence of this canonical value suggests
 profound general principles of community richness, and makes it a
 powerful predictive tool that has been used ever since in biodiversity
 conservation and studies of extinction during biotic collapse. The value
-of <em>c</em> and its universality is more debated (see <a
+of <em>c</em> and its universality is a highly debated topic in ecology
+(see <a
 href="http://ecflora.cavehill.uwi.edu/bio_courses/ECOL2453/pdfs/species%20area%20relationship.pdf">Lomolino’s
-account</a> for a nice discussion of the topic).</p>
+account</a> for a nice discussion).</p>
 </div>
 <div id="the-theory-of-island-biogeography" class="section level2">
 <h2>2.2- The Theory of Island Biogeography</h2>
@@ -532,7 +533,8 @@ metapopulation but involving many species that might be interacting.</p>
 <center>
 <strong>The four paradigms of metacommunity theory for two competing
 species.</strong> (a) patch-dynamics, (b) species sorting, (c) mass
-effects, and (d) neutral . Image taken from Leibold, MA (2004).
+effects, and (d) neutral . Image taken from Leibold, MA et
+al. <strong><em>Ecology Letters</em></strong> (2004).
 </center>
 <p><br></p>
 <p>In 2004, Leibold and colleagues, proposed a way of thinking about
@@ -688,6 +690,7 @@ for(e in extinction){
 }
 
 ggplot(output, aes(ratio, links)) + geom_point() + theme_bw() + xlab(&#39;c-e ratio&#39;) + ylab(&#39;number of interactions&#39;) </code></pre>
+<p><img src="lesson-3_files/figure-html/trophic-biogeography-1.png" width="60%" style="display: block; margin: auto;" /></p>
 <p>On the x-axis we plot the ratio between colonisation and extinction
 as a proxy for the area sampled. Islands with bigger areas have a higher
 colonisation relative to extinction rates and hence higher chances of
@@ -720,8 +723,9 @@ islands &lt;- 75
 
 # here we create a random network of connected patches (the landscape), with a probability of connectivity between any two local patches of 0.3. This will determine our metacommunity structure
 metacomm &lt;- space(islands, 0.3)
-landscape &lt;- metacomm[[2]]
-landscape[landscape &gt; 0] &lt;- 1
+landscape &lt;- metacomm[[2]]</code></pre>
+<p><img src="lesson-3_files/figure-html/metacom-model-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>landscape[landscape &gt; 0] &lt;- 1
 XY &lt;- metacomm[[1]]
 
 #parameters
@@ -875,6 +879,7 @@ for(d in dispersals){
 }
 
 ggplot(output, aes(area, links, colour=as.factor(d))) + geom_point() + theme_bw() + xlab(&#39;area&#39;) + ylab(&#39;number of interactions&#39;)</code></pre>
+<p><img src="lesson-3_files/figure-html/metacom-model-2.png" width="60%" style="display: block; margin: auto;" /></p>
 <p>What do you think about the outcomes of both models? Any
 resemblances? One clear thing is that dispersal seems to homogenise
 communities across spatial scales. Under relatively high levels of

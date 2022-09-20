@@ -36,7 +36,7 @@ Arguably one of the only true laws in ecology is the species-area relationship. 
 
 </center>
 
-**Species-area relationship of showing bird species richness as a function of island size in the West Indies.** Image taken from Preston, FW (1962) *The canonical distribution of commonness and rarity: Part I*. ***Ecology***. 43:2, 185-215. 
+**Species-area relationship showing bird species richness as a function of island size in the West Indies.** Image taken from Preston, FW (1962) *The canonical distribution of commonness and rarity: Part I*. ***Ecology***. 43:2, 185-215. 
 
 The seminal paper by [Preston in 1962](https://www.jstor.org/stable/1931976) building upon Arrhenius work and presenting SARs like the one above for different faunas, presented canonical values for the parameters of the power law form of the SARs:
 
@@ -52,7 +52,7 @@ $$
 
 Making easy to fit a straight line to the log-log relationship of species richness with area size, and the reason why most of the times we see that relationship represented as in the plot above.
 
-The value of *z* across systems was shown by Preston, and many others after him, to be in the range of 0.1 and 0.5 and usually around the value of 0.25. The existence of this canonical value suggests profound general principles of community richness, and makes it a powerful predictive tool that has been used ever since in biodiversity conservation and studies of extinction during biotic collapse. The value of *c* and its universality is more debated (see [Lomolino's account](http://ecflora.cavehill.uwi.edu/bio_courses/ECOL2453/pdfs/species%20area%20relationship.pdf) for a nice discussion of the topic).
+The value of *z* across systems was shown by Preston, and many others after him, to be in the range of 0.1 and 0.5 and usually around the value of 0.25. The existence of this canonical value suggests profound general principles of community richness, and makes it a powerful predictive tool that has been used ever since in biodiversity conservation and studies of extinction during biotic collapse. The value of *c* and its universality is a highly debated topic in ecology (see [Lomolino's account](http://ecflora.cavehill.uwi.edu/bio_courses/ECOL2453/pdfs/species%20area%20relationship.pdf) for a nice discussion).
 
 
 ## 2.2- The Theory of Island Biogeography
@@ -182,7 +182,7 @@ To add even more complexity to this whole picture we have to remember that all o
 ![](lesson-images/metacom-paradigms.png){width="400px"}
 </center>
 <center>
-**The four paradigms of metacommunity theory for two competing species.** (a) patch-dynamics, (b) species sorting, (c) mass effects, and (d) neutral . Image taken from Leibold, MA (2004). 
+**The four paradigms of metacommunity theory for two competing species.** (a) patch-dynamics, (b) species sorting, (c) mass effects, and (d) neutral . Image taken from Leibold, MA et al. ***Ecology Letters*** (2004). 
 </center>
 
 <br>
@@ -199,7 +199,7 @@ Using an extension of the Theory of Island Biogeography, and a meta-community mo
 
 ***An Island Biogeography model for food webs:*** In this model, species occupancy depends not only on colonisation and extinction rates, but also on trophic constraints enforced in which a species can only be present in the community if at least one of its prey (as defined by the food web structure) is also present. Except for basal species which can be first colonisers.
 
-```{r, trophic-biogeography, fig.align='center', message=FALSE, warning=FALSE, out.width="60%", eval=FALSE}
+```{r, trophic-biogeography, fig.align='center', message=FALSE, warning=FALSE, out.width="60%", eval=TRUE}
 source('funcs.r')
 # we explore the model using a colonisation rate and several values of extinction rates
 # the ratio between these values determines the equilibrium number of species
@@ -313,7 +313,7 @@ On the x-axis we plot the ratio between colonisation and extinction as a proxy f
 
 To try to understand the effect of dispersal on metacommunities on the shape of species interaction netwworks across spatial scales, we extended the island biogeography model into a metacommunity in which each local community is represented by the network of ecological interactions happening between the species in the community (similar to the model above). These community networks are then connected to other "local" networks via dispersal. In this way a ***network of networks*** configuration emerges. Colonisation of patches from a mainland is still present.
 
-```{r, metacom-model, warning=FALSE, message=FALSE, out.width="60%", fig.align='center', eval=FALSE}
+```{r, metacom-model, warning=FALSE, message=FALSE, out.width="60%", fig.align='center', eval=TRUE}
 euc.dist <- function(x1, x2) sqrt(sum((x1 - x2) ^ 2))
 islands <- 75
 

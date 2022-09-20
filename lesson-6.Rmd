@@ -1,0 +1,33 @@
+---
+title: "**5.- The Complex Microbiome**"
+output:
+  html_document:
+    pandoc_args:  "--webtex"
+    toc_float: false
+    fig_caption: true
+    self_contained: false
+    includes:
+      before_body: [include_header.html, include_lessons_nav.html]
+      after_body: [include_lessons_nav_end.html, include_footer.html]
+
+---
+
+Microbes are widespread across the globe, occupying a myriad of ecological niches and found in environments as diverse as deep sea vents, to soils and water, to inside the mammalian (including human) gut. Microbes are not only responsible for a large portion of many biogeochemical reactions that have enabled life as we know it, including the global carbon cycle. They also have directly allowed the existence of multicellular organisms such as plants and animals by creating intimate associations with them that allow them to perform a suite of metabolic functions without which these multicellular organisms wouldn't be possible.
+
+
+## Free-living bacterial communities
+
+
+
+## Host-associated bacterial communities
+
+
+## References
+
+
+Lurgi M, Thomas T, Wemheuer B, Webster NS & Montoya JM (2019) Modularity and predicted functions of the global sponge-microbiome network. ***Nature Communications***, 10, 992. https://doi.org/10.1038/s41467-019-08925-4
+
+Thomas T, Moitinho-Silva L, Lurgi M et al. Diversity, structure and convergent evolution of the global sponge microbiome. ***Nature Communications*** 7, 11870. https://doi.org/10.1038/ncomms11870
+
+
+## [Back to Start](lesson-1.html){.continue-link}

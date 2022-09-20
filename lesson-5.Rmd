@@ -492,10 +492,9 @@ These models have provided important insights into the dynamics of epidemiologic
 
 In individual-based models, ***"rules" of interaction at the individual level are defined and the system level behaviour emerges from these interactions at lower organisational scales***. In the app below you can explore the use of a simple individual-based model for ant behaviour using the NetLogo modelling platform. The flexibility of the platform allows for easy definition of individual-level rules of interaction and parameter values manipulation.
 
-***NOTE***: If the frame below doesn't load visit [this URL](http://www.netlogoweb.org/launch#http://www.netlogoweb.org/assets/modelslib/Sample%20Models/Biology/Virus.nlogo).
+***NOTE***: If the frame below doesn't load visit [this URL](https://www.netlogoweb.org/launch#https://www.netlogoweb.org/assets/modelslib/Sample%20Models/Biology/Virus.nlogo).
 
 <iframe style="width:900px; height:900px;" src="https://www.netlogoweb.org/launch#https://www.netlogoweb.org/assets/modelslib/Sample%20Models/Biology/Virus.nlogo" data-external="1">
-  <p>Your browser does not support iframes</p>
 </iframe>
 
 
@@ -540,6 +539,5 @@ Pimm, SL (1982). *Food webs. Population and Community Biology Series*. Springer,
 
 Zavaleta, ES, Hobbs, RJ, & Mooney HA (2001) Viewing invasive species removal in a whole-ecosystem context. ***Trends in Ecology & Evolution***, 16:8, 454-459. https://doi.org/10.1016/S0169-5347(01)02194-2.
 
-***
 
 ## [Continue to The Complex Microbiome](lesson-6.html){.continue-link}
