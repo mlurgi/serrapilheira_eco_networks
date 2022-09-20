@@ -353,7 +353,7 @@ for(i in 1:(steps-1)){
 }
 
 matplot(log10(dynamics[,-1]), type='l', lty=1, col=c(1,2,3,4,5,6), ylim=c(-.5,7), ylab = 'log10(abundance)', xlab = 'timestep')
-legend('top', c("rabbit", "s_m", "roo", "fox", "cat", "dingo"), pch = "-", col = c(1,2,3,4,5,6), box.lwd=0, y.intersp = 1.5, horiz=TRUE, lwd=3, adj=c(1,1.5))
+legend('top', c("rabbit", "small mammal", "roo", "fox", "cat", "dingo"), pch = "-", col = c(1,2,3,4,5,6), box.lwd=0, y.intersp = 1.5, horiz=TRUE, lwd=3, adj=c(1,1.5))
 
 ```
 
@@ -410,13 +410,22 @@ for(i in 1:(steps-1)){
 }
 
 matplot(log10(dynamics[,-1]), type='l', lty=1, col=c(1,2,3,4,5,6), ylim=c(-.5,7), ylab = 'log10(abundance)', xlab = 'timestep')
-legend('top', c("rabbit", "s_m", "roo", "fox", "cat", "dingo"), pch = "-", col = c(1,2,3,4,5,6), box.lwd=0, y.intersp = 1.5, horiz=TRUE, lwd=3, adj=c(1,1.5))
+
+legend('top', c("rabbit", "small mammal", "roo", "fox", "cat", "dingo"), pch = "-", col = c(1,2,3,4,5,6), box.lwd=0, y.intersp = 1.5, horiz=TRUE, lwd=3, adj=c(1,1.5))
 
 ```
 
+Using the above routine, we performed a series of replicated simulations to investigate the potential consequences of removing a highly invasive species (the rabbit) from the Australian semi-arid ecosystem shown above. [Our results suggest](https://doi.org/10.1111/1365-2664.13188) that the managed control of this invasive species can be beneficial for the community (measured as an increase of the abundance of a target species of conservation concern) up to a certain extent, but applying larger levels of control (i.e. increasing the fraction of rabbit killed) can have unintended consequences on native populations. Levels of rabbit population control above 40% can have negative consequences for native small mammals when compared with lower levels of control.
+
+<center>
+![***Effects of rabbit removal on small native mammal and mesopredators.*** Change in median abundance (calculated for the last 10 years of the rabbit control period) from the no rabbit control baseline plotted against the fraction of rabbit removal for three species in the food web: small mammal, cat, and fox. Values below 0 represent smaller abundances compared to a no rabbit control scenario. Points represent the mean abundance values across the 5,000 replicates. Lines show a local polynomial regression fit to the whole dataset (i.e., 5,000 replicates per fraction of rabbit removal). Shaded areas represent 90% confidence intervals on the simulated data. Taken from Lurgi et al. (2018).](lesson-images/food-web-dingo-result.png){width="800px"}
+
+</center>
+
+
 ## Controlling Disease Spread in Wildlife Populations
 
-Disease spread within wildlife populations is a major issue of conservation concern. Traditionally, the behaviour of disease dynamics in populations is studied using SIR(S)-type models. SIR(S) models, as in Susceptible, Infected, and Recovered (or Susceptible -again-), are state-based models in which the focus is on tracking the dynamics of the number (or fraction) of susceptible, infected, and recovered (or susceptible again) individuals within the population through time. These kind of models are specified thus:
+**Disease spread within wildlife populations is a major issue of conservation concern.** Traditionally, the behaviour of disease dynamics in populations is studied using SIR(S)-type models. SIR(S) models, as in Susceptible, Infected, and Recovered (or Susceptible -again-), are state-based models in which the focus is on tracking the dynamics of the number (or fraction) of susceptible, infected, and recovered (or susceptible again) individuals within the population through time. These kind of models are specified thus:
 
 $$
 \frac{dS}{dt} = -\beta \times I \times S
