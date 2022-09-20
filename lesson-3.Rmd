@@ -478,7 +478,7 @@ ggplot(output, aes(area, links, colour=as.factor(d))) + geom_point() + theme_bw(
 ```
 
 
-What do you think about the outcomes of both models? Any resemblances? One clear thing is that dispersal seems to homogenise communities across spatial scales. Under relatively high levels of dispersal, communities it is enough to aggregate only a few local communities to have a pretty good idea about what is going on at the landscape scale. On the other hand, community structure at regional scales is less similar to local scales when dispersal is limited.
+What do you think about the outcomes of both models? Any resemblances? One clear thing is that dispersal seems to homogenise communities across spatial scales. Under relatively high levels of dispersal, it is enough to aggregate only a few local communities to have a pretty good idea about what is going on at the landscape scale. On the other hand, community structure at regional scales is less similar to local scales when dispersal is limited.
 
 Metacommunity models such as those explored above can be used not only to understand the assembly of ecological networks (and communities) across spatial scales but can also form the foundations for **predictive models on the effects of perturbations such as habitat loss on complex ecosystems**.
 

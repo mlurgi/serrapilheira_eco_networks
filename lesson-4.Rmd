@@ -36,7 +36,7 @@ To facilitate data sharing and loading from a remote server, I have subset the s
 
 **VERY IMPORTANT:** If you are going to use these data for your own projects please do not use it straight from this repository. Refer to the BTO's website (link above) and follow their instructions and guidelines concerning data usage.
 
-```{r fig.align='center', message=FALSE, warning=FALSE, out.width="60%", eval=FALSE}
+```{r fig.align='center', message=FALSE, warning=FALSE, out.width="100%", eval=TRUE}
 # load the required libraries
 library(ggplot2) 
 library(tidyverse)
@@ -63,7 +63,6 @@ BTO_sp <- read.csv("https://raw.githubusercontent.com/mlurgi/serrapilheira_eco_n
 ## BTO grid data
 BTO_grid <- read.csv("https://raw.githubusercontent.com/mlurgi/serrapilheira_eco_networks/master/datasets/bto/grid_square_coordinates_lookup.csv", header=T)
 
-
 # Subset distribution data to Britain. This is no longer necessary due to the pre-filtered database, but I left it here for illustration
 BTO_distrib <- as_tibble(BTO_distrib) %>% filter(island=="B" & season=="B" & resolution==10)
 
@@ -76,7 +75,6 @@ BTO_distrib$Pres <- 1
 
 #####################
 # Grid and BTO Locations
-
 # Coordinates: We obtain the coordinates of the centre for each grid cell
 Coord10 <- as_tibble(BTO_grid) %>%
   dplyr::filter(resolution==10 & order<5) %>%
@@ -99,13 +97,10 @@ ggplot(data = sf_UK) + geom_sf() +
 BTO_distrib <- BTO_distrib %>%  left_join(Loc10, by='grid')
 BTO_distrib <- BTO_distrib %>% filter(!is.na(long) & !is.na(lat))
 
-
 #####################
 # BTO Species
-
 ## 3 different periods
 period <- unique(BTO_distrib$period)
-period
 
 # Nb of grid cells species have been observed
 Ngrid <- BTO_distrib %>%
@@ -118,7 +113,6 @@ Spec  <- Spec %>%  left_join(Ngrid, by = c("speccode" = "speccode"))
 
 # We only consider species present in at least 50 cells across all time periods
 Spec  <- Spec %>% filter(P.1>=50 & P.2>=50 & P.3>=50) 
-
 
 # Now that we have the data organised we can look at the range shift of some sample species through time
 safe_colorblind_palette <- c("#88CCEE", "#CC6677", "#DDCC77")
@@ -137,7 +131,7 @@ Spec[which(Spec$speccode == 272),]
 
 b <- ggplot(data = sf_UK) + geom_sf() + geom_point(data = loc, aes(x = long, y = lat, colour = period), size = 1, shape = 15) + scale_colour_manual(values = safe_colorblind_palette[1:3])+
   geom_hline(yintercept = max(BTO_distrib$lat), linetype="dashed") + geom_hline(yintercept = min(BTO_distrib$lat), linetype="dashed") + 
-  ggtitle("Streptopelia turtur") + ylab("") + xlab("") + theme_classic(base_size =  11) + theme(legend.position = 'top')
+  ggtitle("Streptopelia turtur") + ylab("") + xlab("") + theme_classic(base_size =  11) + theme(legend.position = 'bottom')
 
 #################
 loc = merge(Loc10, BTO_distrib[which(BTO_distrib$speccode == 120),])
@@ -180,7 +174,7 @@ plot(df_rangeshift$lat_centre_P.1, df_rangeshift$shift_max20_P.1.3, pch=16, xlab
 
 ### Body size
 
-![](lesson-images/temp-vs-size.png){width="200px" style="float:right; padding-left:10px"}
+![](lesson-images/temp-vs-size.png){width="300px" style="float:right; padding-left:10px"}
 
 A second universal response to climate change is changes on body size. Both within species and the distribution of body sizes across species within communities. This response can be linked to three classical ecological hypotheses relating temperature to body size.
 
@@ -208,6 +202,8 @@ The species' responses to warming identified above, either acting along or in ta
 <center>
 **Effects of warming on species interactions** Image taken from Lurgi et al. (2012).
 </center>
+
+<br>
 
 In particular, **novel communities are expected to be characterised by**:
 
@@ -388,7 +384,7 @@ In 1974, the pioneering tropical ecologist Daniel H. Janzen, while studying the 
 
 Ecological interactions then, and the complex networks they form, are expected to be lost much earlier than species. Evaluating the effects of habitat loss based solely on measures of species diversity can paint a misleading picture, [leading us to greatly underestimate the actual damage on ecosystem organisation](https://theconversation.com/habitat-loss-doesnt-just-affect-species-it-impacts-networks-of-ecological-relationships-117687).
 
-``` {r echo = FALSE, fig.cap = "**Effects of habitat loss on network structure.** Image taken from Hagen et al. (2012)", out.width='60%', fig.align='right'}
+``` {r echo = FALSE, fig.cap = "**Effects of habitat loss on network structure.** Image taken from Hagen et al. (2012)", out.width='100%', fig.align='center'}
 knitr::include_graphics("lesson-images/habitat-loss-plant-pol-networks.png")
 ```
 

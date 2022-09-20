@@ -319,7 +319,6 @@ BTO_sp &lt;- read.csv(&quot;https://raw.githubusercontent.com/mlurgi/serrapilhei
 ## BTO grid data
 BTO_grid &lt;- read.csv(&quot;https://raw.githubusercontent.com/mlurgi/serrapilheira_eco_networks/master/datasets/bto/grid_square_coordinates_lookup.csv&quot;, header=T)
 
-
 # Subset distribution data to Britain. This is no longer necessary due to the pre-filtered database, but I left it here for illustration
 BTO_distrib &lt;- as_tibble(BTO_distrib) %&gt;% filter(island==&quot;B&quot; &amp; season==&quot;B&quot; &amp; resolution==10)
 
@@ -332,7 +331,6 @@ BTO_distrib$Pres &lt;- 1
 
 #####################
 # Grid and BTO Locations
-
 # Coordinates: We obtain the coordinates of the centre for each grid cell
 Coord10 &lt;- as_tibble(BTO_grid) %&gt;%
   dplyr::filter(resolution==10 &amp; order&lt;5) %&gt;%
@@ -349,19 +347,16 @@ Loc10 &lt;- Loc10 %&gt;%  filter(!is.na(long) &amp; !is.na(lat))
 
 # Plot the coordinates on the map to make sure they make sense
 ggplot(data = sf_UK) + geom_sf() +
-  geom_point(data = Loc10, aes(x = long, y = lat), size = 1, shape = 23, fill = &quot;darkred&quot;)
-
-# Join coordinates to occurrence data
+  geom_point(data = Loc10, aes(x = long, y = lat), size = 1, shape = 23, fill = &quot;darkred&quot;)</code></pre>
+<p><img src="lesson-4_files/figure-html/unnamed-chunk-1-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Join coordinates to occurrence data
 BTO_distrib &lt;- BTO_distrib %&gt;%  left_join(Loc10, by=&#39;grid&#39;)
 BTO_distrib &lt;- BTO_distrib %&gt;% filter(!is.na(long) &amp; !is.na(lat))
 
-
 #####################
 # BTO Species
-
 ## 3 different periods
 period &lt;- unique(BTO_distrib$period)
-period
 
 # Nb of grid cells species have been observed
 Ngrid &lt;- BTO_distrib %&gt;%
@@ -375,37 +370,45 @@ Spec  &lt;- Spec %&gt;%  left_join(Ngrid, by = c(&quot;speccode&quot; = &quot;sp
 # We only consider species present in at least 50 cells across all time periods
 Spec  &lt;- Spec %&gt;% filter(P.1&gt;=50 &amp; P.2&gt;=50 &amp; P.3&gt;=50) 
 
-
 # Now that we have the data organised we can look at the range shift of some sample species through time
 safe_colorblind_palette &lt;- c(&quot;#88CCEE&quot;, &quot;#CC6677&quot;, &quot;#DDCC77&quot;)
 
 #################
 loc = merge(Loc10, BTO_distrib[which(BTO_distrib$speccode == 95),])
-Spec[which(Spec$speccode == 95),]
-
-a &lt;- ggplot(data = sf_UK) + geom_sf() + geom_point(data = loc, aes(x = long, y = lat, colour = period), size = 1, shape = 15) + scale_colour_manual(values = safe_colorblind_palette[1:3])+
+Spec[which(Spec$speccode == 95),]</code></pre>
+<pre><code>## # A tibble: 1 × 7
+##   speccode english_name scientific_name  taxonomic_rank   P.1   P.2   P.3
+##      &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;            &lt;chr&gt;          &lt;int&gt; &lt;int&gt; &lt;int&gt;
+## 1       95 Goosander    Mergus merganser Species          411   674   870</code></pre>
+<pre class="r"><code>a &lt;- ggplot(data = sf_UK) + geom_sf() + geom_point(data = loc, aes(x = long, y = lat, colour = period), size = 1, shape = 15) + scale_colour_manual(values = safe_colorblind_palette[1:3])+
   geom_hline(yintercept = max(BTO_distrib$lat), linetype=&quot;dashed&quot;) + geom_hline(yintercept = min(BTO_distrib$lat), linetype=&quot;dashed&quot;) + 
   ggtitle(&quot;Mergus merganser&quot;) + ylab(&quot;&quot;) + xlab(&quot;&quot;) + theme_classic(base_size =  11) + theme(legend.position = &#39;none&#39;)
 
 #################
 loc = merge(Loc10, BTO_distrib[which(BTO_distrib$speccode == 272),])
-Spec[which(Spec$speccode == 272),]
-
-b &lt;- ggplot(data = sf_UK) + geom_sf() + geom_point(data = loc, aes(x = long, y = lat, colour = period), size = 1, shape = 15) + scale_colour_manual(values = safe_colorblind_palette[1:3])+
+Spec[which(Spec$speccode == 272),]</code></pre>
+<pre><code>## # A tibble: 1 × 7
+##   speccode english_name scientific_name     taxonomic_rank   P.1   P.2   P.3
+##      &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;               &lt;chr&gt;          &lt;int&gt; &lt;int&gt; &lt;int&gt;
+## 1      272 Turtle Dove  Streptopelia turtur Species         1252   940   617</code></pre>
+<pre class="r"><code>b &lt;- ggplot(data = sf_UK) + geom_sf() + geom_point(data = loc, aes(x = long, y = lat, colour = period), size = 1, shape = 15) + scale_colour_manual(values = safe_colorblind_palette[1:3])+
   geom_hline(yintercept = max(BTO_distrib$lat), linetype=&quot;dashed&quot;) + geom_hline(yintercept = min(BTO_distrib$lat), linetype=&quot;dashed&quot;) + 
-  ggtitle(&quot;Streptopelia turtur&quot;) + ylab(&quot;&quot;) + xlab(&quot;&quot;) + theme_classic(base_size =  11) + theme(legend.position = &#39;top&#39;)
+  ggtitle(&quot;Streptopelia turtur&quot;) + ylab(&quot;&quot;) + xlab(&quot;&quot;) + theme_classic(base_size =  11) + theme(legend.position = &#39;bottom&#39;)
 
 #################
 loc = merge(Loc10, BTO_distrib[which(BTO_distrib$speccode == 120),])
-Spec[which(Spec$speccode == 120),]
-
-c &lt;- ggplot(data = sf_UK) + geom_sf() + geom_point(data = loc, aes(x = long, y = lat, colour = period), size = 1, shape = 15) + scale_colour_manual(values = safe_colorblind_palette[1:3])+
+Spec[which(Spec$speccode == 120),]</code></pre>
+<pre><code>## # A tibble: 1 × 7
+##   speccode english_name scientific_name taxonomic_rank   P.1   P.2   P.3
+##      &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;           &lt;chr&gt;          &lt;int&gt; &lt;int&gt; &lt;int&gt;
+## 1      120 Hobby        Falco subbuteo  Species          259   625  1033</code></pre>
+<pre class="r"><code>c &lt;- ggplot(data = sf_UK) + geom_sf() + geom_point(data = loc, aes(x = long, y = lat, colour = period), size = 1, shape = 15) + scale_colour_manual(values = safe_colorblind_palette[1:3])+
   geom_hline(yintercept = max(BTO_distrib$lat), linetype=&quot;dashed&quot;) + geom_hline(yintercept = min(BTO_distrib$lat), linetype=&quot;dashed&quot;) + 
   ggtitle(&quot;Falco subbuteo&quot;) + ylab(&quot;&quot;) + xlab(&quot;&quot;) + theme_classic(base_size =  11) + theme(legend.position = &#39;none&#39;)
 
-ggarrange(a,b,c,nrow=1)
-
-#####################
+ggarrange(a,b,c,nrow=1)</code></pre>
+<p><img src="lesson-4_files/figure-html/unnamed-chunk-1-2.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#####################
 # And lastly, we compute range shifts!
 
 ## Here we quantify range shift as the difference in mean location of the 20 most northern records (leading edge) between the time period P.1 and the time period P.3. I.e. the northern edge shift from 1972 to 2011
@@ -427,15 +430,16 @@ lat.all_P.1 &lt;- sort(data.frame(BTO_distrib %&gt;% filter(speccode == spec_spe
 }
 
 # Now we plot the range shifts ranked by magnitude
-plot(rank(df_rangeshift$shift_max20_P.1.3), df_rangeshift$shift_max20_P.1.3, pch=16, xlab=&#39;rank&#39;, ylab=&#39;northern edge shift&#39;)
-
-# And how the shift relates to the centre of the range...
+plot(rank(df_rangeshift$shift_max20_P.1.3), df_rangeshift$shift_max20_P.1.3, pch=16, xlab=&#39;rank&#39;, ylab=&#39;northern edge shift&#39;)</code></pre>
+<p><img src="lesson-4_files/figure-html/unnamed-chunk-1-3.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># And how the shift relates to the centre of the range...
 plot(df_rangeshift$lat_centre_P.1, df_rangeshift$shift_max20_P.1.3, pch=16, xlab=&#39;latitudinal centre&#39;, ylab=&#39;range shift&#39;)</code></pre>
+<p><img src="lesson-4_files/figure-html/unnamed-chunk-1-4.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="body-size" class="section level3">
 <h3>Body size</h3>
 <p><img src="lesson-images/temp-vs-size.png"
-style="float:right; padding-left:10px" width="200" /></p>
+style="float:right; padding-left:10px" width="300" /></p>
 <p>A second universal response to climate change is changes on body
 size. Both within species and the distribution of body sizes across
 species within communities. This response can be linked to three
@@ -499,6 +503,7 @@ and stability of ecosystems.</p>
 <strong>Effects of warming on species interactions</strong> Image taken
 from Lurgi et al. (2012).
 </center>
+<p><br></p>
 <p>In particular, <strong>novel communities are expected to be
 characterised by</strong>:</p>
 <p>1.- A reduction of species body sizes <br> 2.- A shift in the
@@ -751,8 +756,8 @@ misleading picture, <a
 href="https://theconversation.com/habitat-loss-doesnt-just-affect-species-it-impacts-networks-of-ecological-relationships-117687">leading
 us to greatly underestimate the actual damage on ecosystem
 organisation</a>.</p>
-<div class="figure" style="text-align: right">
-<img src="lesson-images/habitat-loss-plant-pol-networks.png" alt="**Effects of habitat loss on network structure.** Image taken from Hagen et al. (2012)" width="60%" />
+<div class="figure" style="text-align: center">
+<img src="lesson-images/habitat-loss-plant-pol-networks.png" alt="**Effects of habitat loss on network structure.** Image taken from Hagen et al. (2012)" width="100%" />
 <p class="caption">
 <strong>Effects of habitat loss on network structure.</strong> Image
 taken from Hagen et al. (2012)
