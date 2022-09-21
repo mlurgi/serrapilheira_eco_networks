@@ -23,7 +23,7 @@ Warming has prompted a series of responses from species. Three main universal re
 
 In an attempt to track their ideal climatic conditions (i.e. to maximise fitness) species have shifted their geographical distribution ranges polewards latitudinally, and towards higher elevations altitudinally. Even though responses vary among species, this aspect of biodiversity reorganisation is more or less universal.
 
-Given this, current research has focused on identifying potential universal drivers of species range shifts that might improve our predictive ability of species range shifts. Recent efforts to understand the determinants of differential shifts across bird species in the UK have revealed that both land cover and climate both differentially affect species that are more distributed towards the north vs more southernly species.
+Given this, current research has focused on identifying potential universal drivers of species range shifts that might improve our predictive ability of species range shifts. Recent efforts to understand the determinants of differential shifts across bird species in the UK have revealed that both land cover and climate differentially affect species that are more distributed towards the north vs more southernly species.
 
 <center>
 ![**Effects of land cover and climate on species range shifts.** Image taken from Taheri et al. (2021).](lesson-images/taheri.jpeg){width="600px"}
@@ -187,13 +187,13 @@ A second universal response to climate change is changes on body size. Both with
 Taken together, these three rules can help us generate hypotheses on the potential effects of warming on natural communities. In particular, it would be expected (and it has been demonstrated in natural populations), that both individuals within species (by reaching maturity earlier) are becoming smaller in general, and the body size distributions of species within communities are being shifted towards smaller values. This has profound consequences for the networks of ecological interactions between species.
 
 ### Vital rates
-A further observed effect of warming on natural populations is a generalised [increase on the pace of life](https://theconversation.com/live-fast-die-small-how-global-heating-is-simplifying-the-worlds-ecosystems-144976). Productivity and respiration have been observed to increase with temperature in aquatic mesocosms, impacting the balance between the distribution of individuals of different species across trophic levels.
+A further observed effect of warming on natural populations is a generalised [increase of the pace of life](https://theconversation.com/live-fast-die-small-how-global-heating-is-simplifying-the-worlds-ecosystems-144976). Productivity and respiration have been observed to increase with temperature in aquatic mesocosms, impacting the balance between the distribution of individuals of different species across trophic levels.
 
-Ecological interactions such as predator-prey relationships have been observed to be affected by these changes in vital rates. Predators live faster, and as such they need to eat more prey to satisfy their metabolic demands. In controlled experiments, attack rates of predators have been observed to increase with temperature, while at the same time handling time (the time a predator employs in processing a prey item) has been observed to decrease. These phenomena prompt an increase in the strength of predator-prey interactions, making the effects of predator populations on their prey stronger. If sustained over large ecological time scales, this trend has the potential to lead to the extinction of prey species, and their predator itself as a consequence.
+**Ecological interactions such as predator-prey relationships have been observed to be affected by these changes in vital rates**. Predators live faster, and as such they need to eat more prey to satisfy their metabolic demands. Across different ecosystems, [attack rates of predators have been observed to increase with temperature, while at the same time handling time (the time a predator employs in processing a prey item) has been observed to decrease](https://doi.org/10.1098/rstb.2012.0242). These phenomena prompt an increase in the strength of predator-prey interactions, making the effects of predator populations on their prey stronger. If sustained over large ecological time scales, this trend has the potential to lead to the extinction of prey species, and their predator itself as a consequence.
 
 ### Consequences for ecological interactions
 
-The species' responses to warming identified above, either acting along or in tandem, have the potential to prompt a radical reorganisation of ecosystems across the globe. This reorganisation can facilitate the emergence of novel communities from climate change in which networks of species interactions display different structural properties relative to the communities from which they originated. These changes in structure can have profound consequences for the persistence and stability of ecosystems.
+The species' responses to warming identified above, either acting along or in tandem, have the potential to prompt a radical reorganisation of ecosystems across the globe. **This reorganisation can facilitate the emergence of novel communities from climate change in which networks of species interactions display different structural properties relative to the communities from which they originated**. These changes in structure can have profound consequences for the persistence and stability of ecosystems.
 
 
 <center>
@@ -224,7 +224,7 @@ Due to the intricate networks of ecological interactions between species within 
 
 This highlights the fragility of ecological networks and poses the pressing challenge of developing predictive frameworks capable of helping us understand the full extent of the consequences of extinctions and invasions on complex ecological networks in order to design sound ecosystem conservation strategies.
 
-The development of predictive frameworks for complex ecosystems relies on mathematical and computational tools. One approach is the use of ordinary differential equations (ODEs) to simulate network dynamics. The history of dynamical modelling of this kind in ecology began back in the 1920's with the works by Alfred J. Lotka and Vito Volterra. Lotka and Volterra developed independently a similar set of two coupled differential equations to study the dynamics of biological systems in general (Lotka) and the effect of restricting fisheries for predatory fish in the Adriatic Sea (Volterra). These equations have become to be known as the Lotka-Volterra model, and it is one of the most used mathematical models in ecology to study the temporal dynamics of predator and prey populations.
+The development of predictive frameworks for complex ecosystems relies on mathematical and computational tools. One approach is the use of ordinary differential equations (ODEs) to simulate network dynamics. **The history of dynamical modelling of this kind in ecology began back in the 1920's with the works by Alfred J. Lotka and Vito Volterra**. Lotka and Volterra developed independently a similar set of two coupled differential equations to study the dynamics of biological systems in general (Lotka) and the effect of restricting fisheries for predatory fish in the Adriatic Sea (Volterra). These equations have become to be known as the Lotka-Volterra model, and it is one of the most used mathematical models in ecology to study the temporal dynamics of predator and prey populations.
 
 ![](lesson-images/lotka-volterra.png){width="200px" style="float:right; padding-left:10px"}
 
@@ -268,18 +268,21 @@ generalised.LV <- function(t, x, parameters){
 }
 
 # This function is for performing simulation experiments
-run_community_dynamics <- function(A, b){
+run_community_dynamics <- function(A, b, init_abs=NULL){
   nb_species <- dim(A)[1]			# the number of species
   nb_pos <- length(which(A > 0))		# the number of + interactions
   nb_neg <- length(which(A < 0))		# the number of - interactions
   pos <- runif(nb_pos, 0, 0.05)	# uniform distribution positive effects
   neg <- runif(nb_neg, -0.5, 0)	# uniform distribution negative effects
-
+  
   A[A<0] <- neg
   A[A>0] <- pos
   
   # initial abundances from a uniform distribution between 0 and 1
-  N0 <- runif(nb_species, 0.01, .1)
+  if(is.null(init_abs))
+    N0 <- runif(nb_species, 0.01, .1)
+  else
+    N0 <- init_abs
   
   # definition of time
   t.values <- seq(0, 500, by=0.01)
@@ -333,12 +336,15 @@ matplot((output[,c(2:7)]), type = 'l', lty = 1, lwd = 2, ylab='Abudance', xlab='
 par(fig=c(6.5,9.5,5.5,10)/10)
 par(new=T, mar=c(0,0,0,1))
 plot(g, layout=food_web_layout, vertex.color = colours, vertex.label.color='white', vertex.size=25, vertex.label.cex=1)
-
 ```
 
 On models like this we can then remove or add species and assess the effect that those perturbations have on the resulting community. For example, removing species 4 from the network above results in more stable populations of consumers (i.e. less drastic fluctuations) and reduced abundance of top predator species (compare abundances of top species 3 across plots).
 
 ```{r, extinction, warning=FALSE, echo=FALSE, error=FALSE, message=FALSE}
+# We remove species 4 from the system and have to redefine the network and the parameter vectors
+# We extract initial abundances from the previous outcome
+cur_abs <- output[dim(output)[1], -c(1,5)]
+
 A_no_4 <- matrix(c(-1,-1,0,-1,0,
                    1,0,-1,0,0,
                    0,1,0,0,0,
@@ -348,15 +354,15 @@ A_no_4 <- matrix(c(-1,-1,0,-1,0,
 
 set.seed(924)				# setting seed
 b <- c(1, -0.02, -0.02, -0.02, -0.02)
-output_extinction <- run_community_dynamics(A_no_4, b)
+output_extinction <- run_community_dynamics(A_no_4, b, cur_abs)
 
 # plotting the results
 # new network (without species 4) requires new layout
 food_web_layout_2 <- matrix(c( -1.37859603, -3.5772072,
-                             -1.37859603, -0.0374094,
-                             -1.37859603,  3.5772072,
-                             1.37859603, -0.0374094,
-                             1.37859603,   3.5772072), 5, 2, byrow=TRUE)
+                               -1.37859603, -0.0374094,
+                               -1.37859603,  3.5772072,
+                               1.37859603, -0.0374094,
+                               1.37859603,   3.5772072), 5, 2, byrow=TRUE)
 
 # again just to plot the new network
 A_plot <- t(A_no_4)
@@ -370,7 +376,6 @@ par(fig=c(6.5,9.5,5.5,10)/10)
 par(new=T, mar=c(0,0,0,1))
 
 plot(g, layout=food_web_layout_2, vertex.color = colours[-4], vertex.label.color='white', vertex.size=25, vertex.label.cex=1, vertex.label=c(1:3, 5,6))
-
 ```
 
 One of the challenges in setting up models like the Generalised Lotka-Volterra is that when many species are considered, it is difficult to find a combination of parameters (growth rates and interaction terms) that yield persistent communities (i.e. the system becomes quickly unstable for many species). This difficulty has been tackled by many ecologists over the last few decades and the current models used to simulate ecological dynamics in complex networks have increased in complexity and level of biological and ecological detail. One of the most popular formulations currently used by food web ecologists to model dynamics in complex food webs is the **Bio-Energetic Model**. The Bio-Energetic Model incorporates the scaling of vital rates with species body size (given by trophic position in the food web), as well as more realistic (saturating) functional responses. This additions make the system more stable and capable of maintaining many interacting species.
@@ -378,19 +383,24 @@ One of the challenges in setting up models like the Generalised Lotka-Volterra i
 In a couple of recent papers, I used this model to investigate [the effects of invasions of complex food webs comprising many species](https://www.frontiersin.org/articles/10.3389/fevo.2014.00036/full) (~60) and also, by making the species' vital rates dependent not only on body size but also temperature, to explore the [synergistic effects of increased temperatures and invasions on food webs](https://royalsocietypublishing.org/doi/full/10.1098/rspb.2020.2622). If you are interested you can explore this modelling framework which is available from my repository: https://github.com/mlurgi/temperature-dependent-invasions
 
 ## 3.3 Habitat loss
+
+![](lesson-images/daniel-janzen.jpeg){width="200px" style="float:right; padding-left:10px"}
+
 In 1974, the pioneering tropical ecologist Daniel H. Janzen, while studying the complex ecosystems of Costa Rica, realised that the lack of sufficient habitat for a species (due to habitat loss) can create situations in which, even if populations of the species still persist, they are no longer able to perform their ecological functions due to a reduced capacity of fulfilling the ecological interactions that would allow them to perform these functions. This realisation led him to conclude that even if the consequences of habitat loss are not apparent when looking at biodiversity loss (i.e. species do not go extinct), they are no longer interacting in a way that maintains true biodiversity in the sense of a healthy ecosystem. Janzen wrote:
 
 ***" What escapes the eye, however, is a much more insidious kind of extinction: the extinction of ecological interactions."*** *Daniel H. Janzen (1974).*
 
 Ecological interactions then, and the complex networks they form, are expected to be lost much earlier than species. Evaluating the effects of habitat loss based solely on measures of species diversity can paint a misleading picture, [leading us to greatly underestimate the actual damage on ecosystem organisation](https://theconversation.com/habitat-loss-doesnt-just-affect-species-it-impacts-networks-of-ecological-relationships-117687).
 
+But how can we start thinking about the consequences of habitat loss for ecological networks?
+
 ``` {r echo = FALSE, fig.cap = "**Effects of habitat loss on network structure.** Image taken from Hagen et al. (2012)", out.width='100%', fig.align='center'}
 knitr::include_graphics("lesson-images/habitat-loss-plant-pol-networks.png")
 ```
 
-Habitat loss can also have biased effects on the organisation of networks of ecological interactions by differentially affecting different species groups. For example, larger animal species in ecosystems usually require larger areas to maintain viable populations. This means that in fragmented habitats we should expect to observe a bias towards smaller species, with the corresponding changes expected on network structure due to this targeted loss.
+Habitat loss can have biased effects on the organisation of networks of ecological interactions by differentially affecting different species groups. For example, larger animal species in ecosystems usually require larger areas to maintain viable populations. This means that in fragmented habitats we should expect to observe a bias towards smaller species, with the corresponding changes expected on network structure due to this targeted loss.
 
-To investigate the effects of habitat loss on complex ecological networks we can use models such as those discussed during the previous section ([The Assembly of Ecological Networks Across Spatial Scales](lesson-3.html)). In those models habitat loss can be simulated by removing nodes from the network of available patches. Alternatively, space can be considered more explicitly, as for example using individual-based models, in which simulated individuals move around in an artificial ecosystem. In a recent study, we investigated the effects of habitat loss on multiplex ecological networks comprising 2 interaction types, trophic and mutualistic interactions. Our results show that different types of habitat loss (either random loss across the landscape, continuous loss where entire large fractions of the habitat are destroyed, or intermediate more clustered habitat loss scenarios). By preventing individuals from finding each other across the landscape, encounters between predators and prey are reduced in random habitat loss scenarios, decreasing the interaction strengths between species. Contiguous habitat loss on the other hand, by 'compressing' the landscape of available habitat, makes interactions more likely and increase the strengths of these interactions, in turn decreasing community stability.
+To investigate the effects of habitat loss on complex ecological networks we can use models such as those discussed during the previous section ([The Assembly of Ecological Networks Across Spatial Scales](lesson-3.html)). In those models habitat loss can be simulated by removing nodes from the network of available patches. Alternatively, space can be considered more explicitly, as for example using individual-based models, in which simulated individuals move around in an artificial ecosystem. In a recent study, we investigated the effects of habitat loss on multiplex ecological networks comprising 2 interaction types, trophic and mutualistic interactions. Our results show that different types of habitat loss (either random loss across the landscape, continuous loss where entire large fractions of the habitat are destroyed, or intermediate more clustered habitat loss scenarios) can have different effects on the organisation and stability of ecological networks. By preventing individuals from finding each other across the landscape, encounters between predators and prey are reduced in random habitat loss scenarios, decreasing the interaction strengths between species. Contiguous habitat loss on the other hand, by 'compressing' the landscape of available habitat, makes interactions more likely and increase the strengths of these interactions, in turn decreasing community stability.
 
 <center>
 ![***Habitat loss, interaction strengths and temporal variability.*** a–c Mean interaction strength (IS) averaged over all interactions, and mean coefficient of variation in species abundances averaged over all species (CV population). d–f IS as a linear predictor for mean CV population, with low and high HL communities indicated by blue and red circles respectively.](lesson-images/h-loss-stability.png){width="600px"}
@@ -419,7 +429,7 @@ McWilliams, C, Lurgi, M, Montoya, J.M. et al. (2019) The stability of multitroph
 
 Parmesan, C., Ryrholm, N., Stefanescu, C. et al. (1999) Poleward shifts in geographical ranges of butterfly species associated with regional warming. ***Nature***, 399, 579–583.
 
-Rall, BC. et al. (2012) Universal temperature and body-mass scaling of feeding rates. ***Phil. Trans. Roy. Soc. B.*** 367(1605), 2923-2934.
+Rall BC, Brose U, Hartvig M, Kalinkat G, Schwarzmüller F, Vucic-Pestic O, Petchey OL. (2012) Universal temperature and body-mass scaling of feeding rates. ***Phil. Trans. Roy. Soc. B.*** 367(1605), 2923-2934. https://doi.org/10.1098/rstb.2012.0242
 
 Taheri, S, García-Callejas, D, Araújo, MB. (2021) Discriminating climate, land-cover and random effects on species range dynamics. ***Global Change Biology***, 27, 1309– 1317. 
 

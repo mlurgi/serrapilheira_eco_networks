@@ -264,9 +264,9 @@ biodiversity reorganisation is more or less universal.</p>
 universal drivers of species range shifts that might improve our
 predictive ability of species range shifts. Recent efforts to understand
 the determinants of differential shifts across bird species in the UK
-have revealed that both land cover and climate both differentially
-affect species that are more distributed towards the north vs more
-southernly species.</p>
+have revealed that both land cover and climate differentially affect
+species that are more distributed towards the north vs more southernly
+species.</p>
 <center>
 <div class="figure">
 <img src="lesson-images/taheri.jpeg" width="600" alt="" />
@@ -469,33 +469,35 @@ ecological interactions between species.</p>
 <p>A further observed effect of warming on natural populations is a
 generalised <a
 href="https://theconversation.com/live-fast-die-small-how-global-heating-is-simplifying-the-worlds-ecosystems-144976">increase
-on the pace of life</a>. Productivity and respiration have been observed
+of the pace of life</a>. Productivity and respiration have been observed
 to increase with temperature in aquatic mesocosms, impacting the balance
 between the distribution of individuals of different species across
 trophic levels.</p>
-<p>Ecological interactions such as predator-prey relationships have been
-observed to be affected by these changes in vital rates. Predators live
-faster, and as such they need to eat more prey to satisfy their
-metabolic demands. In controlled experiments, attack rates of predators
+<p><strong>Ecological interactions such as predator-prey relationships
+have been observed to be affected by these changes in vital
+rates</strong>. Predators live faster, and as such they need to eat more
+prey to satisfy their metabolic demands. Across different ecosystems, <a
+href="https://doi.org/10.1098/rstb.2012.0242">attack rates of predators
 have been observed to increase with temperature, while at the same time
 handling time (the time a predator employs in processing a prey item)
-has been observed to decrease. These phenomena prompt an increase in the
-strength of predator-prey interactions, making the effects of predator
-populations on their prey stronger. If sustained over large ecological
-time scales, this trend has the potential to lead to the extinction of
-prey species, and their predator itself as a consequence.</p>
+has been observed to decrease</a>. These phenomena prompt an increase in
+the strength of predator-prey interactions, making the effects of
+predator populations on their prey stronger. If sustained over large
+ecological time scales, this trend has the potential to lead to the
+extinction of prey species, and their predator itself as a
+consequence.</p>
 </div>
 <div id="consequences-for-ecological-interactions"
 class="section level3">
 <h3>Consequences for ecological interactions</h3>
 <p>The species’ responses to warming identified above, either acting
 along or in tandem, have the potential to prompt a radical
-reorganisation of ecosystems across the globe. This reorganisation can
-facilitate the emergence of novel communities from climate change in
-which networks of species interactions display different structural
-properties relative to the communities from which they originated. These
-changes in structure can have profound consequences for the persistence
-and stability of ecosystems.</p>
+reorganisation of ecosystems across the globe. <strong>This
+reorganisation can facilitate the emergence of novel communities from
+climate change in which networks of species interactions display
+different structural properties relative to the communities from which
+they originated</strong>. These changes in structure can have profound
+consequences for the persistence and stability of ecosystems.</p>
 <center>
 <img src="lesson-images/novel-communities.png" width="400" />
 </center>
@@ -541,15 +543,15 @@ ecosystem conservation strategies.</p>
 <p>The development of predictive frameworks for complex ecosystems
 relies on mathematical and computational tools. One approach is the use
 of ordinary differential equations (ODEs) to simulate network dynamics.
-The history of dynamical modelling of this kind in ecology began back in
-the 1920’s with the works by Alfred J. Lotka and Vito Volterra. Lotka
-and Volterra developed independently a similar set of two coupled
-differential equations to study the dynamics of biological systems in
-general (Lotka) and the effect of restricting fisheries for predatory
-fish in the Adriatic Sea (Volterra). These equations have become to be
-known as the Lotka-Volterra model, and it is one of the most used
-mathematical models in ecology to study the temporal dynamics of
-predator and prey populations.</p>
+<strong>The history of dynamical modelling of this kind in ecology began
+back in the 1920’s with the works by Alfred J. Lotka and Vito
+Volterra</strong>. Lotka and Volterra developed independently a similar
+set of two coupled differential equations to study the dynamics of
+biological systems in general (Lotka) and the effect of restricting
+fisheries for predatory fish in the Adriatic Sea (Volterra). These
+equations have become to be known as the Lotka-Volterra model, and it is
+one of the most used mathematical models in ecology to study the
+temporal dynamics of predator and prey populations.</p>
 <p><img src="lesson-images/lotka-volterra.png"
 style="float:right; padding-left:10px" width="200" /></p>
 <p><img style="vertical-align:middle"
@@ -633,18 +635,21 @@ generalised.LV &lt;- function(t, x, parameters){
 }
 
 # This function is for performing simulation experiments
-run_community_dynamics &lt;- function(A, b){
+run_community_dynamics &lt;- function(A, b, init_abs=NULL){
   nb_species &lt;- dim(A)[1]           # the number of species
   nb_pos &lt;- length(which(A &gt; 0))        # the number of + interactions
   nb_neg &lt;- length(which(A &lt; 0))        # the number of - interactions
   pos &lt;- runif(nb_pos, 0, 0.05) # uniform distribution positive effects
   neg &lt;- runif(nb_neg, -0.5, 0) # uniform distribution negative effects
-
+  
   A[A&lt;0] &lt;- neg
   A[A&gt;0] &lt;- pos
   
   # initial abundances from a uniform distribution between 0 and 1
-  N0 &lt;- runif(nb_species, 0.01, .1)
+  if(is.null(init_abs))
+    N0 &lt;- runif(nb_species, 0.01, .1)
+  else
+    N0 &lt;- init_abs
   
   # definition of time
   t.values &lt;- seq(0, 500, by=0.01)
@@ -735,6 +740,8 @@ class="uri">https://github.com/mlurgi/temperature-dependent-invasions</a></p>
 </div>
 <div id="habitat-loss" class="section level2">
 <h2>3.3 Habitat loss</h2>
+<p><img src="lesson-images/daniel-janzen.jpeg"
+style="float:right; padding-left:10px" width="200" /></p>
 <p>In 1974, the pioneering tropical ecologist Daniel H. Janzen, while
 studying the complex ecosystems of Costa Rica, realised that the lack of
 sufficient habitat for a species (due to habitat loss) can create
@@ -836,9 +843,12 @@ Communications</em></strong>, 10:2322.</p>
 <p>Parmesan, C., Ryrholm, N., Stefanescu, C. et al. (1999) Poleward
 shifts in geographical ranges of butterfly species associated with
 regional warming. <strong><em>Nature</em></strong>, 399, 579–583.</p>
-<p>Rall, BC. et al. (2012) Universal temperature and body-mass scaling
-of feeding rates. <strong><em>Phil. Trans. Roy. Soc. B.</em></strong>
-367(1605), 2923-2934.</p>
+<p>Rall BC, Brose U, Hartvig M, Kalinkat G, Schwarzmüller F,
+Vucic-Pestic O, Petchey OL. (2012) Universal temperature and body-mass
+scaling of feeding rates. <strong><em>Phil. Trans. Roy. Soc.
+B.</em></strong> 367(1605), 2923-2934. <a
+href="https://doi.org/10.1098/rstb.2012.0242"
+class="uri">https://doi.org/10.1098/rstb.2012.0242</a></p>
 <p>Taheri, S, García-Callejas, D, Araújo, MB. (2021) Discriminating
 climate, land-cover and random effects on species range dynamics.
 <strong><em>Global Change Biology</em></strong>, 27, 1309– 1317.</p>
