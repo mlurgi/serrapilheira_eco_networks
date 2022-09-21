@@ -340,7 +340,7 @@ plot(g, layout=food_web_layout, vertex.color = colours, vertex.label.color='whit
 
 On models like this we can then remove or add species and assess the effect that those perturbations have on the resulting community. For example, removing species 4 from the network above results in more stable populations of consumers (i.e. less drastic fluctuations) and reduced abundance of top predator species (compare abundances of top species 3 across plots).
 
-```{r, extinction, warning=FALSE, echo=FALSE, error=FALSE, message=FALSE}
+```{r, extinction, warning=FALSE, echo=TRUE, error=FALSE, message=FALSE}
 # We remove species 4 from the system and have to redefine the network and the parameter vectors
 # We extract initial abundances from the previous outcome
 cur_abs <- output[dim(output)[1], -c(1,5)]

@@ -710,6 +710,41 @@ example, removing species 4 from the network above results in more
 stable populations of consumers (i.e. less drastic fluctuations) and
 reduced abundance of top predator species (compare abundances of top
 species 3 across plots).</p>
+<pre class="r"><code># We remove species 4 from the system and have to redefine the network and the parameter vectors
+# We extract initial abundances from the previous outcome
+cur_abs &lt;- output[dim(output)[1], -c(1,5)]
+
+A_no_4 &lt;- matrix(c(-1,-1,0,-1,0,
+                   1,0,-1,0,0,
+                   0,1,0,0,0,
+                   1,0,0,0,-1,
+                   0,0,0,1,0), 5, 5, byrow = TRUE)
+
+
+set.seed(924)               # setting seed
+b &lt;- c(1, -0.02, -0.02, -0.02, -0.02)
+output_extinction &lt;- run_community_dynamics(A_no_4, b, cur_abs)
+
+# plotting the results
+# new network (without species 4) requires new layout
+food_web_layout_2 &lt;- matrix(c( -1.37859603, -3.5772072,
+                               -1.37859603, -0.0374094,
+                               -1.37859603,  3.5772072,
+                               1.37859603, -0.0374094,
+                               1.37859603,   3.5772072), 5, 2, byrow=TRUE)
+
+# again just to plot the new network
+A_plot &lt;- t(A_no_4)
+diag(A_plot) &lt;- 0
+g &lt;- graph_from_adjacency_matrix(A_plot)
+
+par(fig=c(0,10,0,10)/10)
+par(mar=c(5,5,0,0))
+matplot((output_extinction[,c(2:6)]), type = &#39;l&#39;, lty = 1, lwd = 2, ylab=&#39;Abudance&#39;, xlab=&#39;Time&#39;, col=colours[-4])
+par(fig=c(6.5,9.5,5.5,10)/10)
+par(new=T, mar=c(0,0,0,1))
+
+plot(g, layout=food_web_layout_2, vertex.color = colours[-4], vertex.label.color=&#39;white&#39;, vertex.size=25, vertex.label.cex=1, vertex.label=c(1:3, 5,6))</code></pre>
 <p><img src="lesson-4_files/figure-html/extinction-1.png" width="672" /></p>
 <p>One of the challenges in setting up models like the Generalised
 Lotka-Volterra is that when many species are considered, it is difficult
