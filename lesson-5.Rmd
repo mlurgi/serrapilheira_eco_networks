@@ -12,50 +12,49 @@ output:
 
 ---
 
-As we saw in the previous section, different stressors associated to global change are prompting a dramatic re-organisation of ecosystems worldwide. Their most studied and noticeable effect is species loss, but another facet of biodiversity, species interactions, is also affected.
+As we saw in the previous section, ***different stressors associated to global change are prompting a dramatic re-organisation of ecosystems worldwide***. Their most studied and noticeable effect is species loss, but another facet of biodiversity, species interactions, is also affected.
 
-To counter the effects of these stressors, different conservation measures are adopted. In many cases these measures are devised in an ad-hoc manner and rarely consider the full consequences of adopting them.
+To counter the effects of these stressors, different conservation measures are adopted. In many cases these measures are devised in an ad-hoc manner and rarely consider the full community-level consequences of adopting them.
 
 ## Protected Areas for Biodiversity Conservation
 
 ![](lesson-images/protected-areas.png){width="500px" style="float:right; padding-left:10px"}
 
-One of the prime examples of measures adopted specifically aimed at protecting biodiversity is the establishment of protected areas for conservation. Protected areas are pieces of land (or water, in the case of marine protected areas) within which human activities are reduced to one extent or another. Different levels of protection exist, depending on the type and magnitude of human activities allowed within. In the strictest sense, protected areas with the highest level of protection forbid any kind of human activities. For obvious reasons (e.g. exploitation of natural resources for the benefit of humans and economic growth), establishing protected areas with the highest level of protection is very difficult. Strictly protected areas are thus usually found in remote locations of little interest or value to humans.
+One of the prime examples of measures adopted specifically aimed at protecting biodiversity is the establishment of protected areas for conservation. ***Protected areas are parts of the landscape (or seascape, in the case of marine protected areas) within which human activities are reduced to one extent or another***. Different levels of protection exist, depending on the type and magnitude of human activities allowed within. In the strictest sense, protected areas with the highest level of protection forbid any kind of human activities. For obvious reasons (e.g. exploitation of natural resources for the benefit of humans and economic growth), establishing protected areas with the highest level of protection is very difficult. Strictly protected areas are thus usually found in remote locations of little interest or value to humans.
 
 ![](lesson-images/protected-areas-birds.png){width="400px" style="float:left; padding-right:10px"}
 
-Ideally, rather than setting them up in locations of little economic interest to humans, protected areas should be designed in such a way to obtain the most effective outcome to protect biodiversity, either at the species or the ecosystems level. Research efforts aiming at designing effective protected areas have been developed grounded on mechanistic models and theory that rely heavily on spatial biodiversity considerations akin to those explored in section 2 (e.g. Moilanen et al. 2009). Mechanistic ecological models can thus help us define effective conservation strategies.
+Ideally, rather than setting them up in locations of little economic interest to humans, protected areas should be designed in such a way to obtain the most effective outcome to protect biodiversity, either at the species or the ecosystems level. Research efforts aiming at designing effective protected areas have been developed grounded on mechanistic models and theory that rely heavily on spatial biodiversity considerations akin to those explored in [Section 2](lesson-3.html) (e.g. Moilanen et al. 2009). Mechanistic ecological models can thus help us define effective conservation strategies.
 
-In spite of the availability of these frameworks, many protected areas around the world are still set up as a last resort when particular habitats are threatened and only a fraction of them is left. In many instances, the effectiveness of these protected areas is not known. Recent efforts have have been focusing on obtaining a better understanding of this. Cazalis et al. ([2020](https://doi.org/10.1038/s41467-020-18230-0)) (plot on the left) showed that ***when looking at the number of species of forest birds, the effect of protected areas in tropical forests on biodiversity is negligible, and in some cases even detrimental***. This picture changes when focusing on specific species groups. Disparate results like this highlight the need for obtaining a better understanding of conservation actions, such as protected areas, on biodiversity at regional to global scales. In particular, we need a better understanding of how effective are these areas at protecting other facets of biodiversity, such as species interactions.
+In spite of the availability of these frameworks, many protected areas around the world are still set up as a last resort when particular habitats are threatened and only a fraction of them is left. In many instances, the effectiveness of these protected areas is not known. Recent efforts have focused on obtaining a better understanding of this. Cazalis et al. ([2020](https://doi.org/10.1038/s41467-020-18230-0)) (plot on the left) showed that ***when looking at the number of species of forest birds, the effect of protected areas in tropical forests on biodiversity is negligible, and in some cases even detrimental***. This picture changes when focusing on specific species groups. Disparate results like this highlight the need for obtaining a better understanding of conservation actions, such as protected areas, on biodiversity at regional to global scales. In particular, we need a better understanding of how effective are these areas at protecting other facets of biodiversity, such as species interactions.
 
 At the [Computational Ecology Lab](https://www.swansea.ac.uk/bioscience/research-and-impact/computational-ecology-lab/) we are working towards this understanding from a network perspective, with the ultimate goal of assessing the effectiveness of protected areas in protecting species interactions networks and the properties that they confer to ecosystems.
 
 
 ## Managing Invasive Species: The Community Context Matters
 
-![](lesson-images/cascades.png){width="350px" style="float:right; padding-left:10px"}
+![](lesson-images/cascades.png){width="320px" style="float:right; padding-left:10px"}
 
 One of the classical results in theoretical food web ecology is ***the importance of the potential for cascading effects of species removals (or disturbance) on other species in the ecosystem*** (e.g. Pimm, 1982). Ever since then, field ecologists set out find examples of this in Nature. It turns out there are many! (see Estes et al., 2011 for a review).
 
-This realisation is important because it has profound implications for the ways we approach ecosystems. It not only highlights the indirect effects that species might have on each other when they are tangled in a complex networks of species interactions in ecosystems, but it also warm us of the potential hidden effects that can be caused on ecosystems by the disturbance of individual species. These effects might not be apparent until they become irreversible. For example, secondary extinctions after the removal or introductions of species.
+This realisation is important because it has profound implications for the ways we approach ecosystems. It not only highlights the indirect effects that species might have on each other when they are tangled in a complex networks of species interactions in ecosystems, but it also warns us of the potential hidden effects that can be caused on ecosystems by the disturbance of individual species. These effects might not be apparent until they become irreversible. For example, secondary extinctions after the removal or introductions of species.
 
-One scenario in which these indirect effects are of fundamental importance is when developing management strategies for invasive species. Once invasive species have established themselves in native ecosystems, they become integral part of the ecosystem structure and dynamics. Actions aimed at removing established alien species are thus expected to produce changes in the ecosystem comparable to those resulting from removing other native species.
+***One scenario in which these indirect effects are of fundamental importance is when developing management strategies for invasive species***. Once invasive species have established themselves in native ecosystems, they become integral part of the ecosystem structure and dynamics. Actions aimed at removing established alien species are thus expected to produce changes in the ecosystem comparable to those resulting from removing other native species.
 
 The figure below (taken from Zavaleta et al. 2001) shows some examples of the likely effects of removing invasive species that have been established in ecosystems either by themselves or with other alien species.
 
 
 
 <center>
-![](lesson-images/invasive-species-ecosystem-view.png){width="600px"}
+![](lesson-images/invasive-species-ecosystem-view.png){width="800px"}
 </center>
 <center>
-**Invasive species removal from an ecosystem perspective** Idealized food webs indicating trophic interactions between species. Closed boxes represent exotic species and open boxes represent native species. Arrow thickness indicates the strength of trophic interaction. Font size represents population size. (a) shows a community containing a single exotic predator. In (b), removal of this predator increases native prey populations.
-(c) shows a community containing both an exotic predator and an exotic herbivore. In (d), removal of only the exotic predator releases the exotic herbivore population, with cascading impacts on two plant species. (e) shows a community containing both an exotic herbivore and an exotic plant species. In (f), removal of the exotic herbivore only releases the exotic plant population. *Image and caption taken from Zavaleta et al. (2001)*.
+**Invasive species removal from an ecosystem perspective**. Idealized food webs indicating trophic interactions between species. Coloured boxes represent exotic species and white boxes represent native species. Arrow thickness indicates the strength of trophic interaction. Font size represents population size. **(a)** shows a community containing a single exotic predator. In **(b)**, removal of this predator increases native prey populations. **(c)** shows a community containing both an exotic predator and an exotic herbivore. In **(d)**, removal of only the exotic predator releases the exotic herbivore population, with cascading impacts on two plant species. **(e)** shows a community containing both an exotic herbivore and an exotic plant species. In **(f)**, removal of the exotic herbivore only releases the exotic plant population. ***Image and caption taken from Zavaleta et al. (2001)***.
 </center>
 
 <br>
 
-Predicting the full effects of invasive species removal on ecosystems can be a difficult task, especially if we aim at more quantitative predictions than those shown in the figure. In [2018](https://doi.org/10.1111/1365-2664.13188) we aimed at this focusing on the Australian semi-arid ecosystem, which has been invaded by several introduced species such as the European rabbit (*Oryctolagus cuniculus*), the red fox (*Vulpes vulpes*), and the feral cat (*Felis catus*). We aimed at obtaining a better understanding of the potential cascading effects of managing (by killing) rabbits (the invasive species focus of control actions) on the rest of the ecosystem, with a particular emphasis on small marsupial species. In Australia, the introduction of rabbits in particular, has been identified as one of the causes of extinction and drastic decline of several endemic marsupial species. It is then important to understand the full effects of potential management actions aimed at protecting these species.
+Predicting the full effects of invasive species removal on ecosystems can be a difficult task, especially if we aim at more quantitative predictions than those shown in the figure above. In [2018](https://doi.org/10.1111/1365-2664.13188) we aimed at this focusing on the Australian semi-arid ecosystem, which has been invaded by several introduced species such as the European rabbit (*Oryctolagus cuniculus*), the red fox (*Vulpes vulpes*), and the feral cat (*Felis catus*). **We aimed at obtaining a better understanding of the potential cascading effects of managing (by culling) rabbits (the invasive species focus of control actions) on the rest of the ecosystem**, with a particular emphasis on small marsupial species. In Australia, the introduction of rabbits in particular, has been identified as one of the causes of extinction and drastic decline of several endemic marsupial species. It is then important to understand the full effects of potential management actions aimed at protecting these species.
 
 
 ![](lesson-images/australian-food-web.png){width="350px" style="float:right; padding-left:10px"}
@@ -79,7 +78,7 @@ where *B* is the biomass harvested for consumption from the resources, *w* is th
 
 The computer code for this model (including the equations not shown above but that can be found in the paper) is presented below. You can use this code to run simulations that will yield the results of experiments modeling the disturbance (in the form of decreased abundance, to simulate culling) of rabbits in the ecosystem and the corresponding effects on the other species in the food web within which it is embedded.
 
-Before defining the model we need to initialise a series of empirically derived parameters. All this information comes from intensive study of the system. This illustrates the fact that modelling for ecological applications is very often a very data intensive task.
+Before defining the model we need to initialise a series of empirically derived parameters. All this information comes from intensive study of the system.
 
 ```{r, parameters-australian-web, warning=FALSE, error=FALSE, message=FALSE}
 #### Parameter values
@@ -353,7 +352,7 @@ for(i in 1:(steps-1)){
 }
 
 matplot(log10(dynamics[,-1]), type='l', lty=1, col=c(1,2,3,4,5,6), ylim=c(-.5,7), ylab = 'log10(abundance)', xlab = 'timestep')
-legend('top', c("rabbit", "small mammal", "roo", "fox", "cat", "dingo"), pch = "-", col = c(1,2,3,4,5,6), box.lwd=0, y.intersp = 1.5, horiz=TRUE, lwd=3, adj=c(1,1.5))
+legend('top', c("rabbit", "s-m", "roo", "fox", "cat", "dingo"), pch = "-", col = c(1,2,3,4,5,6), box.lwd=0, y.intersp = 1.5, horiz=TRUE, lwd=3, adj=c(1,1.5))
 
 ```
 
@@ -411,7 +410,7 @@ for(i in 1:(steps-1)){
 
 matplot(log10(dynamics[,-1]), type='l', lty=1, col=c(1,2,3,4,5,6), ylim=c(-.5,7), ylab = 'log10(abundance)', xlab = 'timestep')
 
-legend('top', c("rabbit", "small mammal", "roo", "fox", "cat", "dingo"), pch = "-", col = c(1,2,3,4,5,6), box.lwd=0, y.intersp = 1.5, horiz=TRUE, lwd=3, adj=c(1,1.5))
+legend('top', c("rabbit", "s-m", "roo", "fox", "cat", "dingo"), pch = "-", col = c(1,2,3,4,5,6), box.lwd=0, y.intersp = 1.5, horiz=TRUE, lwd=3, adj=c(1,1.5))
 
 ```
 
@@ -438,7 +437,7 @@ $$
 \frac{dR}{dt} = \gamma \times I
 $$
 
-where *S* is the number / fraction of susceptible, *I* of infected and *R* of recovered individuals. Susceptible individuals become infected with an infectious contact rate of $\beta$ when encountering an infected individual, and infected individuals recover from the disease at a rate $\gamma$. In SIR models, infected individuals exit the system when they move to the recovered state. In SIS models, on the other hand, infected individuals become again susceptible can become infected again.
+where *S* is the number / fraction of susceptible, *I* of infected and *R* of recovered individuals, respectively. Susceptible individuals become infected with an infectious contact rate of $\beta$ when encountering an infected individual, and infected individuals recover from the disease at a rate $\gamma$. In SIR models, infected individuals exit the system when they move to the recovered state. In SIS models, on the other hand, infected individuals become again susceptible and can become infected again.
 
 The code below provides an implementation of the SIR model and the resulting dynamics when the model is integrated through time.
 
@@ -495,11 +494,11 @@ legend("right", c("susceptibles", "infectious", "recovered"), col = c("blue", "r
 
 ```
 
-These models have provided important insights into the dynamics of epidemiological systems and have been applied to understand and predict specific epidemics. Disease transmission is however, an inherently individual-to-individual interaction problem process. In some instances, ***the mechanisms of interaction that might affect the outcome of disease transmission dynamics cannot be investigated using system-level models*** like the equations above. One solution to this is the use of individual-based models.
+These models have provided important insights into the dynamics of epidemiological systems and have been applied to understand and predict specific epidemics. Disease transmission is however, an inherently individual-to-individual interaction process. In some instances, ***the mechanisms of interaction that might affect the outcome of disease transmission dynamics cannot be investigated using system-level models*** like the equations above. One solution to this is the use of individual-based models.
 
 ### Technical note: Individual-based models
 
-In individual-based models, ***"rules" of interaction at the individual level are defined and the system level behaviour emerges from these interactions at lower organisational scales***. In the app below you can explore the use of a simple individual-based model for ant behaviour using the NetLogo modelling platform. The flexibility of the platform allows for easy definition of individual-level rules of interaction and parameter values manipulation.
+In individual-based models, ***"rules" of interaction at the individual level are defined, and the system level behaviour emerges from these interactions at lower organisational scales***. In the app below you can explore the use of a simple individual-based model for epidemics behaviour using the NetLogo modelling platform. The flexibility of the platform allows for easy definition of individual-level rules of interaction and parameter values manipulation.
 
 ***NOTE***: If the frame below doesn't load visit [this URL](https://www.netlogoweb.org/launch#https://www.netlogoweb.org/assets/modelslib/Sample%20Models/Biology/Virus.nlogo).
 
@@ -514,7 +513,7 @@ In individual-based models, ***"rules" of interaction at the individual level ar
 The last remnants of Tasmanian devil populations in Tasmania, Australia, have been drastically decreasing due to the introduction of a transmissible cancer, DFTD, in 1996. By means of local aggressive interactions between individuals the cancer is capable of spreading between them, having profound consequences for population persistence. Obtaining a good understanding of the drivers of disease spread in these wild populations is of fundamental importance to be able to develop sound conservation measures to protect the species from collapse.
 
 <center>
-![***From habitat maps to metapopulation.*** Taking the map of preferred habitats of Tasmanian devils across the island of Tasmania, we defined a network of local patches of devil populations linked by dispersal corridors according to a threshold distance between patches.](lesson-images/habitat2metapop.png){width="600px"}
+![***From habitat maps to metapopulation.*** Taking the map of preferred habitats of Tasmanian devils across the island of Tasmania, we defined a network of local patches of devil populations linked by dispersal corridors according to a threshold distance between patches. ***Figure from Durrant et al. (2021)***](lesson-images/habitat2metapop.png){width="600px"}
 
 </center>
 
@@ -525,9 +524,9 @@ In an effort to tackle this problem, [we developed an individual-based metapopul
 
 ***Check the full code for this project here!*** [https://github.com/RowanDurrant/DFTD](https://github.com/RowanDurrant/DFTD), including the local rules of interaction defined to simulate disease transmission between individuals and movement across the landscape.
 
-Using this information, and the model parameterised in this way, we designed conservation management strategies aimed at reducing the spread of the disease across the metapopulation. Our results suggest that if metapopulations of Tasmanian devils were to be managed -by isolating certain patches from the metapopulation- using a landscape scale approach based on betweenness centrality of patches (a measurement of how central a local population is within the network of patches), the proportion of patches infected at the landscape level is considerably lower than if a random approach, or even one based solely on the degree (i.e. number of dispersal corridors arriving at and emanating from a given patch) is taken. In other words, if local patches to be isolated from the metapopulation are selected based on their betweeness centrality, the proportion of infected patches remains lower than if alternative topology-oriented strategies are adopted.
+Using this information, and the model parameterised in this way, we designed conservation management strategies aimed at reducing the spread of the disease across the metapopulation. Our results suggest that ***if metapopulations of Tasmanian devils were to be managed -by isolating certain patches from the metapopulation- using a landscape scale approach based on betweenness centrality of patches (a measurement of how central a local population is within the network of patches), the proportion of patches infected at the landscape level is considerably lower than if a random approach, or even one based solely on patch degree (i.e. number of dispersal corridors arriving at and emanating from a given patch) is taken***. In other words, if local patches to be isolated from the metapopulation are selected based on their betweeness centrality, the proportion of infected patches remains lower than if alternative topology-oriented strategies are adopted.
 
-Note that in terms of population size and within-population genetic variation, both strategies yield similar, i.e. a decrease in both quantities as more patches are isolated.
+Note that in terms of population size and within-population genetic variation, both strategies yield similar outcomes: a decrease in both quantities as more patches are isolated.
 
 <center>
 ![***Effects of fragmentation on DFTD spread in Tasmanian devil metapopulations.*** Metapopulation size (A), proportion of individuals infected within the metapopulation (B) and mean within-population genetic diversity index (C) are influenced by the number of populations isolated from the metapopulation. Proportion of populations infected is also influenced by whether populations are isolated based on the population’s centrality in the metapopulation (i.e., betweenness), its connectivity (i.e., degree) or at random (B). Colours represents different population isolation methods.](lesson-images/results-devils.png){width="800px"}

@@ -231,34 +231,169 @@ Microbiome</strong></h1>
 <p>Microbes are widespread across the globe, occupying a myriad of
 ecological niches and found in environments as diverse as deep sea
 vents, to soils and water, to inside the mammalian (including human)
-gut. Microbes are not only responsible for a large portion of many
-biogeochemical reactions that have enabled life as we know it, including
-the global carbon cycle. They also have directly allowed the existence
-of multicellular organisms such as plants and animals by creating
-intimate associations with them that allow them to perform a suite of
-metabolic functions without which these multicellular organisms wouldn’t
-be possible.</p>
+gut. <strong>Microbes are not only responsible for a large portion of
+many biogeochemical reactions that have enabled life as we know it,
+including the global carbon cycle. They also have directly allowed the
+existence of multicellular organisms</strong>* such as plants and
+animals by creating intimate associations with them that allow them to
+perform a suite of metabolic functions without which these multicellular
+organisms wouldn’t be possible.</p>
 <div id="free-living-bacterial-communities" class="section level2">
 <h2>Free-living bacterial communities</h2>
+<p>Microorganisms are ubiquitous across the world, having colonised
+virtually all environments on Earth. Free-living bacterial communities
+in the ocean and the soil play key roles in biogeochemical processes
+including carbon and nutrient cycling. Given their central importance
+for life on Earth, they have become a central focus of ecological
+studies aimed at better understanding their composition, structure and
+function. This would not only allow a better mechanistic understanding
+of the assembly mechanisms behind their emergence, but also to be in a
+better position to predict their potential responses to global
+anthropogenic changes.</p>
 <p><img src="lesson-images/tara-oceans.png"
 style="float:right; padding-left:10px" width="500" /></p>
-<p>Microorganisms are ubiquitous across the world and different
-environments. Free-living bacterial communities in the ocean and the
-soil play key roles in biogeochemical processes including carbon and
-nutrient cycling. Given their central importance for life on Earth, they
-have become a central focus of ecological studies aimed at better
-understanding their composition, structure and function. This would not
-only allow a better mechanistic understanding of the assembly mechanisms
-behind their emergence, but also to be in a better position to predict
-their potential responses to global anthropogenic changes.</p>
+<p><strong>Tools available from classical community ecology are commonly
+applied to microbial ecology</strong> datasets to quantify patterns of
+diversity across scales. Measures of <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Calpha"
+alt="\alpha" title="\alpha" class="math inline" />, <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cbeta"
+alt="\beta" title="\beta" class="math inline" />, and <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cgamma"
+alt="\gamma" title="\gamma" class="math inline" /> diversity, as well as
+community ordination techniques are routinely used to characterise
+biodiversity and describe differences across communities found on
+different locations. These patterns are also commonly related to
+different environmental variables of interest using a suite of
+statistical methods.</p>
+<div style="text-align: right; margin-bottom:.3cm;">
+<strong> Figure taken from Sunagawa et al. (2015) </strong>
+</div>
+<p>Measures of <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Calpha"
+alt="\alpha" title="\alpha" class="math inline" /> and <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cgamma"
+alt="\gamma" title="\gamma" class="math inline" /> diversity quantify
+diversity (often in terms of species richnes, i.e. number of species) at
+local and regional scales respectively. <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cbeta"
+alt="\beta" title="\beta" class="math inline" /> diversity on the other
+hand is a measure of change or dissimilarity between local communities,
+commonly used in community ecology to quantify the turnover or
+replacement of species across local patches. The most commonly used
+measure to quantify <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cbeta"
+alt="\beta" title="\beta" class="math inline" /> diversity in microbial
+ecology is the Bray-Curtis dissimilarity index, a statistic used to
+quantify the compositional difference between communities based on the
+species abundances (i.e. counts) at each community. For comparing two
+communities <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20i" alt="i"
+title="i" class="math inline" /> and <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20j" alt="j"
+title="j" class="math inline" />, it is defined thus:</p>
+<p><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20BC_%7Bij%7D%20%3D%201%20-%20%5Cfrac%7B2C_%7Bij%7D%7D%7BS_i%20%2B%20S_j%7D"
+alt="BC_{ij} = 1 - \frac{2C_{ij}}{S_i + S_j}"
+title="BC_{ij} = 1 - \frac{2C_{ij}}{S_i + S_j}" class="math display" />
+where <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20C_%7Bij%7D"
+alt="C_{ij}" title="C_{ij}" class="math inline" /> is the sum of the
+lesser values for only those species that are found in both sites, and
+<img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20S_i" alt="S_i"
+title="S_i" class="math inline" /> and <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20S_j" alt="S_j"
+title="S_j" class="math inline" /> are the total number of individuals
+(or counts) found at sites <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20i" alt="i"
+title="i" class="math inline" /> and <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20j" alt="j"
+title="j" class="math inline" /> respectively.</p>
+<p>The application of these tools to microbial communities in marine
+environments has revealed that communities found in different oceans
+across the globe are substantially different from one another
+(challenging the hypotheses that the ocean is a well mixed environment),
+and these differences seem to be driven by ocean temperatures.
+Additionally, different environmental factors seem to play a role in
+determining the taxonomic and gene functional composition of these
+communities.</p>
 </div>
 <div id="host-associated-bacterial-communities" class="section level2">
 <h2>Host-associated bacterial communities</h2>
-<p><img src="lesson-images/human-microbiome.png"
-style="float:left; padding-right:10px" width="700" /></p>
+<p>Life on Earth as we know it wouldn’t be possible without microbes.
+Multicellular organisms depend fundamentally on the intimate
+relationships they have developed with microbial communities for
+survival and health. This has resulted in <a
+href="https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1002533">our
+bodies containing about 1.3 as many bacterial as human cells</a>, with
+the corresponding metabolic function potential provided by these added
+gene pool.</p>
+<p>Recent advances in gene sequencing technologies have made possible to
+characterise the sheer diversity of microbial communities that live in
+association with their multicellular hosts. In the human microbiome
+community analysis reveals that <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Calpha"
+alt="\alpha" title="\alpha" class="math inline" /> diversity varies
+greatly amongst niches (i.e. body parts), whereas <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cbeta"
+alt="\beta" title="\beta" class="math inline" /> diversity across the
+same sites in different individuals is more or less constant.
+Differences in species richness about body parts are reinforced by the
+differences found on community composition (using principal component
+analysis) acorss sites. This suggest that the human microbiome is more
+or less consisten across individuals but there are great variations
+across different niches associated to different parts of the human body.
+This makes intuitive sense as we would expect different ‘ecosystem
+fucntions’ to be relevant in different parts of the body.</p>
+<center>
+<img src="lesson-images/human-microbiome.png" width="700" />
+</center>
+<p><strong>The organisation of the Human Microbiome</strong>.
+<strong>(a)</strong> Alpha diversity within subjects by body habitat,
+grouped by area. <strong>(b)</strong> Bray–Curtis beta diversity among
+subjects by body habitat. <strong>(c)</strong> Principal coordinates
+plot showing variation among samples demonstrates that primary
+clustering is by body area, with the oral, gastrointestinal, skin and
+urogenital habitats separate; the nares habitat bridges oral and skin
+habitats. <strong>(d)</strong> Repeated samples from the same subject
+(blue) are more similar than microbiomes from different subjects (red).
+Technical replicates (grey) are in turn more similar; these patterns are
+consistent for all body habitats and for both phylogenetic and metabolic
+community composition. <strong><em>Figure and caption extracted from The
+Human Microbiome Project Consortium (2012)</em></strong>.</p>
+<p>A similar pattern to that observed in the human microbiome across
+niches distributed across the human body are observed across species in
+different genera of multicellular organisms. Bacterial communtiies found
+across species are different across host species, with explicit links to
+the functional capabilities of these communities (e.g. Lurgi et
+al. 2019). When studying these associations, microbial ecologists look
+not only at the differences between community composition (as done for
+the marine and human microbiome communities above) but also at the
+differences in relative abundances of different taxonomic groups across
+different microbiomes.</p>
+<center>
+<img src="lesson-images/taxonomic-comp-sponges.png" width="700" />
+</center>
+<p><strong>Taxonomic profile of microbial communities in marine
+sponges.</strong> Average phylum-level taxonomic profile of microbial
+symbiont communities in 81 different sponge species, seawater and marine
+sediments. Colour scale shows relative abundance in percentage within
+each host species.</p>
 </div>
 <div id="references" class="section level2">
 <h2>References</h2>
+<p>Coyte KZ, Schluter J &amp; Foster KR (2015) The ecology of the
+microbiome: Networks, competition, and stability.
+<strong><em>Science</em></strong>, 350:6261, 663-666. <a
+href="https://doi.org/10.1126/science.aad2602"
+class="uri">https://doi.org/10.1126/science.aad2602</a></p>
 <p>Lurgi M, Thomas T, Wemheuer B, Webster NS &amp; Montoya JM (2019)
 Modularity and predicted functions of the global sponge-microbiome
 network. <strong><em>Nature Communications</em></strong>, 10, 992. <a

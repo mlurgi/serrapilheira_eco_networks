@@ -12,24 +12,60 @@ output:
 
 ---
 
-Microbes are widespread across the globe, occupying a myriad of ecological niches and found in environments as diverse as deep sea vents, to soils and water, to inside the mammalian (including human) gut. Microbes are not only responsible for a large portion of many biogeochemical reactions that have enabled life as we know it, including the global carbon cycle. They also have directly allowed the existence of multicellular organisms such as plants and animals by creating intimate associations with them that allow them to perform a suite of metabolic functions without which these multicellular organisms wouldn't be possible.
+Microbes are widespread across the globe, occupying a myriad of ecological niches and found in environments as diverse as deep sea vents, to soils and water, to inside the mammalian (including human) gut. **Microbes are not only responsible for a large portion of many biogeochemical reactions that have enabled life as we know it, including the global carbon cycle. They also have directly allowed the existence of multicellular organisms*** such as plants and animals by creating intimate associations with them that allow them to perform a suite of metabolic functions without which these multicellular organisms wouldn't be possible.
 
 
 ## Free-living bacterial communities
 
-![](lesson-images/tara-oceans.png){width="500px" style="float:right; padding-left:10px"}
+Microorganisms are ubiquitous across the world, having colonised virtually all environments on Earth. Free-living bacterial communities in the ocean and the soil play key roles in biogeochemical processes including carbon and nutrient cycling. Given their central importance for life on Earth, they have become a central focus of ecological studies aimed at better understanding their composition, structure and function. This would not only allow a better mechanistic understanding of the assembly mechanisms behind their emergence, but also to be in a better position to predict their potential responses to global anthropogenic changes.
 
-Microorganisms are ubiquitous across the world and different environments. Free-living bacterial communities in the ocean and the soil play key roles in biogeochemical processes including carbon and nutrient cycling. Given their central importance for life on Earth, they have become a central focus of ecological studies aimed at better understanding their composition, structure and function. This would not only allow a better mechanistic understanding of the assembly mechanisms behind their emergence, but also to be in a better position to predict their potential responses to global anthropogenic changes.
+
+![](lesson-images/tara-oceans.png){width="500px" style="float:right; padding-left:10px"} 
+
+**Tools available from classical community ecology are commonly applied to microbial ecology** datasets to quantify patterns of diversity across scales. Measures of $\alpha$, $\beta$, and $\gamma$ diversity, as well as community ordination techniques are routinely used to characterise biodiversity and describe differences across communities found on different locations. These patterns are also commonly related to different environmental variables of interest using a suite of statistical methods.
+
+<div style="text-align: right; margin-bottom:.3cm;"> <strong> Figure taken from Sunagawa et al. (2015) </strong> </div>
+
+Measures of $\alpha$ and $\gamma$ diversity quantify diversity (often in terms of species richnes, i.e. number of species) at local and regional scales respectively. $\beta$ diversity on the other hand is a measure of change or dissimilarity between local communities, commonly used in community ecology to quantify the turnover or replacement of species across local patches. The most commonly used measure to quantify $\beta$ diversity in microbial ecology is the Bray-Curtis dissimilarity index, a statistic used to quantify the compositional difference between communities based on the species abundances (i.e. counts) at each community. For comparing two communities $i$ and $j$, it is defined thus:
+
+$$
+BC_{ij} = 1 - \frac{2C_{ij}}{S_i + S_j}
+$$
+where $C_{ij}$ is the sum of the lesser values for only those species that are found in both sites, and $S_i$ and $S_j$ are the total number of individuals (or counts) found at sites $i$ and $j$ respectively.
+
+The application of these tools to microbial communities in marine environments has revealed that communities found in different oceans across the globe are substantially different from one another (challenging the hypotheses that the ocean is a well mixed environment), and these differences seem to be driven by ocean temperatures. Additionally, different environmental factors seem to play a role in determining the taxonomic and gene functional composition of these communities.
 
 
 
 ## Host-associated bacterial communities
 
-![](lesson-images/human-microbiome.png){width="700px" style="float:left; padding-right:10px"}
+Life on Earth as we know it wouldn't be possible without microbes. Multicellular organisms depend fundamentally on the intimate relationships they have developed with microbial communities for survival and health. This has resulted in [our bodies containing about 1.3 as many bacterial as human cells](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1002533), with the corresponding metabolic function potential provided by these added gene pool. 
+
+Recent advances in gene sequencing technologies have made possible to characterise the sheer diversity of microbial communities that live in association with their multicellular hosts. In the human microbiome community analysis reveals that $\alpha$ diversity varies greatly amongst niches (i.e. body parts), whereas $\beta$ diversity across the same sites in different individuals is more or less constant. Differences in species richness about body parts are reinforced by the differences found on community composition (using principal component analysis) acorss sites. This suggest that the human microbiome is more or less consisten across individuals but there are great variations across different niches associated to different parts of the human body. This makes intuitive sense as we would expect different 'ecosystem fucntions' to be relevant in different parts of the body.
+
+<center>
+![](lesson-images/human-microbiome.png){width="700px"}
+</center>
+**The organisation of the Human Microbiome**. **(a)** Alpha diversity within subjects by body habitat, grouped by area. **(b)** Bray–Curtis beta diversity among subjects by body habitat. **(c)** Principal coordinates plot showing variation among samples demonstrates that primary clustering is by body area, with the oral, gastrointestinal, skin and urogenital habitats separate; the nares habitat bridges oral and skin habitats. **(d)** Repeated samples from the same subject (blue) are more similar than microbiomes from different subjects (red). Technical replicates (grey) are in turn more similar; these patterns are consistent for all body habitats and for both phylogenetic and metabolic community composition. ***Figure and caption extracted from The Human Microbiome Project Consortium (2012)***.
+
+
+A similar pattern to that observed in the human microbiome across niches distributed across the human body are observed across species in different genera of multicellular organisms. Bacterial communtiies found across species are different across host species, with explicit links to the functional capabilities of these communities (e.g. Lurgi et al. 2019). When studying these associations, microbial ecologists look not only at the differences between community composition (as done for the marine and human microbiome communities above) but also at the differences in relative abundances of different taxonomic groups across different microbiomes.
+
+
+<center>
+![](lesson-images/taxonomic-comp-sponges.png){width="700px"}
+</center>
+
+**Taxonomic profile of microbial communities in marine sponges.** Average phylum-level taxonomic profile of microbial symbiont communities in 81 different sponge species, seawater and marine sediments. Colour scale shows relative abundance in percentage within each host species. ***Figure and caption extracted from Thomas et al. (2016).***
+
+This taxonomical compositional representation, jointly with knowledge on the potential functional capabilities of different microbial phyla, provides clues on the metabolic needs of different host species and their differences. This can in turn be related to ecosystem level thinking about different environmental niches occupied by different host species.
+
+### Beyond classical community analyses: The network approach
 
 
 ## References
 
+Coyte KZ, Schluter J & Foster KR (2015) The ecology of the microbiome: Networks, competition, and stability. ***Science***, 350:6261, 663-666. https://doi.org/10.1126/science.aad2602
 
 Lurgi M, Thomas T, Wemheuer B, Webster NS & Montoya JM (2019) Modularity and predicted functions of the global sponge-microbiome network. ***Nature Communications***, 10, 992. https://doi.org/10.1038/s41467-019-08925-4
 
@@ -37,7 +73,7 @@ Sunagawa S et al. (2015) Structure and function of the global ocean microbiome. 
 
 The Human Microbiome Project Consortium. (2012) Structure, function and diversity of the healthy human microbiome. ***Nature***, 486, 207–214. https://doi.org/10.1038/nature11234
 
-Thomas T, Moitinho-Silva L, Lurgi M et al. Diversity, structure and convergent evolution of the global sponge microbiome. ***Nature Communications*** 7, 11870. https://doi.org/10.1038/ncomms11870
+Thomas T, Moitinho-Silva L, Lurgi M et al. (2016) Diversity, structure and convergent evolution of the global sponge microbiome. ***Nature Communications*** 7, 11870. https://doi.org/10.1038/ncomms11870
 
 
 ## [Back to Start](lesson-1.html){.continue-link}
