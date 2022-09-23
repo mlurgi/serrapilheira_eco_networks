@@ -385,15 +385,300 @@ different microbiomes.</p>
 sponges.</strong> Average phylum-level taxonomic profile of microbial
 symbiont communities in 81 different sponge species, seawater and marine
 sediments. Colour scale shows relative abundance in percentage within
-each host species.</p>
+each host species. <strong><em>Figure and caption extracted from Thomas
+et al. (2016).</em></strong></p>
+<p>This taxonomical compositional representation, jointly with knowledge
+on the potential functional capabilities of different microbial phyla,
+provides clues on the metabolic needs of different host species and
+their differences. This can in turn be related to ecosystem level
+thinking about different environmental niches occupied by different host
+species.</p>
+<div id="beyond-classical-community-analyses-the-network-approach"
+class="section level3">
+<h3>Beyond classical community analyses: The network approach</h3>
+<p><img src="lesson-images/sponge-network.png"
+style="float:left; padding-right:10px" width="300" /></p>
+<p>Classical community analyses like those illustrated above on the
+microbiome can be complemented with more network oriented approaches to
+unveil further organisational patterns.</p>
+<p>To do this, network representations of the microbiome are required.
+One approach is to create a bipartite network of the network of hosts
+and the microbes found within them. In this case the network does not
+necessarily represent an ecological interaction but it nonetheless
+represents the patterns of occurrence of microbial taxa across host
+species.</p>
+<p>Looking at the structure of this host-microbiome network can reveal
+patterns of, for example, microbial persistence across host species.</p>
+<p><img src="lesson-images/host-specificity-sponges.png"
+style="float:right; padding-left:10px" width="400" /></p>
+<p>In marine sponges, this analysis has revealed that <strong>the marine
+sponge microbiome is made up of three kind of microbes. 1.- A set of
+very specialised microbes that are found only a handful of hosts but
+consistently within them (as measured by the fraction of samples on
+their hosts in which they have been found). 2.- A group of ‘transient’
+microbes that are found in an intermediate number of hosts but not very
+frequently. And 3.- another set of very generalist microbes (i.e. found
+in many different host species), which are again found relatively
+consistent across them</strong>. This suggests that the composition of
+the microbiome is made up of very specialised and very generalist
+species with a set of microbes that come and go on different host
+species, probably linked to exogenous stochastic factors.</p>
+<p>Certain system-level network properties can provide insight into the
+internal organisation of the microbiome can help us better understand
+how microbial communities have self-organised across host species
+(modularity); and how likely it is that microbial species found within
+more specialised hosts are subsets of those found in generalist hosts,
+thus hinting at a core microbioem that is conserved across species
+(nestedness).</p>
+</div>
+<div id="modularity" class="section level3">
+<h3>Modularity</h3>
+<p>Modularity is a way of quantifying the extent to which a network is
+organised into subcommunities within which their nodes are more
+connected amongst themselves than to the rest of the network. It can be
+quantified using the formula:</p>
+<p><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20M%20%3D%20%5Csum_%7Bs%3D1%7D%5E%7BN_M%7D%20%5Cleft%5B%20%5Cfrac%7Bl_s%7D%7BL%7D%20-%20%5Cleft%28%20%5Cfrac%7Bd_s%7D%7B2L%7D%20%5Cright%29%5E2%20%5Cright%5D"
+alt="M = \sum_{s=1}^{N_M} \left[ \frac{l_s}{L} - \left( \frac{d_s}{2L} \right)^2 \right]"
+title="M = \sum_{s=1}^{N_M} \left[ \frac{l_s}{L} - \left( \frac{d_s}{2L} \right)^2 \right]"
+class="math display" /></p>
+<p>where <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20N_M" alt="N_M"
+title="N_M" class="math inline" /> is the number of modules, <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20L" alt="L"
+title="L" class="math inline" /> is the number of links in the network,
+<img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20l_s" alt="l_s"
+title="l_s" class="math inline" /> is the number of links between nodes
+in module <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20s" alt="s"
+title="s" class="math inline" />, and <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20d_s" alt="d_s"
+title="d_s" class="math inline" /> is the sum of the degrees in module
+<img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20s" alt="s"
+title="s" class="math inline" />. Partitions of nodes into ‘modules’
+that yield high scores for <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20M" alt="M"
+title="M" class="math inline" /> ensure as many within-module links and
+as few between-module links as possible. Finding partitions that improve
+the value of <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20M" alt="M"
+title="M" class="math inline" /> is a hard optimisation problem, and
+different algorithms have been proposed in the literature to tackle
+this. An implementation by Guimerà and Nunes Amaral (2005) using
+simulated annealing yields robust results for this partitioning process.
+They also define two futher metrics associated with the calculation of
+modularity that can be useful to understand the role of each nodes in
+the network. These are the within-module degree and the participation
+coefficient. These measurements provide node-level information on the
+connectivity profile at the module and network levels respectively. They
+are defined thus:</p>
+<p><img src="lesson-images/netcarto-roles.png"
+style="float:right; padding-left:10px" width="300" /></p>
+<p><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20z_i%20%3D%20%5Cfrac%7Bk_i%20-%20%5Cbar%7Bk%7D_%7Bs_i%7D%7D%7B%5Csigma_%7Bk_%7Bs_i%7D%7D%7D"
+alt="z_i = \frac{k_i - \bar{k}_{s_i}}{\sigma_{k_{s_i}}}"
+title="z_i = \frac{k_i - \bar{k}_{s_i}}{\sigma_{k_{s_i}}}"
+class="math display" /> where <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20z_i" alt="z_i"
+title="z_i" class="math inline" /> is the within-module degree of node
+<img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20i" alt="i"
+title="i" class="math inline" />, <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20k_i" alt="k_i"
+title="k_i" class="math inline" /> is the number of links to other nodes
+in its module <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20s_i" alt="s_i"
+title="s_i" class="math inline" />, <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20k_%7Bs_i%7D"
+alt="k_{s_i}" title="k_{s_i}" class="math inline" /> is the average
+degree of all nodes in <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20s_i" alt="s_i"
+title="s_i" class="math inline" /> and <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Csigma_%7Bk_%7Bs_i%7D%7D"
+alt="\sigma_{k_{s_i}}" title="\sigma_{k_{s_i}}" class="math inline" />
+is the standard deviation of the degree of the nodes within <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20s_i" alt="s_i"
+title="s_i" class="math inline" />.</p>
+<p>Participation coefficient, on the other hand, is defined as:</p>
+<p><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20P_i%20%3D%201%20-%20%5Csum_%7Bs%3D1%7D%5E%7BN_M%7D%20%5Cleft%28%20%5Cfrac%7Bk_%7Bis%7D%7D%7Bk_i%7D%20%5Cright%29%5E2"
+alt="P_i = 1 - \sum_{s=1}^{N_M} \left( \frac{k_{is}}{k_i} \right)^2"
+title="P_i = 1 - \sum_{s=1}^{N_M} \left( \frac{k_{is}}{k_i} \right)^2"
+class="math display" /> where <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20k_%7Bis%7D"
+alt="k_{is}" title="k_{is}" class="math inline" /> is the number of
+links of node <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20i" alt="i"
+title="i" class="math inline" /> to nodes in module <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20s" alt="s"
+title="s" class="math inline" /> and <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20k_i" alt="k_i"
+title="k_i" class="math inline" /> is the total degree of node <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20i" alt="i"
+title="i" class="math inline" />.</p>
+<p>The P-Z space can be classified into 7 roles that nodes can assume in
+a network, as proposed by Guimerà and Nunes Amaral (2005), which allow
+us to characterise nodes according to different profiles from
+ultra-peripheral (nodes that are only connected within their modules) to
+kinless hubs (nodes that are very connected to all modules in the
+network).</p>
+<p><strong>Modularity analysis performed over the global sponge
+microbiome network has allowed to identify groups of host species that
+harbour similar bacterial communities</strong>, along with the microbial
+taxa that form these communities. Complementing this analysis with the
+phylogenetic background of host species allowed us to unveil the
+evolutionary drivers of these complex symbiotic associations.</p>
+<center>
+<img src="lesson-images/sponge-phylo-tree.png" width="500" />
+</center>
+<p><strong>Sponge phylogeny is associated with modularity in the global
+sponge-core microbiome network.</strong> Sponge species belonging to the
+same module identified over the sponge core–microbiome network display
+the same colour. Stars, crosses and filled squares refer to sponge type
+according to whether they are high- or low-microbial abundance species
+(HMA and LMA respectively). NA = no information for host type is
+available. <strong><em>Figure and caption extracted from Lurgi et
+al. (2019).</em></strong></p>
+<p><img src="lesson-images/p-vs-z-sponges.png"
+style="float:right; padding-left:10px" width="300" /></p>
+<p>Additionally, analysis of the structural roles of host species in the
+host-microbiome network, revealed fundamental differences in the
+organisation of High vs Low Microbial Abundance species. <strong>Sponge
+species that harbour higher densities of microbes tend to be more
+connected within their modules, whereas host species with low microbial
+densities are well connected across the network</strong>. These suggests
+that microbial communities in HMA sponges are more species- or
+group-specific, while microbes found LMA sponges are more ubiquitous,
+probably because of being more opportunistic and capable of dispersing
+through the water column and colonising different species.</p>
+</div>
+<div id="nestedness" class="section level3">
+<h3>Nestedness</h3>
+<p>The observation that microbial communities in some host species are
+more similar between groups of species, while other communities seem to
+be composed of more ubiquitous microbes suggests a pattern of microbial
+presence across hosts in which less microbially-rich hosts might harbour
+bacterial communities that are subsets of more microbially diverse
+hosts. One way of quantifying this potential pattern is by using a
+measure of nestedness. Nestedness allows us to quantify the extent to
+which the species composition (or composition interaction partners if
+thinking of a plant animal interaction network) of less speciose
+communities (or interacting partners of specialist species in a network)
+are proper subsets of more diverse communities (or of the set of
+interacting partners of generalist species if thinking about a bipartite
+interaction network). This network property can be quantified using the
+Nestedness metric based on Overlap and Decreasing Fill proposed by
+Almeida-Neto et al. (2008):</p>
+<p><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20NODF%20%3D%20%5Cfrac%7B%5Csum%20N_%7Bpaired%7D%7D%7B%28%5Cfrac%7Bn%28n-1%29%7D%7B2%7D%29%2B%28%5Cfrac%7Bm%28m-1%29%7D%7B2%7D%29%7D"
+alt="NODF = \frac{\sum N_{paired}}{(\frac{n(n-1)}{2})+(\frac{m(m-1)}{2})}"
+title="NODF = \frac{\sum N_{paired}}{(\frac{n(n-1)}{2})+(\frac{m(m-1)}{2})}"
+class="math display" /></p>
+<p>where <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20N_%7Bpaired%7D"
+alt="N_{paired}" title="N_{paired}" class="math inline" /> is a score
+that quantifies the overlap between communities (or diets) of contiguous
+rows and columns in a community matrix (or incidence matrix for
+bipartite networks) and <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20n" alt="n"
+title="n" class="math inline" /> and <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20m" alt="m"
+title="m" class="math inline" /> are the number of rows and columns in
+the matrix respectively.</p>
+<p>Using nestedness analysis on the microbiome can allow us to unveil
+patterns in the way different taxonomic groups of species are organised
+across different environments and host species. This approach has
+revealed that across different microbiomes globally, species composition
+in relatively species poor communities is a subset of the composition of
+more diverse ones. Thus, microbiomes across environments seem to
+increase in complexity starting from a core community of ubiquitously
+found taxa, building up to new species that continue to aggregate in
+into larger assemblages that contain the same species found in smaller
+ones, possibly due to the availability of further ecological niches that
+new taxa are able to colonise. Communities found in different
+environments add new species depending on the availability ecological /
+functional niches but conserving a set of core taxa, possibly generalist
+taxa that are capble of surviving under different conditions.</p>
+<center>
+<img src="lesson-images/nestedness-microbial-communities.png"
+width="700" />
+</center>
+<p><strong>Nestedness of community composition in microbiomes across
+environments and multicellular host species.</strong>
+<strong>(a)</strong> Presence–absence of phyla across samples, with
+phyla (rows) sorted by prevalence and samples (columns) sorted by
+richness. Shown is a subset of the EMP consisting of n=2,000
+biologically independent samples with even representation across
+environments and studies. With increasing sample richness (left to
+right), phyla tended to be gained but not lost. <strong>(b)</strong> As
+in <strong>a</strong> but separated into non-saline, saline, animal, and
+plant environments. <strong>(c)</strong> Nestedness as a function of
+taxonomic level, from phylum to tag sequence, across all samples and
+within environment types. Also shown are median null model NODF scores
+(± s.d.). NODF measures the average fraction of taxa from less diverse
+communities that occur in more diverse communities. All environments at
+all taxonomic levels were more nested than expected randomly, with
+nestedness higher at higher taxonomic levels (for example, phyla).
+<strong><em>Figure and caption from Thompson et
+al. (2017).</em></strong></p>
+</div>
+</div>
+<div id="modelling-the-microbiome" class="section level2">
+<h2>Modelling the Microbiome</h2>
+<p><img src="lesson-images/microbial-framework.jpeg"
+style="float:right; padding-left:10px" width="300" /></p>
+<p>Microbial communities within multicellular hosts are thought to form
+complex networks of ecological interactions. They are amongst the most
+complex ecological communities found in nature. It is thus an important
+challenge to determine the strategies they might use to maintain
+stability and persistence within their hosts. Modelling approaches like
+the Lotka-Volterra framework that we explored in <a
+href="lesson-4.html">section 3</a> can help us elucidate these
+mechanisms.</p>
+<p>Using a generalised Lotka-Volterra model for many species, Coyte et
+al. (2015) explored different mechanisms by which hosts may control the
+ecological interactions between microbial taxa within the microbiome.
+These mechanisms, targeted at reducing positive feedbacks between
+cooperative species (e.g. supplementary / targeted feeding by the host)
+and decreasing the strength of interactions (e.g. via spatial
+structuring) were shown to increase the stability of the microbiome.</p>
+<p><img src="lesson-images/stability-microbial-networks.png"
+style="float:left; padding-right:10px" width="300" /> <strong><em>Host
+strategies to promote ecological stability.</em></strong>
+<strong>(A)</strong> Spatial structure promotes ecological stability in
+linear stability analysis (LAS) (left), permanence analysis (PA)
+(middle), and an individual-based model (IbM) (right).
+<strong>(B)</strong> Targeted feeding. Host-supplied nutrients that
+weaken cooperative interactions promote ecological stability. We
+observed an exception for which targeted feeding may destabilize more
+competitive communities in the IbM (Pm = 0.25), but the effect is weak.
+<strong><em>Figure and caption taken from Coyte et
+al. (2015).</em></strong></p>
+<p><br> <br></p>
 </div>
 <div id="references" class="section level2">
 <h2>References</h2>
+<p>Almeida-Neto M, Guimaraes P, Guimaraes PR, Loyola RD &amp; Ulrich W
+(2008) A consistent metric for nestedness analysis in ecological
+systems: reconciling concept and measurement.
+<strong><em>Oikos</em></strong>, 117, 1227-1239.</p>
 <p>Coyte KZ, Schluter J &amp; Foster KR (2015) The ecology of the
 microbiome: Networks, competition, and stability.
 <strong><em>Science</em></strong>, 350:6261, 663-666. <a
 href="https://doi.org/10.1126/science.aad2602"
 class="uri">https://doi.org/10.1126/science.aad2602</a></p>
+<p>Guimerà R, Amaral LA. Cartography of complex networks: Modules and
+universal roles. <strong><em>Journal of Statistical
+Mechanics</em></strong>, P02001, 1-13. <a
+href="https://doi.org/10.1088/1742-5468/2005/02/P02001"
+class="uri">https://doi.org/10.1088/1742-5468/2005/02/P02001</a></p>
 <p>Lurgi M, Thomas T, Wemheuer B, Webster NS &amp; Montoya JM (2019)
 Modularity and predicted functions of the global sponge-microbiome
 network. <strong><em>Nature Communications</em></strong>, 10, 992. <a
@@ -408,11 +693,16 @@ and diversity of the healthy human microbiome.
 <strong><em>Nature</em></strong>, 486, 207–214. <a
 href="https://doi.org/10.1038/nature11234"
 class="uri">https://doi.org/10.1038/nature11234</a></p>
-<p>Thomas T, Moitinho-Silva L, Lurgi M et al. Diversity, structure and
-convergent evolution of the global sponge microbiome. <strong><em>Nature
-Communications</em></strong> 7, 11870. <a
+<p>Thomas T, Moitinho-Silva L, Lurgi M et al. (2016) Diversity,
+structure and convergent evolution of the global sponge microbiome.
+<strong><em>Nature Communications</em></strong> 7, 11870. <a
 href="https://doi.org/10.1038/ncomms11870"
 class="uri">https://doi.org/10.1038/ncomms11870</a></p>
+<p>Thompson, L., Sanders, J., McDonald, D. et al. (2017) A communal
+catalogue reveals Earth’s multiscale microbial diversity.
+<strong><em>Nature</em></strong>, 551, 457–463. <a
+href="https://doi.org/10.1038/nature24621"
+class="uri">https://doi.org/10.1038/nature24621</a></p>
 </div>
 <div id="back-to-start" class="section level2">
 <h2><a href="lesson-1.html" class="continue-link">Back to Start</a></h2>
